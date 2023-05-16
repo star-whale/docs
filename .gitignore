@@ -1,0 +1,65 @@
+*.class
+# Compiled class file
+**.iml
+*.py[c|o]
+*.pb.go
+*.pb.gw.go
+
+# Log file
+*.log
+pylint.out
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+dist/
+*.egg
+*.egg/
+*.egg-info/
+*.sw[p|o]
+*.orig
+
+# IDE file
+/.idea/
+**/.idea/
+/server/**/target/**
+.history
+.vscode
+.cspell
+
+.starwhale
+
+# UI
+node_modules
+console/node/
+console/cypress/example
+coverage
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.eslintcache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.cache-loader
+/docker/jar/
+/server/controller/src/main/resources/static/
+videos/
+storybook-static/
+compiled
+
+# Doc
+node_modules
+build
+.docusaurus
+versions.json
+versioned_sidebars
+versioned_docs
+i18n/zh/docusaurus-plugin-content-docs/version-*/
