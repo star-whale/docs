@@ -1,7 +1,7 @@
 <div align="center">
 
 <p align="center">
-    <img src="https://github.com/star-whale/docs/raw/main/docs/static/img/starwhale.png" width="600" style="max-width: 600px;">
+    <img src="https://github.com/star-whale/docs/raw/main/static/img/starwhale.png" width="600" style="max-width: 600px;">
 </p>
 
 **Starwhale - An MLOps Platform for Model Evaluation.**
