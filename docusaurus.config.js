@@ -1,18 +1,20 @@
+require('dotenv').config();
+require('dotenv-defaults').config();
 const path = require("path");
 
 module.exports = {
     title: "Starwhale",
-    tagline: "An MLOps Platform",
-    url: "https://doc.starwhale.ai",
-    baseUrl: "/",
+    tagline: "An MLOps/LLMOps Platform",
+    url: process.env.URL,
+    baseUrl: process.env.BASE_URL,
     onBrokenLinks: "warn",
     onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
-    organizationName: "doc.starwhale.ai",
+    organizationName: process.env.ORG,
     projectName: "starwhale",
 
     i18n: {
-        defaultLocale: 'en',
+        defaultLocale: process.env.DEFAULT_LOCALE,
         locales: ['en', 'zh'],
         localeConfigs: {
             en: {
@@ -89,7 +91,7 @@ module.exports = {
     customFields: {
         email: "developer@starwhale.ai",
         description:
-            "Starwhale is an MLOps platform to manage machine learning projects, models and datasets.",
+            "Starwhale is an MLOps/LLMOps platform to manage machine learning projects, models and datasets.",
     },
     presets: [
         [
