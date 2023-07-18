@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - chore/version-doc
   pull_request:
     branches:
       - main
@@ -90,9 +91,9 @@ jobs:
 
   main-release-for-starwhale-cn:
     runs-on: self-hosted
-    needs:
-      - main-release-for-github-pages
-    if: ${{ github.ref == 'refs/heads/main'}}
+    #needs:
+    #  - main-release-for-github-pages
+    #if: ${{ github.ref == 'refs/heads/main'}}
 
     steps:
       - uses: actions/checkout@v3
