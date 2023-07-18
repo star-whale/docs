@@ -14,6 +14,7 @@ jobs:
     defaults:
       run:
         shell: bash
+    if: ${{ github.ref == 'refs/heads/main'}}
 
     steps:
       - uses: actions/checkout@v3
@@ -53,6 +54,8 @@ jobs:
         with:
           ref: gh-pages
           path: gh-pages
+          sparse-checkout: |
+            .archived-versions
 
       - name: Copy archived version files
         run: |
@@ -108,6 +111,8 @@ jobs:
         with:
           ref: gh-pages
           path: gh-pages
+          sparse-checkout: |
+            .archived-versions
 
       - name: Copy archived version files
         run: |
@@ -135,3 +140,4 @@ jobs:
           source: "build/*"
           target: "/data/www/starwhale-cn-docs/docs/"
           strip_components: 1
+          rm: true

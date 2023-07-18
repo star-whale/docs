@@ -8,7 +8,7 @@ You need to install the [Starwhale Client (SWCLI)](../swcli) at first.
 
 ## Sign Up for Starwhale Cloud and create your first project
 
-You can either directly log in with your GitHub or Google account or sign up for an account. You will be asked for an account name if you log in with your GitHub or Google account. For more information, see the [Starwhale Cloud user guide - Create your account](../starwhale-cloud/index)
+You can either directly log in with your GitHub or Google account or sign up for an account. You will be asked for an account name if you log in with your GitHub or Google account.
 
 Then you can create a new project. In this tutorial, we will use the name `demo` for the project name.
 

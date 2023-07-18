@@ -35,7 +35,7 @@ swcli model build [选项] <WORKDIR>
 | --- | --- | --- | --- | --- |
 | `--project`或`-p` | ❌ | String | [默认项目](../../swcli/uri.md#defaultProject) | 项目URI |
 | `--module` 或 `-m` | ❌ | String | | 构建时导入的模块。Starwhale会将这些模块中包含的handler导出到模型包。该参数可以指定多次，用来导入多个Python模块。|
-| `--runtime` | ❌ | String | | 运行此命令时使用的[Starwhale Runtime](../../runtime/index.md)的URI。如果指定此选项，该命令将在Starwhale Runtime指定的独立python环境中运行。否则它将直接在swcli当前的python环境中运行。 |
+| `--runtime` | ❌ | String | | 运行此命令时使用的[Starwhale Runtime](../../userguide/runtime)的URI。如果指定此选项，该命令将在Starwhale Runtime指定的独立python环境中运行。否则它将直接在swcli当前的python环境中运行。 |
 | `--name` 或 `-n` | ❌ | String | | 模型包的名字 |
 | `--desc` 或 `-d` | ❌ | String | | 模型包的描述 |
 
@@ -164,7 +164,7 @@ model URI模式需要一个预先构建好的模型包，本地开发模式仅�
 | `--workdir` 或 `-w` | ❌ | String | | 在本地开发模式中使用，指定model代码目录地址。|
 | `--uri` 或 `-u` | ❌ | String | | 在model URI模式中使用，指定model URI。|
 | `--handler` 或 `-h` | ❌ | String | | 运行的Handler索引或名字，默认运行第一个Handler。|
-| `--runtime` | ❌ | String | | 运行此命令时使用的[Starwhale Runtime](../../runtime/index.md)的URI。如果指定此选项，该命令将在Starwhale Runtime指定的独立python环境中运行。否则它将直接在swcli当前的python环境中运行。 |
+| `--runtime` | ❌ | String | | 运行此命令时使用的[Starwhale Runtime](../../userguide/runtime)的URI。如果指定此选项，该命令将在Starwhale Runtime指定的独立python环境中运行。否则它将直接在swcli当前的python环境中运行。 |
 | `--in-container` | ❌ | Boolean | False | 使用docker镜像来运行模型。此选项仅适用于Standalone实例。Server和Cloud实例始终使用docker镜像。如果指定的runtime是基于docker镜像构建的，此选项总是为真。 |
 
 ## swcli model tag {#tag}

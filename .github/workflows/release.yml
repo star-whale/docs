@@ -46,9 +46,10 @@ jobs:
       - name: Checkout gh-pages branch for archived versions docs
         uses: actions/checkout@v3
         with:
-          lfs: false
           ref: gh-pages
           path: gh-pages
+          sparse-checkout: |
+            .archived-versions
 
       - name: Copy archived version files
         run: |
@@ -133,7 +134,8 @@ jobs:
       - name: Checkout gh-pages branch for archived versions docs
         uses: actions/checkout@v3
         with:
-          lfs: false
+          sparse-checkout: |
+            .archived-versions
           ref: gh-pages
           path: gh-pages
 
@@ -178,3 +180,4 @@ jobs:
           source: "build/*"
           target: "/data/www/starwhale-cn-docs/docs"
           strip_components: 1
+          rm: true
