@@ -51,7 +51,7 @@ module.exports = {
             logo: {
                 alt: "Starwhale",
                 src: "img/starwhale-white.png",
-                href: "/",
+                href: "/next",
             },
             items: [
                 {
