@@ -50,4 +50,4 @@ Starwhale支持按量付费，按量付费是一种先使用后付费的计费�
 
 现金余额支持退款
 
-需要登录账户中心，点击**账户管理>充值订单**，可退款的充值订单在操作列会显示**退款**按钮。点击可发起退款申请，详细操作流程请参见[申请退款](https://github.com/lijing-susan/docs/blob/account-and-billing/i18n/zh/docusaurus-plugin-content-docs/current/instances/cloud/accound-and-billing/refund.md)
+需要登录账户中心，点击**账户管理>充值订单**，可退款的充值订单会在**操作列**显示**退款**按钮。点击可发起退款申请，详细操作流程请参见[申请退款](https://github.com/lijing-susan/docs/blob/account-and-billing/i18n/zh/docusaurus-plugin-content-docs/current/instances/cloud/accound-and-billing/refund.md)
