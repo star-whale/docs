@@ -155,18 +155,18 @@ jobs:
         env:
           RELEASE_VERSION: ${{ steps.tag.outputs.tag }}
           DEFAULT_LOCALE: "zh"
-          URL: "https://starwhale.cn"
+          URL: "https://starwhale.cn/docs"
           ORG: "starwhale.cn"
-          BASE_URL: "/docs/"
+          BASE_URL: "/"
         run: make versioning-docs
 
       - name: Build docs
         run: make build-docs
         env:
           DEFAULT_LOCALE: "zh"
-          URL: "https://starwhale.cn"
+          URL: "https://starwhale.cn/docs"
           ORG: "starwhale.cn"
-          BASE_URL: "/docs/"
+          BASE_URL: "/"
 
       - name: Publish docs
         uses: appleboy/scp-action@v0.1.4
@@ -175,5 +175,5 @@ jobs:
           host: ${{ secrets.DOC_RELEASE_HOST }}
           username: ${{ secrets.DOC_RELEASE_USER }}
           key: ${{ secrets.DOC_RELEASE_KEY }}
-          source: "./build"
+          source: "./build/*"
           target: "/data/www/starwhale-cn-docs/docs"
