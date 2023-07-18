@@ -1,5 +1,5 @@
 ---
-title: Starwhale模型用户指南
+title: Starwhale模型
 ---
 
 Starwhale模型是一种机器学习模型的标准包格式，可用于多种用途，例如模型微调、模型评估和在线服务。 Starwhale模型包含模型文件、推理代码、配置文件等等。

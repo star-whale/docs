@@ -70,7 +70,7 @@ jobs:
         run: make build-docs
 
       - name: Update archived version files
-        if: ${{ github.ref == 'refs/heads/main'}}
+        #if: ${{ github.ref == 'refs/heads/main'}}
         run: |
           mkdir -p build/.archived-versions
           cp versions.json build/.archived-versions/

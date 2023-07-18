@@ -45,7 +45,6 @@ module.exports = {
                             collapsed: true,
                             items: [
                                 "instances/standalone/getting_started",
-                                "instances/standalone/concepts",
                                 "instances/standalone/install",
                                 {
                                     type: 'category',
@@ -55,16 +54,6 @@ module.exports = {
                                         "instances/standalone/guides/uri",
                                         "instances/standalone/guides/config",
                                         "instances/standalone/guides/swignore",
-                                    ]
-                                },
-                                {
-                                    type: 'category',
-                                    label: "API",
-                                    collapsed: true,
-                                    items: [
-                                        "instances/standalone/api/instance_cli",
-                                        "instances/standalone/api/project_cli",
-                                        "instances/standalone/api/utilities_cli",
                                     ]
                                 },
                             ]
@@ -127,6 +116,7 @@ module.exports = {
                 },
                 "userguide/model",
                 "userguide/runtime",
+                "userguide/dataset",
             ]
         },
         {
