@@ -1,5 +1,5 @@
 ---
-title: Starwhale Model User Guide
+title: Starwhale Model
 ---
 
 A Starwhale Model is a standard format for packaging machine learning models that can be used for various purposes, like model finetuning, model evaluation, and online serving. A Starwhale Model contains the model file, inference codes, configuration files, and any other files required to run the model.

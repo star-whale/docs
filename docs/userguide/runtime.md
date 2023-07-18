@@ -1,5 +1,5 @@
 ---
-title: Starwhale Runtime User Guide
+title: Starwhale Runtime
 ---
 
 ## Overview

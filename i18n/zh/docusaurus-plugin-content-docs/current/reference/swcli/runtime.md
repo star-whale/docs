@@ -172,7 +172,7 @@ swcli [全局选项] runtime tag [选项] <RUNTIME> [TAGS]...
 
 每个运行时版本可以包含任意数量的标签，但同一运行时中不允许有重复的标签名称。
 
-**`runtime tag`仅适用于[Standalone实例](../../instances/standalone/index.md).**
+**`runtime tag`仅适用于[Standalone实例](../../instances/standalone).**
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
