@@ -2,7 +2,7 @@
 title: starwhale.env
 ---
 
-```text
+```ini
 ################################################################################
 # *** Required ***
 # The external Starwhale server URL. For example: https://cloud.starwhale.ai
@@ -31,7 +31,7 @@ SW_JWT_TOKEN_EXPIRE_MINUTES=43200
 # The JWT secret key. All strings are valid, but we strongly recommend you to use a random string with at least 16 characters.
 SW_JWT_SECRET=
 ################################################################################
-# The Kubernetes namspace to use when running a task
+# The Kubernetes namespace to use when running a task
 SW_K8S_NAME_SPACE=default
 
 # The path on the Kubernetes host node's filesystem to cache Python packages. Use the setting only if you have
@@ -75,6 +75,10 @@ SW_STORAGE_ACCESSKEY=
 # *** Required ***
 # The secret access key used to access the object storage system.
 SW_STORAGE_SECRETKEY=
+
+# *** Optional ***
+# The region of the object storage system.
+SW_STORAGE_REGION=
 
 # Starwhale Server will use multipart upload when uploading a large file. This setting specifies the part size.
 SW_STORAGE_PART_SIZE=5MB
