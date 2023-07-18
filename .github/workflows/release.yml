@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  doc-release:
+  version-release-for-github-pages:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -92,3 +92,87 @@ jobs:
           user_name: github-actions[bot]
           cname: doc.starwhale.ai
           user_email: "github-actions[bot]@users.noreply.github.com"
+
+  version-release-for-starwhale-cn:
+    runs-on: self-hosted
+    needs:
+      - version-release-for-github-pages
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: "yarn"
+          cache-dependency-path: "./yarn.lock"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-docs-dir-path
+        run: |
+          echo "::set-output name=dir::"
+          yarn cache dir
+
+      - uses: actions/cache@v3
+        id: yarn-cache-docs
+        with:
+          path: |
+            ${{ steps.yarn-cache-docs-dir-path.outputs.dir }}
+            **/node_modules
+          key: ${{ runner.os }}-yarn-docs-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-docs-
+
+      - name: Install docs dependencies
+        if: steps.yarn-cache-docs.outputs.cache-hit != 'true' # Over here!
+        run: make install-req
+
+      - name: Checkout gh-pages branch for archived versions docs
+        uses: actions/checkout@v3
+        with:
+          lfs: false
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Copy archived version files
+        run: |
+          [ ! -d gh-pages/.archived-versions ] && exit 0
+          cp gh-pages/.archived-versions/versions.json ./
+          cp -R gh-pages/.archived-versions/versioned_sidebars ./
+          cp -R gh-pages/.archived-versions/versioned_docs ./
+          cp -R gh-pages/.archived-versions/i18n/zh/docusaurus-plugin-content-docs/version-* ./i18n/zh/docusaurus-plugin-content-docs/
+
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+        with:
+          strip_v: true
+
+      - name: Generate new release version
+        env:
+          RELEASE_VERSION: ${{ steps.tag.outputs.tag }}
+          DEFAULT_LOCALE: "zh"
+          URL: "https://starwhale.cn"
+          ORG: "starwhale.cn"
+          BASE_URL: "/docs/"
+        run: make versioning-docs
+
+      - name: Build docs
+        run: make build-docs
+        env:
+          DEFAULT_LOCALE: "zh"
+          URL: "https://starwhale.cn"
+          ORG: "starwhale.cn"
+          BASE_URL: "/docs/"
+
+      - name: Publish docs
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.DOC_RELEASE_HOST }}
+          username: ${{ secrets.DOC_RELEASE_USER }}
+          key: ${{ secrets.DOC_RELEASE_KEY }}
+          source: "./build"
+          target: "/data/docs"
