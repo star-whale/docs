@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstarwhale_docs=self.webpackChunkstarwhale_docs||[]).push([[4195],{2841:(e,s,t)=>{t.r(s),t.d(s,{default:()=>l});var a=t(7294),c=t(6550);const l=()=>a.createElement(c.l_,{to:"/next"})}}]);
