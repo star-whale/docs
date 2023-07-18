@@ -171,8 +171,9 @@ jobs:
       - name: Publish docs
         uses: appleboy/scp-action@v0.1.4
         with:
+          debug: true
           host: ${{ secrets.DOC_RELEASE_HOST }}
           username: ${{ secrets.DOC_RELEASE_USER }}
           key: ${{ secrets.DOC_RELEASE_KEY }}
           source: "./build"
-          target: "/data/docs"
+          target: "/data/www/starwhale-cn-docs/docs"
