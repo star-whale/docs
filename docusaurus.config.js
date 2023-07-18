@@ -28,6 +28,7 @@ module.exports = {
         prism: {
             theme: require("prism-react-renderer/themes/dracula"),
             darkTheme: require("prism-react-renderer/themes/duotoneDark"),
+            additionalLanguages: ["ini"],
         },
         colorMode: {
             defaultMode: 'light',
