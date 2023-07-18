@@ -99,6 +99,7 @@ module.exports = {
             "@docusaurus/preset-classic",
             {
                 docs: {
+                    routeBasePath: "/",
                     sidebarPath: require.resolve("./sidebars.js"),
                     editUrl: "https://github.com/star-whale/docs/tree/main",
                     versions: {
