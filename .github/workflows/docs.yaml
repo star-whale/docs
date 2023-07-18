@@ -134,3 +134,4 @@ jobs:
           key: ${{ secrets.DOC_RELEASE_KEY }}
           source: "build/*"
           target: "/data/www/starwhale-cn-docs/docs/"
+          strip_components: 1
