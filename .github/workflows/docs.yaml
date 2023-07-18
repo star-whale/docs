@@ -132,5 +132,5 @@ jobs:
           host: ${{ secrets.DOC_RELEASE_HOST }}
           username: ${{ secrets.DOC_RELEASE_USER }}
           key: ${{ secrets.DOC_RELEASE_KEY }}
-          source: "./build/*"
-          target: "/data/www/starwhale-cn-docs/docs"
+          source: "build/*"
+          target: "/data/www/starwhale-cn-docs/docs/"
