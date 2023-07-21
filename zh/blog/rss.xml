@@ -9,12 +9,12 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh</language>
         <item>
-            <title><![CDATA[What is Starwhale?]]></title>
+            <title><![CDATA[Starwhale是什么？]]></title>
             <link>https://doc.starwhale.ai/zh/blog/intro-starwhale</link>
             <guid>intro-starwhale</guid>
             <pubDate>Fri, 21 Jul 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[Starwhale description]]></description>
-            <content:encoded><![CDATA[<p>Starwhale is an MLOps platform that make your model creation, evaluation and publication much eaiser. It aims to create a handy tool for data scientists and machine learning engineers.</p><p>Starwhale helps you:</p><ul><li>Keep track of your training/testing data history including data items and their labels, so that you can easily access them.</li><li>Manage your model packages that you can share across your team.</li><li>Run your models in different environments, either on a Nvidia GPU server or on an embedded device like Cherry Pi.</li><li>Create a online service with interactive Web UI for your models.</li></ul><p>Starwhale is designed to be an open platform. You can create your own plugins to meet your requirements.</p>]]></content:encoded>
+            <description><![CDATA[Starwhale介绍]]></description>
+            <content:encoded><![CDATA[<p>Starwhale是一个 MLOps平台，能够让您的模型创建、评估和发布流程变得更加轻松。 它旨在为数据科学家和机器学习工程师创建一个方便的工具。</p><p>Starwhale帮您:</p><ul><li>跟踪您的训练/测试数据历史记录，包括所有数据项及其相关标签，以便您轻松访问它们。</li><li>管理您可以在团队中共享的模型包。</li><li>在不同的环境中运行您的模型，无论是在 Nvidia GPU 服务器上还是在嵌入式设备（如 Cherry Pi）上。</li><li>为您的模型快速创建配备交互式 Web UI的在线服务。</li></ul><p>Starwhale是一个开放的平台，您可以创建插件来满足自己的需求。</p>]]></content:encoded>
             <category>intro</category>
         </item>
     </channel>
