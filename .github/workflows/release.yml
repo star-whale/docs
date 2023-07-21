@@ -94,6 +94,7 @@ jobs:
           cname: doc.starwhale.ai
           user_email: "github-actions[bot]@users.noreply.github.com"
 
+#TODO: refactor with main-release-for-starwhale-cn job in the docs.yaml
   version-release-for-starwhale-cn:
     runs-on: self-hosted
     needs:
@@ -104,40 +105,19 @@ jobs:
         with:
           lfs: true
 
-      - name: Use Node.js 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-          cache: "yarn"
-          cache-dependency-path: "./yarn.lock"
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-docs-dir-path
-        run: |
-          echo "::set-output name=dir::"
-          yarn cache dir
-
-      - uses: actions/cache@v3
-        id: yarn-cache-docs
-        with:
-          path: |
-            ${{ steps.yarn-cache-docs-dir-path.outputs.dir }}
-            **/node_modules
-          key: ${{ runner.os }}-yarn-docs-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-docs-
-
       - name: Install docs dependencies
-        if: steps.yarn-cache-docs.outputs.cache-hit != 'true' # Over here!
-        run: make install-req
+        run: |
+            yarn config set registry https://registry.npmmirror.com
+            npm config set registry https://registry.npm.taobao.org
+            make install-req
 
       - name: Checkout gh-pages branch for archived versions docs
         uses: actions/checkout@v3
         with:
-          sparse-checkout: |
-            .archived-versions
           ref: gh-pages
           path: gh-pages
+          sparse-checkout: |
+            .archived-versions
 
       - name: Copy archived version files
         run: |
@@ -146,21 +126,6 @@ jobs:
           cp -R gh-pages/.archived-versions/versioned_sidebars ./
           cp -R gh-pages/.archived-versions/versioned_docs ./
           cp -R gh-pages/.archived-versions/i18n/zh/docusaurus-plugin-content-docs/version-* ./i18n/zh/docusaurus-plugin-content-docs/
-
-      - name: Get tag
-        id: tag
-        uses: dawidd6/action-get-tag@v1
-        with:
-          strip_v: true
-
-      - name: Generate new release version
-        env:
-          RELEASE_VERSION: ${{ steps.tag.outputs.tag }}
-          DEFAULT_LOCALE: "zh"
-          URL: "https://starwhale.cn"
-          ORG: "starwhale.cn"
-          BASE_URL: "/docs/"
-        run: make versioning-docs
 
       - name: Build docs
         run: make build-docs
@@ -178,6 +143,6 @@ jobs:
           username: ${{ secrets.DOC_RELEASE_USER }}
           key: ${{ secrets.DOC_RELEASE_KEY }}
           source: "build/*"
-          target: "/data/www/starwhale-cn-docs/docs"
+          target: "/data/www/starwhale-cn-docs/docs/"
           strip_components: 1
           rm: true
