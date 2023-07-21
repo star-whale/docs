@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstarwhale_docs=self.webpackChunkstarwhale_docs||[]).push([[2535],{5641:s=>{s.exports=JSON.parse('{"title":"All posts","items":[{"title":"What is Starwhale?","permalink":"/blog/intro-starwhale"}]}')}}]);

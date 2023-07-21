@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstarwhale_docs=self.webpackChunkstarwhale_docs||[]).push([[2535],{45641:e=>{e.exports=JSON.parse('{"title":"\u6700\u65b0\u53d1\u5e03","items":[{"title":"What is Starwhale?","permalink":"/zh/blog/intro-starwhale"}]}')}}]);

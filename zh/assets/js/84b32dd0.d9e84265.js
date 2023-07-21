@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstarwhale_docs=self.webpackChunkstarwhale_docs||[]).push([[1704],{94573:a=>{a.exports=JSON.parse('{"label":"intro","permalink":"/zh/blog/tags/intro","allTagsPath":"/zh/blog/tags","count":1}')}}]);
