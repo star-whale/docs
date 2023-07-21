@@ -74,6 +74,13 @@ module.exports = {
                     label: "Slack",
                 },
                 {
+                    to: "blog",
+                    position: "right",
+                    className: "header-ico header-ico--blog",
+                    "aria-label": "Starwhale Blog",
+                    label: "Blog",
+                },
+                {
                     type: 'localeDropdown',
                     position: 'right',
                 },
@@ -110,6 +117,12 @@ module.exports = {
                             path: "/next",
                         }
                     }
+                },
+                blog: {
+                    blogTitle: "Starwhale Blog",
+                    postsPerPage: 'ALL',
+                    blogSidebarTitle: 'All posts',
+                    blogSidebarCount: 'ALL',
                 },
                 theme: {
                     customCss: require.resolve("./src/css/custom.scss"),

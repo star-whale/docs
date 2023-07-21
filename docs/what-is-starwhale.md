@@ -5,13 +5,13 @@ title: What is Starwhale
 
 ## Overview
 
-Starwhale is an MLOps platform that make your model creation, evaluation and publication much eaiser. It aims to create a handy tool for data scientists and machine learning engineers.
+Starwhale is an MLOps platform that make your model creation, evaluation and publication much easier. It aims to create a handy tool for data scientists and machine learning engineers.
 
 Starwhale helps you
 
 * Keep track of your training/testing data history including data items and their labels, so that you can easily access them.
 * Manage your model packages that you can share across your team.
-* Run your models in different environments, either on a Nvidia GPU server or on an embeded device like Cherry Pi.
+* Run your models in different environments, either on a Nvidia GPU server or on an embedded device like Cherry Pi.
 * Create a online service with interactive Web UI for your models.
 
 Starwhale is designed to be an open platform. You can create your own plugins to meet your requirements.

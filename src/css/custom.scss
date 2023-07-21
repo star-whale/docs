@@ -255,11 +255,19 @@ html[data-theme="light"] .hero .button.button--primary {
 .header-ico--github {
   background-image: url("/img/ico-github.svg");
   background-position: 0 0;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 
 .header-ico--slack {
   background-image: url("/img/ico-slack.svg");
+  background-position: 0 0;
+  margin-right: 20px;
+}
+
+.header-ico--blog {
+  background-image: url("/img/ico-blog.svg");
+  background-position: 0 0;
+  margin-right: 20px;
 }
 
 .header-ico {
