@@ -1,14 +1,11 @@
 {
-  "title": {
-    "message": "Blog",
-    "description": "The title for the blog used in SEO"
-  },
-  "description": {
-    "message": "Blog",
-    "description": "The description for the blog used in SEO"
-  },
-  "sidebar.title": {
-    "message": "最新发布",
-    "description": "The label for the left sidebar"
-  }
+    "title": {
+        "message": "北京星鲸科技有限公司博客"
+    },
+    "description": {
+        "message": "北京星鲸科技有限公司（Starwhale）是一家致力于人工智能平台研发的高科技公司。我们坚信AI将带来人类历史的又一次文明飞跃，使我们的生产更高效，生活更便捷舒适。星鲸科技致力于构建一个高效易用的AI开发服务平台，满足千行百业的业务需求，降低成本提高效率，并加速AI在实际场景中的迭代、落地和应用。"
+    },
+    "sidebar.title": {
+        "message": "最新发布"
+    }
 }
