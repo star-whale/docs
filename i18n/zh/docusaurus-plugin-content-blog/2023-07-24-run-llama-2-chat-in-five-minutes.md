@@ -1,10 +1,9 @@
 ---
 title: 5分钟快速运行Llama 2-Chat
 description: Starwhale 
-slug: intro-starwhale-run-model
+slug: run llama2-Chat in five minutes
 authors:
   - name: Starwhale
-    image_url: https://github.com/star-whale/docs/assets/101299635/2f9e5c10-b829-434d-9bc1-39d138da2c:0c
 tags: [模型]
 image: https://starwhale.cn/assets/images/banner-9c279049eb74ef96a8c1eb6ac3636360.jpg
 hide_table_of_contents: false
