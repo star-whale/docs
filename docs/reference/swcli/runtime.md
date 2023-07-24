@@ -176,7 +176,7 @@ swcli [GLOBAL OPTIONS] runtime tag [OPTIONS] <RUNTIME> [TAGS]...
 
 Each runtime version can have any number of tags， but duplicated tag names are not allowed in the same runtime.
 
-**`runtime tag` only works for the [standalone instance](../../instances/standalone/index.md).**
+**`runtime tag` only works for the Standalone Instance.**
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |

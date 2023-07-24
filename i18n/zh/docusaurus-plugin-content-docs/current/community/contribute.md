@@ -1,5 +1,5 @@
 ---
-title: Starwhale开源贡献指南
+title: Starwhale 开源贡献指南
 ---
 
 ## 参与贡献
@@ -32,8 +32,9 @@ Starwhale社区使用[Github Issues](https://github.com/star-whale/starwhale/iss
 - [Starwhale Cloud](https://cloud.starwhale.cn)
 - [官方文档](https://doc.starwhale.ai)
 - [Github Repo](https://github.com/star-whale/starwhale)
-- [Python Package](https://pypi.org/project/starwhale/)
-- Docker镜像：[Docker Hub](https://hub.docker.com/u/starwhaleai)，[ghcr.io](https://github.com/orgs/star-whale/packages)
+- [Github Docs Repo](https://github.com/star-whale/docs)
+- [Python Package](https://pypi.org/project/starwhale)
+- Docker镜像：[Docker Hub](https://hub.docker.com/u/starwhaleai)，[ghcr.io](https://github.com/orgs/star-whale/packages), [Starwhale Hosted](https://docker-registry.starwhale.cn/v2/star-whale/starwhale/tags/list)
 - [Helm Charts](https://artifacthub.io/packages/helm/starwhale/starwhale)
 
 ## 代码基本结构
@@ -49,7 +50,7 @@ Starwhale社区使用[Github Issues](https://github.com/star-whale/starwhale/iss
 - [console](https://github.com/star-whale/starwhale/tree/main/console)：前端的实现，使用React + TypeScript编写，对应Starwhale Cloud Instance的Web UI。
 - [server](https://github.com/star-whale/starwhale/tree/main/server)：Starwhale Controller的实现，使用Java编写，对应Starwhale Cloud Instance的后端API。
 - [docker](https://github.com/star-whale/starwhale/tree/main/docker)：Helm Charts，绝大多数Docker Image的Dockerfile等。
-- [docs](https://github.com/star-whale/starwhale/tree/main/docs)：Starwhale官方文档。
+- [docs](https://github.com/star-whale/docs)：Starwhale官方文档。
 - [example](https://github.com/star-whale/starwhale/tree/main/example)：示例程序，包含MNIST等例子。
 - [scripts](https://github.com/star-whale/starwhale/tree/main/scripts)：一些Bash和Python脚本，用来进行E2E测试和软件发布等。
 
@@ -77,7 +78,7 @@ Standalone Instance采用Python编写，当要修改Python SDK和swcli时，需�
 ### Standalone本地开发环境前置条件
 
 - OS：Linux或macOS
-- Python：3.7~3.10
+- Python：3.7~3.11
 - Docker：>=19.03 (非必须，当调试dockerize、生成docker image或采用docker为载体运行模型任务时需要)
 - Python隔离环境：Python venv 或 virtualenv 或 conda等都可以，用来构建一个隔离的Python环境
 

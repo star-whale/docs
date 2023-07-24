@@ -11,10 +11,10 @@ swcli [GLOBAL OPTIONS] instance [OPTIONS] <SUBCOMMAND> [ARGS]
 The `instance` command includes the following subcommands:
 
 * `info`
-* `list`
+* `list` (`ls`)
 * `login`
 * `logout`
-* `use`
+* `use` (`select`)
 
 ## swcli instance info {#info}
 

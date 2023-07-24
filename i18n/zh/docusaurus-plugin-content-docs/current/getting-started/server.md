@@ -4,7 +4,7 @@ title: Starwhale Server入门指南
 
 ## 安装Starwhale Server
 
-安装Starwhale Server，参见[安装指南]
+安装 Starwhale Server，参见[安装指南](../server/installation/index.md)。
 
 ## 创建您的第一个项目
 
@@ -28,9 +28,10 @@ title: Starwhale Server入门指南
 
 ```bash
 swcli instance login --username <your username> --password <your password> --alias server <Your Server URL>
-swcli model copy mnist/version/latest server/project/demo
-swcli dataset copy mnist/version/latest server/project/demo
-swcli runtime copy pytorch/version/latest server/project/demo
+
+swcli model copy mnist server/project/demo
+swcli dataset copy mnistserver/project/demo
+swcli runtime copy pytorch server/project/demo
 ```
 
 ## 使用Web UI运行模型评估

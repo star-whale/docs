@@ -34,76 +34,8 @@ module.exports = {
             label: "User Guides",
             items: [
                 {
-                    "Starwhale Instances": [
-                        {
-                            type: 'category',
-                            label: "Starwhale Standalone",
-                            link: {
-                                type: "doc",
-                                id: "instances/standalone/index"
-                            },
-                            collapsed: true,
-                            items: [
-                                "instances/standalone/getting_started",
-                                "instances/standalone/install",
-                                {
-                                    type: 'category',
-                                    label: "Guides",
-                                    collapsed: true,
-                                    items: [
-                                        "instances/standalone/guides/uri",
-                                        "instances/standalone/guides/config",
-                                        "instances/standalone/guides/swignore",
-                                    ]
-                                },
-                            ]
-                        },
-                        {
-                            type: 'category',
-                            label: "Starwhale Server",
-                            link: {
-                                type: "doc",
-                                id: "instances/server/index"
-                            },
-                            collapsed: true,
-                            items: [
-                                {
-                                    type: 'category',
-                                    label: "Installation",
-                                    link: {
-                                        type: "doc",
-                                        id: "instances/server/installation/index"
-                                    },
-                                    collapsed: true,
-                                    items: [
-                                        "instances/server/installation/docker",
-                                        "instances/server/installation/helm-charts",
-                                    ]
-                                },
-                                {
-                                    type: 'category',
-                                    label: "Guides",
-                                    collapsed: true,
-                                    items: [
-                                        "instances/server/guides/server_admin",
-                                    ]
-                                },
-                            ]
-                        },
-                        {
-                            type: 'category',
-                            label: "Starwhale Cloud",
-                            collapsed: true,
-                            items: [
-                                "instances/cloud/getting_started",
-                                "instances/cloud/concepts",
-                            ]
-                        },
-                    ]
-                },
-                {
                     type: "category",
-                    label: "Starwhale Client",
+                    label: "Starwhale Client(swcli)",
                     link: {
                         type: "doc",
                         id: "swcli/index"
@@ -111,12 +43,50 @@ module.exports = {
                     items: [
                         "swcli/installation",
                         "swcli/uri",
-                        "swcli/swignore"
+                        "swcli/swignore",
+                        "swcli/config",
+                    ]
+                },
+                {
+                    type: 'category',
+                    label: "Starwhale Server",
+                    link: {
+                        type: "doc",
+                        id: "server/index"
+                    },
+                    collapsed: true,
+                    items: [
+                        {
+                            type: 'category',
+                            label: "Installation Guide",
+                            link: {
+                                type: "doc",
+                                id: "server/installation/index"
+                            },
+                            collapsed: true,
+                            items: [
+                                "server/installation/minikube",
+                                "server/installation/helm-charts",
+                                {
+                                    type: 'category',
+                                    label: 'Install Starwhale Server with Docker',
+                                    link: {
+                                        type: "doc",
+                                        id: "server/installation/docker",
+                                    },
+                                    collapsed: true,
+                                    items: [
+                                        "server/installation/starwhale_env",
+                                    ]
+                                },
+                            ],
+                        },
+                        "server/guides/server_admin",
+                        "server/project",
                     ]
                 },
                 "userguide/model",
                 "userguide/runtime",
-                "userguide/dataset",
             ]
         },
         {
@@ -154,6 +124,8 @@ module.exports = {
                     ]
                 }
             ],
+        },
+        {
             "Community": [
                 "community/contribute",
             ]

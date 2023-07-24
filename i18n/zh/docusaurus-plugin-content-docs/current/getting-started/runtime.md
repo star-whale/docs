@@ -17,32 +17,20 @@ title: Starwhale Runtime入门指南
 
 * Python 3.7+
 * Linux或macOS
-* [Starwhale Client](../swcli/index.md) 0.3.0+
+* [Starwhale Client](../swcli/index.md) 0.5.6+
 
 运行以下命令以克隆示例代码：
 
 ```shell
-git clone --depth=1 https://github.com/star-whale/starwhale.git
-cd starwhale/example/runtime/pytorch #中国大陆用户请改用pytorch-cn-mirror。
+git clone https://github.com/star-whale/starwhale.git
+cd starwhale/example/runtime/pytorch-cn-mirror #非中国大陆网络可使用pytorch例子
 ```
 
 ## 构建Starwhale Runtime
 
 ```console
-❯ swcli runtime build .
-🚧 start to build runtime bundle...
-👷 uri:local/project/self/runtime/pytorch
-🐦 runtime will ignore pypi editable package
-🆕 version gy4wgmzugayw
-📁 workdir: /home/liutianwei/.cache/starwhale/self/workdir/runtime/pytorch/gy/gy4wgmzugaywczjyg44tkzjwnvrgq4y
-🐝 dump environment info...
-dump dependencies info...
-🌈 runtime docker image: ghcr.io/star-whale/starwhale:latest-cuda11.4  🌈
-🦋 .swrt bundle:/home/liutianwei/.cache/starwhale/self/runtime/pytorch/gy/gy4wgmzugaywczjyg44tkzjwnvrgq4y.swrt
-  10 out of 10 steps finished ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00 0:00:00
+❯ swcli -vvv runtime build --yaml runtime.yaml
 ```
-
-![runtime-build](../img/runtime-build.gif)
 
 ## 在Standalone Instance中使用Starwhale Runtime
 
@@ -50,22 +38,22 @@ dump dependencies info...
 
 ```console
 # 激活runtime
-swcli runtime activate pytorch/version/latest
+swcli runtime activate pytorch-cn-mirror
 ```
 
 `swcli runtime activate`会下载runtime的所有python依赖，并在当前shell环境中激活该环境。这个过程可能需要很长时间。
 
 当runtime被激活时，所有依赖项都已在您的python环境中准备就绪，类似于virtualenv的`source venv/bin/activate`或者conda的`conda activate`命令。如果您关闭了shell或切换到另一个shell，则下次使用之前需要重新激活这个runtime。
 
-### 在SWCLI中使用Starwhale Runtime
+### 在swcli中使用Starwhale Runtime
 
 ```console
 # 模型构建中使用runtime
-swcli model build . --runtime pytorch
+swcli model build . --runtime pytorch-cn-mirror
 # 数据集构建中使用runtime
-swcli dataset build . --runtime pytorch
+swcli dataset build . --runtime pytorch-cn-mirror
 # 模型评测中使用runtime
-swcli model eval . --dataset mnist --runtime pytorch
+swcli model run --uri mnist/version/v0 --dataset mnist --runtime pytorch-cn-mirror
 ```
 
 ## 将 Starwhale Runtime 复制到另一个实例
@@ -74,8 +62,5 @@ swcli model eval . --dataset mnist --runtime pytorch
 
 ```console
 # 将runtime复制到名为“pre-k8s”的Server实例
-❯ swcli runtime copy pytorch cloud://pre-k8s/project/starwhale
-🚧 start to copy local/project/self/runtime/pytorch/version/latest -> http://console.pre.intra.starwhale.ai/project/starwhale...
-  🎳 upload gfsdeyrtmqztezjyg44tkzjwmnttmoi.swrt ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00 30.7 kB ?
-👏 copy done.
+❯ swcli runtime copy pytorch-cn-mirror cloud://pre-k8s/project/starwhale
 ```

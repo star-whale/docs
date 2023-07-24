@@ -4,27 +4,35 @@ title: Starwhale Model
 
 A Starwhale Model is a standard format for packaging machine learning models that can be used for various purposes, like model finetuning, model evaluation, and online serving. A Starwhale Model contains the model file, inference codes, configuration files, and any other files required to run the model.
 
-For more information about the packaging format, see [the storage format](#format).
-
 ## Create a Starwhale Model
 
-There are two ways to create a Starwhale Model: by [SWCLI](../reference/swcli/model.md) or by SDK.
+There are two ways to create a Starwhale Model: by [swcli](../reference/swcli/model.md) or by Python SDK.
 
-### Create a Starwhale Model by SWCLI
+### Create a Starwhale Model by swcli
 
-To create a Starwhale Model by SWCLI, you need to define a model.yaml, which describes some required information about the model package, and run the following command:
+To create a Starwhale Model by swcli, you need to define a model.yaml, which describes some required information about the model package, and run the following command:
 
 ```bash
-swcli model build <path to your model.yaml directory>
+swcli model build . --model-yaml /path/to/model.yaml
 ```
 
-For more information about the command and model.yaml, see [the SWCLI reference](../reference/swcli/model.md#build)
+For more information about the command and model.yaml, see [the swcli reference](../reference/swcli/model.md#build). `model.yaml` is optional for model building.
 
-### Create a Starwhale Model by SDK
+### Create a Starwhale Model by Python SDK
+
+```python
+from starwhale import model, predict
+
+@predict
+def predict_img(data):
+   ...
+
+model.build(name="mnist", modules=[predict_img])
+```
 
 ## Model Management
 
-### Model Management by SWCLI
+### Model Management by swcli
 
 | Command | Description |
 | ------- | ----------- |
@@ -40,7 +48,7 @@ For more information about the command and model.yaml, see [the SWCLI reference]
 
 Starwhale Models are versioned. The general rules about versions are described in [Resource versioning in Starwhale](../concepts/versioning.md).
 
-## Model History Management by SWCLI
+## Model History Management by swcli
 
 | Command | Description |
 | ------- | ----------- |
@@ -51,19 +59,13 @@ Starwhale Models are versioned. The general rules about versions are described i
 | [`swcli model remove`](../reference/swcli/model.md#remove) | Remove a Starwhale Model version |
 | [`swcli model recover`](../reference/swcli/model.md#recover) | Recover a previously removed Starwhale Model version |
 
-## Model History Management by WebUI
-
 ## Model Evaluation
 
-### Model Evaluation by SWCLI
+### Model Evaluation by swcli
 
 | Command | Description |
 | ------- | ----------- |
-| [`swcli model eval`](../reference/swcli/model.md#eval) | Create an evaluation with a Starwhale Model |
-
-### Model Evaluation by WebUI
-
-#### Model Online Evaluation by WebUI
+| [`swcli model run`](../reference/swcli/model.md#eval) | Create an evaluation with a Starwhale Model |
 
 ## The Storage Format {#format}
 

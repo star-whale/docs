@@ -180,7 +180,7 @@ swcli [GLOBAL OPTIONS] model tag [OPTIONS] <MODEL> [TAGS]...
 
 Each model version can have any number of tags， but duplicated tag names are not allowed in the same model.
 
-**`model tag` only works for the [standalone instance](../../instances/standalone/index.md).**
+**`model tag` only works for the Standalone Instance.**
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |

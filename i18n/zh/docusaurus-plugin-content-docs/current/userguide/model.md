@@ -1,30 +1,38 @@
 ---
-title: Starwhale模型
+title: Starwhale 模型
 ---
 
-Starwhale模型是一种机器学习模型的标准包格式，可用于多种用途，例如模型微调、模型评估和在线服务。 Starwhale模型包含模型文件、推理代码、配置文件等等。
+Starwhale 模型是一种机器学习模型的标准包格式，可用于多种用途，例如模型微调、模型评估和在线服务。 Starwhale 模型包含模型文件、推理代码、配置文件等等。
 
-有关包格式的更多信息，请参阅[存储格式](#format)。
+## 创建一个 Starwhale 模型
 
-## 创建一个Starwhale模型
+创建 Starwhale 模型有两种方法：通过 [swcli](../reference/swcli/model.md) 或通过SDK。
 
-创建Starwhale模型有两种方法：通过[SWCLI](../reference/swcli/model.md) 或通过SDK。
+### 使用 swcli 创建 Starwhale 模型
 
-### 使用SWCLI创建Starwhale模型
-
-使用SWCLI创建Starwhale模型之前，您需要定义一个model.yaml，其中描述了关于Starwhale模型的一些必要信息，然后运行以下命令：
+使用 swcli 创建 Starwhale 模型之前，您可以定义一个model.yaml，其中描述了关于Starwhale模型的一些必要信息，然后运行以下命令：
 
 ```bash
-swcli model build <您的model.yaml所在目录的路径>
+swcli model build . --model-yaml /path/to/model.yaml
 ```
 
-有关该命令和 model.yaml 的更多信息，请参阅[SWCLI参考](../reference/swcli/model.md#build)。
+有关该命令和 model.yaml 的更多信息，请参阅[swcli参考](../reference/swcli/model.md#build)。需要注意的是，model.yaml 是非必要的。
 
-### 使用SWSDK创建Starwhale模型
+### 使用 Python SDK 创建 Starwhale 模型
 
-## 管理Starwhale模型
+```python
+from starwhale import model, predict
 
-### 使用SWCLI管理Starwhale模型
+@predict
+def predict_img(data):
+    ...
+
+model.build(name="mnist", modules=[predict_img])
+```
+
+## 管理 Starwhale 模型
+
+### 使用 swcli 管理 Starwhale 模型
 
 | 命令 | 说明 |
 | ------- | ----------- |
@@ -34,13 +42,13 @@ swcli model build <您的model.yaml所在目录的路径>
 | [`swcli model remove`](../reference/swcli/model.md#remove) | 删除Starwhale模型 |
 | [`swcli model recover`](../reference/swcli/model.md#recover) | 恢复之前删除的Starwhale模型 |
 
-### 使用Web界面管理Starwhale模型
+### 使用 Web 界面管理 Starwhale 模型
 
-## 管理Starwhale模型的历史版本
+## 管理 Starwhale 模型的历史版本
 
-Starwhale模型是版本化的。关于版本的基本信息可以参考[Starwhale中的资源版本控制](../concepts/versioning.md)。
+Starwhale 模型是版本化的。关于版本的基本信息可以参考 [Starwhale中的资源版本控制](../concepts/versioning.md)。
 
-## 使用SWCLI管理Starwhale模型的历史版本
+## 使用 swcli 管理 Starwhale 模型的历史版本
 
 | 命令 | 说明 |
 | ------- | ----------- |
@@ -51,19 +59,13 @@ Starwhale模型是版本化的。关于版本的基本信息可以参考[Starwha
 | [`swcli model remove`](../reference/swcli/model.md#remove) | 删除某个Starwhale模型版本 |
 | [`swcli model recover`](../reference/swcli/model.md#recover) | 恢复以前删除的Starwhale模型版本 |
 
-## 使用Web界面管理Starwhale模型的历史版本
-
 ## 模型评估
 
-### 使用SWCLI进行模型评估
+### 使用swcli进行模型评估
 
 | 命令 | 说明 |
 | ------- | ----------- |
-| [`swcli model eval`](../reference/swcli/model.md#eval) | 指定某个Starwhale模型进行模型评估 |
-
-### 使用Web界面进行模型评估
-
-#### 使用Web界面运行Starwhale模型
+| [`swcli model run`](../reference/swcli/model.md#eval) | 指定某个Starwhale模型进行模型评估 |
 
 ## 存储格式 {#format}
 
