@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstarwhale_docs=self.webpackChunkstarwhale_docs||[]).push([[2535],{5641:t=>{t.exports=JSON.parse('{"title":"All posts","items":[{"title":"Run Llama 2-Chat from scratch in 5 minutes","permalink":"/blog/run-llama2-chat-in-five-minutes"},{"title":"What is Starwhale?","permalink":"/blog/intro-starwhale"}]}')}}]);
