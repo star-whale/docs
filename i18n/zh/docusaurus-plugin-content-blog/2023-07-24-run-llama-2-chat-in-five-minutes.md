@@ -1,21 +1,21 @@
 ---
 title: 5分钟快速运行Llama 2-Chat
-description: Starwhale 
-slug: run llama2-Chat in five minutes
+description: 5分钟快速运行Llama 2-Chat
+slug: run-llama2-chat-in-five-minutes
 authors:
   - name: Starwhale
-tags: [模型]
+tags: [模型, llama2]
 image: https://starwhale.cn/assets/images/banner-9c279049eb74ef96a8c1eb6ac3636360.jpg
 hide_table_of_contents: false
 ---
 
-Meta Llama 2 一经发布就吸引了全世界的目光，[Starwhale](https://starwhale.cn/) 特别制作了 Llama 2-Chat 和 Llama 2-7b模型包。只需5分钟，您就可以在https://cloud.starwhale.cn/ 上和 Llama 2-Chat 进行对话。
+Meta Llama 2 一经发布就吸引了全世界的目光，[Starwhale](https://starwhale.cn/) 特别制作了 Llama 2-Chat 和 Llama 2-7b模型包。只需5分钟，您就可以在 <https://cloud.starwhale.cn> 上和 Llama 2-Chat 进行对话。
 
 后续我们也将提供Llama 2-13b 和 Llama 2-70b 的模型包，感兴趣的朋友们请持续关注！
 
 下文将为大家详细介绍什么是 Llama 2，什么是 Starwhale 以及如何使用 Starwhale 运行 Llama 2-Chat。
 
-## 什么是 Llama 2 
+## 什么是 Llama 2
 
 Llama 2 系列模型是一组使用了优化的自回归 Transformer 架构的大语言模型，经过了预训练和微调，包含70亿、130亿和700亿三种参数版本。此外，Meta还训练了 340亿参数版本，但并未发布，相关数据在论文中有体现。
 
@@ -33,17 +33,17 @@ Meta将 Llama 2-70b 的结果与闭源模型进行了比较，在 MMLU 和 GSM8K
 
 ## 什么是 Starwhale
 
-Starwhale是一个MLOps平台，提供MLOps全流程解决方案，能够让开发者和企业高效便捷地进行模型托管、运行、评测、部署及数据集管理等。用户可以根据自己的需要，选择 Standalone、Server 或者 Cloud 任意一版使用，详细说明可参考文档[什么是Starwhale](https://starwhale.cn/docs/) 
+Starwhale是一个MLOps平台，提供MLOps全流程解决方案，能够让开发者和企业高效便捷地进行模型托管、运行、评测、部署及数据集管理等。用户可以根据自己的需要，选择 Standalone、Server 或者 Cloud 任意一版使用，详细说明可参考文档[什么是Starwhale](https://starwhale.cn/docs/)。
 
 ## 如何使用 Starwhale Cloud 运行 Llama 2-Chat
 
 基本流程：登录账号 → 创建项目 → 运行模型 → 进行对话
 
-**一. 登录**
+### **一. 登录**
 
 首先，需要登录Starwhale平台，点击跳转[登录入口](https://cloud.starwhale.cn/login?lang=zh)。如您尚未注册，可点击 [注册入口](https://cloud.starwhale.cn/signup) 进行注册。
 
-**二. 创建项目**
+### **二. 创建项目**
 
 成功登录后进入项目列表页，点击右上角的**创建**项目按钮，输入项目名称,点击 提交 按钮即可新建一个项目。
 
@@ -51,12 +51,12 @@ Starwhale是一个MLOps平台，提供MLOps全流程解决方案，能够让开�
 
 ![image](https://github.com/star-whale/docs/assets/101299635/2494cac8-44f2-4d94-866d-a4d3cc01c453)
 
-**三. 运行模型**
+### **三. 运行模型**
 
 进入作业列表页，点击右上角的**创建**任务按钮。
 
  1) 选择运行资源，可以选择 A100 80G*1（推荐） 或者 A10 24G*1
- 2) 选择模型：starwhale/public/llama2-7b-chat/ki72ulaf(latest)  
+ 2) 选择模型：starwhale/public/llama2-7b-chat/ki72ulaf(latest)
  3) 选择handler：运行对话模型，选择默认项：evaluation:chatbot
  4) 选择运行时：选择默认项，内置
  5) 高级配置，打开自动释放开关：可设置任务自动释放时长，达到设置时长，系统会自动取消任务运行。如不设置自动释放，您可以在体验完成后手动取消任务。
@@ -65,7 +65,7 @@ Starwhale是一个MLOps平台，提供MLOps全流程解决方案，能够让开�
 
 ![image](https://github.com/star-whale/docs/assets/101299635/cc21187a-a40b-44a3-bce7-c785d5fc8d7b)
 
-**四. 查看运行结果和日志**
+#### **四. 查看运行结果和日志**
 
 作业列表页可以查看项目中的所有作业。
 
@@ -77,10 +77,10 @@ Starwhale是一个MLOps平台，提供MLOps全流程解决方案，能够让开�
 
 ![image](https://github.com/star-whale/docs/assets/101299635/c412a427-f5b1-4b34-ab3f-95237f79ced4)
 
-运行成功后返回任务列表，点击**终端**按钮，可打开 chatbox 页面，在chatbox 页面和 Llama 2-Chat 对话
+运行成功后返回任务列表，点击**终端**按钮，可打开 chatbox 页面，在 chatbox 页面和 Llama 2-Chat 对话
 
 ![image](https://github.com/star-whale/docs/assets/101299635/e6e93ab4-d7ca-4bbb-a89a-14850e36ffcb)
 
 ![image](https://github.com/star-whale/docs/assets/101299635/e75f2221-f7ca-4492-981b-7672a2ed65eb)
 
-以上就是关于如何使用 Starwhale Cloud 运行 Llama 2-Chat 的说明，如果您在使用过程中有任何问题欢迎私信留言。您也可以通过[Starwhale官网](https://cloud.starwhale.cn/)了解更多信息，感谢您的关注和支持。
+以上就是关于如何使用 Starwhale Cloud 运行 Llama 2-Chat 的说明，如果您在使用过程中有任何问题欢迎私信留言。您也可以通过[Starwhale官网](https://starwhale.cn/)了解更多信息，感谢您的关注和支持。
