@@ -12,7 +12,7 @@
         "message": "用户指南"
     },
     "sidebar.mainSidebar.category.Starwhale Instances": {
-        "message": "Starwhale实例"
+        "message": "Starwhale 实例"
     },
     "sidebar.mainSidebar.category.Command Line Interface": {
         "message": "Starwhale Client"
@@ -20,8 +20,11 @@
     "sidebar.mainSidebar.category.Community": {
         "message": "社区"
     },
-    "sidebar.mainSidebar.category.Installation": {
-        "message": "安装说明"
+    "sidebar.mainSidebar.category.Installation Guide": {
+        "message": "安装指南"
+    },
+    "sidebar.mainSidebar.category.Install Starwhale Server with Docker": {
+        "message": "使用 Docker 安装 Starwhale Server"
     },
     "sidebar.mainSidebar.category.Configurations": {
         "message": "配置文件"
@@ -30,9 +33,12 @@
         "message": "异构设备"
     },
     "sidebar.mainSidebar.category.Overview": {
-        "message": "关于Starwhale"
+        "message": "关于 Starwhale"
     },
     "sidebar.mainSidebar.category.Examples": {
         "message": "使用示例"
+    },
+    "sidebar.mainSidebar.category.FAQ": {
+        "message": "常见问题"
     }
 }

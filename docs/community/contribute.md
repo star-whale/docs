@@ -30,8 +30,9 @@ You can get involved, get updates and contact Starwhale developers in the follow
 - [Starwhale Cloud](https://cloud.starwhale.cn)
 - [Official docs](https://doc.starwhale.ai)
 - [Github Repo](https://github.com/star-whale/starwhale)
+- [Github Docs Repo](https://github.com/star-whale/docs)
 - [Python Package](https://pypi.org/project/starwhale/)
-- Docker Image：[Docker Hub](https://hub.docker.com/u/starwhaleai)，[ghcr.io](https://github.com/orgs/star-whale/packages)
+- Docker Image：[Docker Hub](https://hub.docker.com/u/starwhaleai)，[ghcr.io](https://github.com/orgs/star-whale/packages), [Starwhale Hosted](https://docker-registry.starwhale.cn/v2/star-whale/starwhale/tags/list)
 - [Helm Charts](https://artifacthub.io/packages/helm/starwhale/starwhale)
 
 ## Code Structure
@@ -45,7 +46,7 @@ You can get involved, get updates and contact Starwhale developers in the follow
 - [console](https://github.com/star-whale/starwhale/tree/main/console): frontend with React + TypeScript.
 - [server](https://github.com/star-whale/starwhale/tree/main/server)：Starwhale Controller with java, which includes all Starwhale Cloud Instance backend apis.
 - [docker](https://github.com/star-whale/starwhale/tree/main/docker)：Helm Charts, dockerfile.
-- [docs](https://github.com/star-whale/starwhale/tree/main/docs)：Starwhale official docs.
+- [docs](https://github.com/star-whale/docs)：Starwhale官方文档。
 - [example](https://github.com/star-whale/starwhale/tree/main/example)：Example code.
 - [scripts](https://github.com/star-whale/starwhale/tree/main/scripts)：Bash and Python scripts for E2E testing and software releases, etc.
 
@@ -72,10 +73,10 @@ Standalone Instance is written in Python3. When you want to modify swcli and sdk
 
 ### Standalone development environment prerequisites
 
-- OS: Linux or macOS.
-- Python: 3.7~3.10.
-- Docker: >=19.03(optional).
-- Python isolated env tools：Python venv, virtualenv or conda, etc.
+- OS: Linux or macOS
+- Python: 3.7~3.11
+- Docker: >=19.03(optional)
+- Python isolated env tools：Python venv, virtualenv or conda, etc
 
 ### Building from source code
 

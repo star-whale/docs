@@ -11,10 +11,10 @@ swcli [全局选项] instance [选项] <SUBCOMMAND> [参数]
 `instance`命令包括以下子命令：
 
 * `info`
-* `list`
+* `list` (`ls`)
 * `login`
 * `logout`
-* `use`
+* `use` (`select`)
 
 ## swcli instance info {#info}
 
@@ -22,9 +22,9 @@ swcli [全局选项] instance [选项] <SUBCOMMAND> [参数]
 swcli [全局选项] instance info [选项] <INSTANCE>
 ```
 
-`instance info`输出指定Starwhale实例的详细信息。
+`instance info` 输出指定 Starwhale 实例的详细信息。
 
-`INSTANCE`是一个[实例URI](../../swcli/uri.md#instance)。
+`INSTANCE` 是一个[实例URI](../../swcli/uri.md#instance)。
 
 ## swcli instance list {#list}
 
@@ -32,7 +32,7 @@ swcli [全局选项] instance info [选项] <INSTANCE>
 swcli [全局选项] instance list [选项]
 ```
 
-`instance list`显示所有的Starwhale实例。
+`instance list` 显示所有的 Starwhale 实例。
 
 ## swcli instance login {#login}
 
@@ -40,9 +40,9 @@ swcli [全局选项] instance list [选项]
 swcli [全局选项] instance login [选项] <INSTANCE>
 ```
 
-`instance login`连接到一个Server/Cloud实例并将它设置为[默认实例](../../swcli/uri.md#defaultInstance).
+`instance login` 连接到一个 Server/Cloud 实例并将它设置为[默认实例](../../swcli/uri.md#defaultInstance).
 
-`INSTANCE`是一个[实例URI](../../swcli/uri.md#instance)。
+`INSTANCE` 是一个[实例URI](../../swcli/uri.md#instance)。
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
@@ -51,7 +51,7 @@ swcli [全局选项] instance login [选项] <INSTANCE>
 | `--token` | ❌ | String | | 登录令牌 |
 | `--alias` | ✅ | String | | 实例别名。您可以在任何需要实例URI的地方使用对应的别名替代。 |
 
-`--username`和`--password`不能和`--token`一起使用。
+`--username` 和 `--password` 不能和 `--token` 一起使用。
 
 ## swcli instance logout {#logout}
 
@@ -59,7 +59,7 @@ swcli [全局选项] instance login [选项] <INSTANCE>
 swcli [全局选项] instance logout [INSTANCE]
 ```
 
-`instance logout`断开和Server/Cloud实例的连接并清除本地保存的信息。
+`instance logout` 断开和 Server/Cloud 实例的连接并清除本地保存的信息。
 
 `INSTANCE`是一个[实例URI](../../swcli/uri.md#instance)。如果不指定，将使用[默认实例](../../swcli/uri.md#defaultInstance)。
 
@@ -69,6 +69,6 @@ swcli [全局选项] instance logout [INSTANCE]
 swcli [全局选项] instance use <INSTANCE>
 ```
 
-`instance use`将指定的实例设置为[默认实例](../../swcli/uri.md#defaultInstance).
+`instance use` 将指定的实例设置为[默认实例](../../swcli/uri.md#defaultInstance).
 
-`INSTANCE`是一个[实例URI](../../swcli/uri.md#instance)。
+`INSTANCE` 是一个[实例URI](../../swcli/uri.md#instance)。

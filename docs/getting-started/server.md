@@ -4,7 +4,7 @@ title: Getting started with Starwhale Server
 
 ## Install Starwhale Server
 
-To install Starwhale Server, see the [installation guide]
+To install Starwhale Server, see the [installation guide](../server/installation/index.md).
 
 ## Create your first project
 
@@ -28,9 +28,10 @@ Follow step 1 to step 4 in [Getting started with Starwhale Standalone](standalon
 
 ```bash
 swcli instance login --username <your username> --password <your password> --alias server <Your Server URL>
-swcli model copy mnist/version/latest server/project/demo
-swcli dataset copy mnist/version/latest server/project/demo
-swcli runtime copy pytorch/version/latest server/project/demo
+
+swcli model copy mnist server/project/demo
+swcli dataset copy mnist server/project/demo
+swcli runtime copy pytorch server/project/demo
 ```
 
 ## Use the Web UI to run an evaluation

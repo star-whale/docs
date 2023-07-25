@@ -14,32 +14,20 @@ You can learn the following things from this tutorial:
 
 * Python 3.7+
 * Linux or macOS
-* [Starwhale Client](../swcli/index.md) 0.3.0+
+* [Starwhale Client](../swcli/index.md) 0.5.6+
 
 Run the following command to clone the example code:
 
 ```shell
-git clone --depth=1 https://github.com/star-whale/starwhale.git
+git clone https://github.com/star-whale/starwhale.git
 cd starwhale/example/runtime/pytorch # for users in the mainland of China, use pytorch-cn-mirror instead.
 ```
 
 ## Build Starwhale Runtime
 
 ```console
-❯ swcli runtime build .
-🚧 start to build runtime bundle...
-👷 uri:local/project/self/runtime/pytorch
-🐦 runtime will ignore pypi editable package
-🆕 version gy4wgmzugayw
-📁 workdir: /home/liutianwei/.cache/starwhale/self/workdir/runtime/pytorch/gy/gy4wgmzugaywczjyg44tkzjwnvrgq4y
-🐝 dump environment info...
-dump dependencies info...
-🌈 runtime docker image: ghcr.io/star-whale/starwhale:latest-cuda11.4  🌈
-🦋 .swrt bundle:/home/liutianwei/.cache/starwhale/self/runtime/pytorch/gy/gy4wgmzugaywczjyg44tkzjwnvrgq4y.swrt
-  10 out of 10 steps finished ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00 0:00:00
+❯ swcli -vvv runtime build --yaml runtime.yaml
 ```
-
-![runtime-build](../img/runtime-build.gif)
 
 ## Use Starwhale Runtime in the standalone instance
 
@@ -47,22 +35,22 @@ dump dependencies info...
 
 ```console
 # Activate the runtime
-swcli runtime activate pytorch/version/latest
+swcli runtime activate pytorch
 ```
 
 `swcli runtime activate` will download all python dependencies of the runtime, which may take a long time.
 
 All dependencies are ready in your python environment when the runtime is activated. It is similar to `source venv/bin/activate` of virtualenv or the `conda activate` command of conda. If you close the shell or switch to another shell, you need to reactivate the runtime.
 
-### Use Starwhale Runtime in SWCLI
+### Use Starwhale Runtime in swcli
 
 ```console
 # Use the runtime when building a Starwhale Model
 swcli model build . --runtime pytorch
 # Use the runtime when building a Starwhale Dataset
-swcli dataset build . --runtime pytorch
+swcli dataset build --yaml /path/to/dataset.yaml --runtime pytorch
 # Run a model evaluation with the runtime
-swcli model eval . --dataset mnist --runtime pytorch
+swcli model run --uri mnist/version/v0 --dataset mnist --runtime pytorch
 ```
 
 ## Copy Starwhale Runtime to another instance
@@ -72,7 +60,4 @@ You can copy the runtime to a server/cloud instance, which can then be used in t
 ```console
 # Copy the runtime to a server instance named 'pre-k8s'
 ❯ swcli runtime copy pytorch cloud://pre-k8s/project/starwhale
-🚧 start to copy local/project/self/runtime/pytorch/version/latest -> http://console.pre.intra.starwhale.ai/project/starwhale...
-  🎳 upload gfsdeyrtmqztezjyg44tkzjwmnttmoi.swrt ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00 30.7 kB ?
-👏 copy done.
 ```

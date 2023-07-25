@@ -2,9 +2,7 @@
 title: Starwhale中的角色和权限
 ---
 
-角色用于为用户分配权限。只有Starwhale Server/Cloud有角色和权限，Starwhale Standalone没有相应概念。
-
-系统会自动创建一个管理员角色并分配给默认用户“starwhale”。一些敏感操作只能由具有管理员角色的用户执行，例如在Starwhale Server中创建新的账号。
+角色用于为用户分配权限。只有Starwhale Server/Cloud有角色和权限，Starwhale Standalone没有相应概念。系统会自动创建一个管理员角色并分配给默认用户“starwhale”。一些敏感操作只能由具有管理员角色的用户执行，例如在Starwhale Server中创建新的账号。
 
 每个项目具有三类角色：
 

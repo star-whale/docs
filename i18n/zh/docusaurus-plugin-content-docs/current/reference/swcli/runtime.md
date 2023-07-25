@@ -27,9 +27,11 @@ swcli [全局选项] runtime [选项] <SUBCOMMAND> [参数]...
 swcli [全局选项] runtime activate [选项] <RUNTIME>
 ```
 
-`runtime activate`根据指定的运行时创建一个全新的Python环境，类似`source venv/bin/activate`或`conda activate xxx`的效果。关闭当前shell或切换到其他shell后，需要重新激活Runtime。`URI` 参数为Runtime URI。
+`runtime activate` 根据指定的运行时创建一个全新的Python环境，类似 `source venv/bin/activate` 或 `conda activate xxx` 的效果。关闭当前shell或切换到其他shell后，需要重新激活Runtime。`URI` 参数为Runtime URI。
 
 对于已经激活的Runtime，如果想要退出该环境，需要在venv环境中执行 `deactivate` 命令或conda环境中执行`conda deactivate` 命令。
+
+`runtime activate` 命令首次激活环境的时候，会根据Starwhale 运行时的定义，构建一个Python隔离环境，并下载相关的Python Packages，可能会花费比较的时间。
 
 ## swcli runtime build {#build}
 

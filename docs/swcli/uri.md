@@ -14,10 +14,10 @@ Instance URI can be either:
 
 - `local`: standalone instance.
 - `[http(s)://]<hostname or ip>[:<port>]`: cloud instance with HTTP address.
-- `[cloud://]<cloud alias>`: cloud instance with an alias name, which can be configured in the instance login phase.
+- `[cloud://]<cloud alias>`: cloud or server instance with an alias name, which can be configured in the instance login phase.
 
 :::caution
-"local" is different from "localhost". The former means the local standalone instance without a controller, while the latter implies a controller listening at the default port 8082 on the localhost.|
+**"local" is different from "localhost". The former means the local standalone instance without a controller, while the latter implies a controller listening at the default port 8082 on the localhost.**
 :::
 
 Example:
@@ -25,10 +25,12 @@ Example:
 ```bash
 # log in Starwhale Cloud; the alias is swcloud
 swcli instance login --username <your account name> --password <your password> https://cloud.starwhale.ai --alias swcloud
+
 # copy a model from the local instance to the cloud instance
-swcli model copy mnist/version/latest swcloud/project/<your account name>/demo
+swcli model copy mnist/version/latest swcloud/project/<your account name>:demo
+
 # copy a runtime to a Starwhale Server instance: http://localhost:8081
-swcli runtime copy pytorch/version/v1 http://localhost:8081/project/<your account name>/demo
+swcli runtime copy pytorch/version/v1 http://localhost:8081/project/<your account name>:demo
 ```
 
 ## Project URI  {#project}
@@ -47,9 +49,13 @@ swcli project info local/project/self  # inspect self project info in the local 
 - Model URI: `[<Project URI>/model/]<model name>[/version/<version id|tag>]`.
 - Dataset URI: `[<Project URI>/dataset/]<dataset name>[/version/<version id|tag>]`.
 - Runtime URI: `[<Project URI>/runtime/]<runtime name>[/version/<version id|tag>]`.
+
+:::tip
+
 - `swcli` supports human-friendly short version id. You can type the first few characters of the version id, provided it is at least four characters long and unambiguous. However, the `recover` command must use the complete version id.
 - If the project URI is not specified, the [default project](#defaultProject) will be used.
 - You can always use the version tag instead of the version id.
+:::
 
 Example:
 
@@ -57,7 +63,7 @@ Example:
 swcli model info mnist/version/hbtdenjxgm4ggnrtmftdgyjzm43tioi  # inspect model info, model name: mnist, version:hbtdenjxgm4ggnrtmftdgyjzm43tioi
 swcli model remove mnist/version/hbtdenj  # short version
 swcli model info mnist  # inspect mnist model info
-swcli model run mnist/version/latest --runtime pytorch-mnist/version/latest --dataset mnist/version/latest # use version tag
+swcli model run mnist --runtime pytorch-mnist --dataset mnist # use the default latest tag
 ```
 
 ## Job URI {#job}

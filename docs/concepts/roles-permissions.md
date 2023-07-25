@@ -2,9 +2,7 @@
 title: Roles and permissions in Starwhale
 ---
 
-Roles are used to assign permissions to users. Only Starwhale Server/Cloud has roles and permissions, and Starwhale Standalone does not.
-
-The Administrator role is automatically created and assigned to the user "admin". Some sensitive operations can only be performed by users with the Administrator role, for example, creating accounts in Starwhale Server.
+Roles are used to assign permissions to users. Only Starwhale Server/Cloud has roles and permissions, and Starwhale Standalone does not.The Administrator role is automatically created and assigned to the user "admin". Some sensitive operations can only be performed by users with the Administrator role, for example, creating accounts in Starwhale Server.
 
 Projects have three roles:
 
