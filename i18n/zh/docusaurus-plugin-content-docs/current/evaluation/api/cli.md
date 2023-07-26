@@ -16,15 +16,15 @@ eval命令包含如下子命令：
 
 |命令|别名|Standalone|Cloud|
 |---|---|----------|-----|
-|run||✅|✅|
-|compare|cmp|✅|❌|
-|info||✅|✅|
-|list|ls|✅|✅|
-|remove|rm|✅|✅|
-|recover||✅|✅|
-|pause||✅|✅|
-|cancel||✅|✅|
-|resume||✅|✅|
+|run||Y|Y|
+|compare|cmp|Y|N|
+|info||Y|Y|
+|list|ls|Y|Y|
+|remove|rm|Y|Y|
+|recover||Y|Y|
+|pause||Y|Y|
+|cancel||Y|Y|
+|resume||Y|Y|
 
 ## 评测模型
 
@@ -40,13 +40,13 @@ swcli eval run [OPTIONS]
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |---|-------|-----|---|------|---|
-|`--model`||✅||String||Model URI或model.yaml所在的目录。如果在Cloud Instance上运行，支持Model URI形式。|
-|`--dataset`||✅||String||Dataset URI，该参数也可以通过 `SW_DATASET_URI` 环境变量来设置。|
-|`--runtime`||❌|String||`--runtime`参数为Standalone Instance中的Runtime URI。若设置，则表示运行模型评测的时候会使用该Runtime提供的运行时环境；若不设置，则使用当前shell环境作为运行时。设置`--runtime`参数是安全的，只在运行时才会使用Runtime，不会污染当前shell环境。|
-|`--name`||❌|String|default|任务运行的名称|
-|`--desc`||❌|String||任务运行的描述|
-|`--gencmd`||❌|Boolean|False|当选用设置 `--use-docker` 参数后，只输出docker run的命令，不真正运行。该参数只能在Standalone Instance中使用。|
-|`--use-docker`||❌|Boolean|False|选用docker为载体的Runtime来运行模型评测过程，该参数只能在Standalone Instance中使用。|
+|`--model`||Y||String||Model URI或model.yaml所在的目录。如果在Cloud Instance上运行，支持Model URI形式。|
+|`--dataset`||Y||String||Dataset URI，该参数也可以通过 `SW_DATASET_URI` 环境变量来设置。|
+|`--runtime`||N|String||`--runtime`参数为Standalone Instance中的Runtime URI。若设置，则表示运行模型评测的时候会使用该Runtime提供的运行时环境；若不设置，则使用当前shell环境作为运行时。设置`--runtime`参数是安全的，只在运行时才会使用Runtime，不会污染当前shell环境。|
+|`--name`||N|String|default|任务运行的名称|
+|`--desc`||N|String||任务运行的描述|
+|`--gencmd`||N|Boolean|False|当选用设置 `--use-docker` 参数后，只输出docker run的命令，不真正运行。该参数只能在Standalone Instance中使用。|
+|`--use-docker`||N|Boolean|False|选用docker为载体的Runtime来运行模型评测过程，该参数只能在Standalone Instance中使用。|
 
 ## 对比模型评测结果
 
@@ -68,8 +68,8 @@ swcli eval info [OPTIONS] JOB
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--page`||❌|Integer|1|Cloud Instance中分页显示中page序号。|
-|`--size`||❌|Integer|20|Cloud Instance中分页显示中每页数量。|
+|`--page`||N|Integer|1|Cloud Instance中分页显示中page序号。|
+|`--size`||N|Integer|20|Cloud Instance中分页显示中每页数量。|
 
 ## 展示模型评测列表
 
@@ -81,11 +81,11 @@ swcli eval list [OPTIONS]
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--project`|`-p`|❌|String|`swcli project select`命令选定的默认project|Project URI|
-|`--fullname`||❌|Boolean|False|显示完整的版本信息，默认只显示版本号的前12位。|
-|`--show-removed`||❌|Boolean|False|显示本地已经删除但能恢复的模型评测结果。|
-|`--page`||❌|Integer|1|Cloud Instance中分页显示中page序号。|
-|`--size`||❌|Integer|20|Cloud Instance中分页显示中每页数量。|
+|`--project`|`-p`|N|String|`swcli project select`命令选定的默认project|Project URI|
+|`--fullname`||N|Boolean|False|显示完整的版本信息，默认只显示版本号的前12位。|
+|`--show-removed`||N|Boolean|False|显示本地已经删除但能恢复的模型评测结果。|
+|`--page`||N|Integer|1|Cloud Instance中分页显示中page序号。|
+|`--size`||N|Integer|20|Cloud Instance中分页显示中每页数量。|
 
 ## 删除模型评测结果
 
@@ -97,7 +97,7 @@ swcli eval remove [OPTIONS] JOB
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|强制删除，不可恢复|
+|`--force`|`-f`|N|Boolean|False|强制删除，不可恢复|
 
 ## 恢复软删除的模型评测结果
 
@@ -109,7 +109,7 @@ swcli eval recover [OPTIONS] JOB
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|强制恢复，处理类似恢复版本冲突的情况。|
+|`--force`|`-f`|N|Boolean|False|强制恢复，处理类似恢复版本冲突的情况。|
 
 ## 暂停模型评测任务的运行
 
@@ -121,7 +121,7 @@ swcli eval pause [OPTIONS] JOB
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|强制暂停|
+|`--force`|`-f`|N|Boolean|False|强制暂停|
 
 ## 取消模型评测任务的运行
 
@@ -133,7 +133,7 @@ swcli eval cancel [OPTIONS] JOB
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|强制取消|
+|`--force`|`-f`|N|Boolean|False|强制取消|
 
 ## 恢复模型评测任务的运行
 
@@ -145,4 +145,4 @@ swcli eval resume [OPTIONS] JOB
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|强制恢复|
+|`--force`|`-f`|N|Boolean|False|强制恢复|

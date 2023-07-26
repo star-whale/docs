@@ -19,16 +19,16 @@ swcli [GLOBAL OPTIONS] dataset [OPTIONS] COMMAND [ARGS]...
 
   |Command|Standalone|Cloud|
   |-------|----------|-----|
-  |build|✅|❌|
-  |copy|✅|✅|
-  |diff|✅|❌|
-  |history|✅|✅|
-  |info|✅|✅|
-  |list|✅|✅|
-  |recover|✅|✅|
-  |remove|✅|✅|
-  |summary|✅|✅|
-  |tag|✅|❌|
+  |build|Y|N|
+  |copy|Y|Y|
+  |diff|Y|N|
+  |history|Y|Y|
+  |info|Y|Y|
+  |list|Y|Y|
+  |recover|Y|Y|
+  |remove|Y|Y|
+  |summary|Y|Y|
+  |tag|Y|N|
 
 ## Build a dataset
 
@@ -41,8 +41,8 @@ swcli dataset build [OPTIONS] WORKDIR
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--project`|`-p`|❌|String|Selected project|Project URI|
-    |`--dataset-yaml`|`-f`|❌|String|dataset.yaml|Dataset yaml filename, the default is ${WORKDIR}/dataset.yaml|
+    |`--project`|`-p`|N|String|Selected project|Project URI|
+    |`--dataset-yaml`|`-f`|N|String|dataset.yaml|Dataset yaml filename, the default is ${WORKDIR}/dataset.yaml|
 
 - Example:
 
@@ -74,11 +74,11 @@ swcli dataset list [OPTIONS]
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--project`|`-p`|❌|String|Selected project|Project URI|
-    |`--fullname`||❌|Boolean|False|Show fullname of dataset version|
-    |`--show-removed`||❌|Boolean|False|Show removed datasets|
-    |`--page`||❌|Integer|1|Page number for dataset list|
-    |`--size`||❌|Integer|20|Page size for dataset list|
+    |`--project`|`-p`|N|String|Selected project|Project URI|
+    |`--fullname`||N|Boolean|False|Show fullname of dataset version|
+    |`--show-removed`||N|Boolean|False|Show removed datasets|
+    |`--page`||N|Integer|1|Page number for dataset list|
+    |`--size`||N|Integer|20|Page size for dataset list|
 
 ## Remove a dataset
 
@@ -93,7 +93,7 @@ swcli dataset remove [OPTIONS] DATASET
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to remove dataset|
+    |`--force`|`-f`|N|Boolean|False|Force to remove dataset|
 
 - Example:
 
@@ -116,7 +116,7 @@ swcli dataset recover [OPTIONS] DATASET
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to recover dataset|
+    |`--force`|`-f`|N|Boolean|False|Force to recover dataset|
 
 - Example:
 
@@ -137,7 +137,7 @@ swcli dataset info [OPTIONS] DATASET
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--fullname`||❌|Boolean|False|Show version fullname|
+    |`--fullname`||N|Boolean|False|Show version fullname|
 
 ## Show dataset history
 
@@ -151,7 +151,7 @@ swcli dataset history [OPTIONS] DATASET
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--fullname`||❌|Boolean|False|Show version fullname|
+    |`--fullname`||N|Boolean|False|Show version fullname|
 
 - Example:
 
@@ -172,8 +172,8 @@ swcli dataset tag [OPTIONS] DATASET TAGS
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--remove`|`-r`|❌|Boolean|False|Remove tags|
-    |`--quiet`|`-q`|❌|Boolean|False|Ignore tag name errors like name duplication, name absence|
+    |`--remove`|`-r`|N|Boolean|False|Remove tags|
+    |`--quiet`|`-q`|N|Boolean|False|Ignore tag name errors like name duplication, name absence|
 
 - Example:
 

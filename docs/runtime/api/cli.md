@@ -20,18 +20,18 @@ swcli runtime [OPTIONS] COMMAND [ARGS]...
 
   |Command|Standalone|Cloud|
   |-------|----------|-----|
-  |create|✅|❌|
-  |build|✅|❌|
-  |history|✅|✅|
-  |info|✅|✅|
-  |list|✅|✅|
-  |recover|✅|✅|
-  |remove|✅|✅|
-  |tag|✅|❌|
-  |activate|✅|❌|
-  |extract|✅|❌|
-  |restore|✅|❌|
-  |copy|✅|✅|
+  |create|Y|N|
+  |build|Y|N|
+  |history|Y|Y|
+  |info|Y|Y|
+  |list|Y|Y|
+  |recover|Y|Y|
+  |remove|Y|Y|
+  |tag|Y|N|
+  |activate|Y|N|
+  |extract|Y|N|
+  |restore|Y|N|
+  |copy|Y|Y|
 
 ## Create a runtime
 
@@ -45,10 +45,10 @@ swcli runtime create [OPTIONS] WORKDIR
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--name`|`-n`|✅|String||Runtime name|
-    |`--mode`|`-m`|❌|String Choice: venv or conda|venv|Runtime Mode:venv or conda|
-    |`--python`||❌|String|3.8|Python Version|
-    |`--force`|`-f`|❌|Boolean|False|Force to create runtime|
+    |`--name`|`-n`|Y|String||Runtime name|
+    |`--mode`|`-m`|N|String Choice: venv or conda|venv|Runtime Mode:venv or conda|
+    |`--python`||N|String|3.8|Python Version|
+    |`--force`|`-f`|N|Boolean|False|Force to create runtime|
 
 - Example:
 
@@ -75,10 +75,10 @@ swcli runtime build [OPTIONS] WORKDIR
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--project`|`-p`|❌|String|Selected project|Project URI|
-    |`--runtime-yaml`|`-f`|❌|String|runtime.yaml|Runtime yaml filename, default is ${WORKDIR}/runtime.yaml|
-    |`--gen-all-bundles`||❌|Boolean|False|Generate conda or venv files into runtime, which will generate a large runtime bundle file|
-    |`--include-editable`||❌|Boolean|False|Include editable packages|
+    |`--project`|`-p`|N|String|Selected project|Project URI|
+    |`--runtime-yaml`|`-f`|N|String|runtime.yaml|Runtime yaml filename, default is ${WORKDIR}/runtime.yaml|
+    |`--gen-all-bundles`||N|Boolean|False|Generate conda or venv files into runtime, which will generate a large runtime bundle file|
+    |`--include-editable`||N|Boolean|False|Include editable packages|
 
 - Example:
 
@@ -107,7 +107,7 @@ swcli runtime activate [OPTIONS] WORKDIR
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--runtime-yaml`|`-f`|❌|String|runtime.yaml|Runtime yaml filename, default is ${WORKDIR}/runtime.yaml|
+    |`--runtime-yaml`|`-f`|N|String|runtime.yaml|Runtime yaml filename, default is ${WORKDIR}/runtime.yaml|
 
 - Example:
 
@@ -129,8 +129,8 @@ swcli runtime extract [OPTIONS] RUNTIME
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to extract runtime|
-    |`--target-dir`||❌|String|Starwhale default runtime workdir|Extract target dir|
+    |`--force`|`-f`|N|Boolean|False|Force to extract runtime|
+    |`--target-dir`||N|String|Starwhale default runtime workdir|Extract target dir|
 
 - Example:
 
@@ -151,11 +151,11 @@ swcli runtime list [OPTIONS]
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--project`|`-p`|❌|String|Selected project|Project URI|
-    |`--fullname`||❌|Boolean|False|Show fullname of runtime version|
-    |`--show-removed`||❌|Boolean|False|Show removed runtimes|
-    |`--page`||❌|Integer|1|Page number for runtime list|
-    |`--size`||❌|Integer|20|Page size for runtime list|
+    |`--project`|`-p`|N|String|Selected project|Project URI|
+    |`--fullname`||N|Boolean|False|Show fullname of runtime version|
+    |`--show-removed`||N|Boolean|False|Show removed runtimes|
+    |`--page`||N|Integer|1|Page number for runtime list|
+    |`--size`||N|Integer|20|Page size for runtime list|
 
 ## Get runtime info
 
@@ -169,7 +169,7 @@ swcli runtime info [OPTIONS] RUNTIME
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--fullname`||❌|Boolean|False|Show version fullname|
+    |`--fullname`||N|Boolean|False|Show version fullname|
 
 ## Show runtime history
 
@@ -183,7 +183,7 @@ swcli runtime history [OPTIONS] RUNTIME
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--fullname`||❌|Boolean|False|Show version fullname|
+    |`--fullname`||N|Boolean|False|Show version fullname|
 
 - Example:
 
@@ -204,8 +204,8 @@ swcli runtime tag [OPTIONS] RUNTIME TAGS
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--remove`|`-r`|❌|Boolean|False|Remove tags|
-    |`--quiet`|`-q`|❌|Boolean|False|Ignore tag name errors like name duplication, name absence|
+    |`--remove`|`-r`|N|Boolean|False|Remove tags|
+    |`--quiet`|`-q`|N|Boolean|False|Ignore tag name errors like name duplication, name absence|
 
 - Example:
 
@@ -226,7 +226,7 @@ swcli dataset remove [OPTIONS] RUNTIME
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to remove runtime|
+    |`--force`|`-f`|N|Boolean|False|Force to remove runtime|
 
 - Example:
 
@@ -249,7 +249,7 @@ swcli runtime recover [OPTIONS] RUNTIME
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to recover runtime|
+    |`--force`|`-f`|N|Boolean|False|Force to recover runtime|
 
 - Example:
 
@@ -272,7 +272,7 @@ swcli runtime copy [OPTIONS] SRC DEST
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to copy runtime|
+    |`--force`|`-f`|N|Boolean|False|Force to copy runtime|
 
 - Example: copy a runtime from the local standalone instance to a remote cloud instance(upload)
 

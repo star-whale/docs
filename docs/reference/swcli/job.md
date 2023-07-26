@@ -12,10 +12,10 @@ The `job` command includes the following subcommands:
 
 * `cancel`
 * `info`
-* `list`
+* `list`(`ls`)
 * `pause`
 * `recover`
-* `remove`
+* `remove`(`rm`)
 * `resume`
 
 ## swcli job cancel {#cancel}
@@ -24,13 +24,13 @@ The `job` command includes the following subcommands:
 swcli [GLOBAL OPTIONS] job cancel [OPTIONS] <JOB>
 ```
 
-`job cancel` stops the specified job.
+`job cancel` stops the specified job. On Standalone instance, this command only takes effect for containerized jobs.
 
 `JOB` is a [job URI](../../swcli/uri.md#job).
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--force` or `-f` | ❌ | Boolean | False | If true, kill the Starwhale Job by force. |
+| `--force` or `-f` | N | Boolean | False | If true, kill the Starwhale Job by force. |
 
 ## swcli job info {#info}
 
@@ -44,8 +44,8 @@ swcli [GLOBAL OPTIONS] job info [OPTIONS] <JOB>
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--page` | ❌ | Integer | 1 | The starting page number.  Server and cloud instances only. |
-| `--size` | ❌ | Integer | 20 | The number of items in one page. Server and cloud instances only. |
+| `--page` | N | Integer | 1 | The starting page number.  Server and cloud instances only. |
+| `--size` | N | Integer | 20 | The number of items in one page. Server and cloud instances only. |
 
 ## swcli job list {#list}
 
@@ -57,10 +57,10 @@ swcli [GLOBAL OPTIONS] job list [OPTIONS]
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--project` | ❌ | String | | The URI of the project to list. Use the [default project](../../swcli/uri.md#defaultProject) if not specified. |
-| `--show-removed` or `-sr` | ❌ | Boolean | False | If true, include packages that are removed but not garbage collected. |
-| `--page` | ❌ | Integer | 1 | The starting page number.  Server and cloud instances only. |
-| `--size` | ❌ | Integer | 20 | The number of items in one page. Server and cloud instances only. |
+| `--project` | N | String | | The URI of the project to list. Use the [default project](../../swcli/uri.md#defaultProject) if not specified. |
+| `--show-removed` or `-sr` | N | Boolean | False | If true, include packages that are removed but not garbage collected. |
+| `--page` | N | Integer | 1 | The starting page number.  Server and cloud instances only. |
+| `--size` | N | Integer | 20 | The number of items in one page. Server and cloud instances only. |
 
 ## swcli job pause {#pause}
 
@@ -68,7 +68,7 @@ swcli [GLOBAL OPTIONS] job list [OPTIONS]
 swcli [GLOBAL OPTIONS] job pause [OPTIONS] <JOB>
 ```
 
-`job pause` pauses the specified job. Paused jobs can be resumed by `job resume`.
+`job pause` pauses the specified job. Paused jobs can be resumed by `job resume`. On Standalone instance, this command only takes effect for containerized jobs.
 
 `JOB` is a [job URI](../../swcli/uri.md#job).
 
@@ -76,7 +76,7 @@ From Starwhale's perspective, `pause` is almost the same as `cancel`, except tha
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--force` or `-f` | ❌ | Boolean | False | If true, kill the Starwhale Job by force. |
+| `--force` or `-f` | N | Boolean | False | If true, kill the Starwhale Job by force. |
 
 ## swcli job resume {#resume}
 
@@ -84,6 +84,6 @@ From Starwhale's perspective, `pause` is almost the same as `cancel`, except tha
 swcli [GLOBAL OPTIONS] job resume [OPTIONS] <JOB>
 ```
 
-`job resume` resumes the specified job.
+`job resume` resumes the specified job. On Standalone instance, this command only takes effect for containerized jobs.
 
 `JOB` is a [job URI](../../swcli/uri.md#job).

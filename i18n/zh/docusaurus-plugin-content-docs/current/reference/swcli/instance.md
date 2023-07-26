@@ -46,10 +46,10 @@ swcli [全局选项] instance login [选项] <INSTANCE>
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-| `--username` | ❌ | String | | 登录用户名 |
-| `--password` | ❌ | String | | 登录密码 |
-| `--token` | ❌ | String | | 登录令牌 |
-| `--alias` | ✅ | String | | 实例别名。您可以在任何需要实例URI的地方使用对应的别名替代。 |
+| `--username` | N | String | | 登录用户名 |
+| `--password` | N | String | | 登录密码 |
+| `--token` | N | String | | 登录令牌 |
+| `--alias` | Y | String | | 实例别名。您可以在任何需要实例URI的地方使用对应的别名替代。 |
 
 `--username` 和 `--password` 不能和 `--token` 一起使用。
 
