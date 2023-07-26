@@ -1,10 +1,10 @@
 ---
-title: 数据类型
+title: Starwhale 数据类型 SDK
 ---
 
-## starwhale.COCOObjectAnnotation
+## COCOObjectAnnotation
 
-提供COCO类型的定义，Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L403)。
+提供COCO类型的定义。
 
 ```python
 COCOObjectAnnotation(
@@ -28,7 +28,7 @@ COCOObjectAnnotation(
 |`bbox`|表示bounding box，可以为BoundingBox类型或float的列表|
 |`iscrowd`|0表示是一个单独的object，1表示两个没有分开的object|
 
-### COCOObjectAnnotation使用示例
+### 使用示例 {#coco-example}
 
 ```python
 def _make_coco_annotations(
@@ -73,9 +73,9 @@ def _make_coco_annotations(
     return coco_annotations
 ```
 
-## starwhale.GrayscaleImage
+## GrayscaleImage
 
-提供灰度图类型，比如MNIST中数字手写体图片，是 `Image` 类型的一个特例。Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L301)。
+提供灰度图类型，比如MNIST中数字手写体图片，是 `Image` 类型的一个特例。
 
 ```python
 GrayscaleImage(
@@ -95,7 +95,7 @@ GrayscaleImage(
 |`as_mask`|是否作为Mask图片|
 |`mask_uri`|Mask原图的URI|
 
-### GrayscaleImage使用示例
+### 使用示例 {#gray-example}
 
 ```python
 for i in range(0, min(data_number, label_number)):
@@ -128,9 +128,9 @@ carry_raw_data() -> GrayscaleImage
 astype() -> Dict[str, t.Any]
 ```
 
-## starwhale.BoundingBox
+## BoundingBox
 
-提供边界框类型，目前为 `LTWH` 格式，即 `left_x`, `top_y`, `width` 和 `height`。Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L363)。
+提供边界框类型，目前为 `LTWH` 格式，即 `left_x`, `top_y`, `width` 和 `height`。
 
 ```python
 BoundingBox(
@@ -148,9 +148,9 @@ BoundingBox(
 |`width`|图片的宽度|
 |`height`|图片的高度|
 
-## starwhale.ClassLabel
+## ClassLabel
 
-描述label的数量和类型，Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L344)。
+描述label的数量和类型。
 
 ```python
 ClassLabel(
@@ -158,9 +158,9 @@ ClassLabel(
 )
 ```
 
-## starwhale.Image
+## Image
 
-图片类型，Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L267)。
+图片类型。
 
 ```python
 Image(
@@ -182,7 +182,7 @@ Image(
 |`as_mask`|是否作为Mask图片|
 |`mask_uri`|Mask原图的URI|
 
-### Image使用示例
+### 使用示例 {#image-example}
 
 ```python
 import io
@@ -213,8 +213,6 @@ def _iter_item(paths: t.List[Path]) -> t.Generator[t.Tuple[t.Any, t.Dict], None,
                     shape=image_array.shape,
                     mime_type=MIMEType.PNG,
                 ), annotations
-
-
 ```
 
 ### Image函数
@@ -237,27 +235,75 @@ carry_raw_data() -> GrayscaleImage
 astype() -> Dict[str, t.Any]
 ```
 
-## starwhale.Audio
+## Video
 
-音频类型，Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L324)。
+视频类型。
 
 ```python
-Audio(
+Video(
     fp: _TArtifactFP = "",
     display_name: str = "",
-    shape: Optional[_TShape] = None,
     mime_type: Optional[MIMEType] = None,
 )
 ```
 
 |参数|说明|
 |---|---|
-|`fp`|图片的路径、IO对象或文件内容的bytes|
+|`fp`|视频的路径、IO对象或文件内容的bytes|
 |`display_name`|Dataset Viewer上展示的名字|
-|`shape`|图片的Width、Height和channel|
 |`mime_type`|MIMEType支持的类型|
 
-### Audio使用示例
+### 使用示例 {#video-example}
+
+```python
+import typing as t
+from pathlib import Path
+
+from starwhale import Video, MIMEType
+
+root_dir = Path(__file__).parent.parent
+dataset_dir = root_dir / "data" / "UCF-101"
+test_ds_path = [root_dir / "data" / "test_list.txt"]
+
+def iter_ucf_item() -> t.Generator:
+    for path in test_ds_path:
+        with path.open() as f:
+            for line in f.readlines():
+                _, label, video_sub_path = line.split()
+
+                data_path = dataset_dir / video_sub_path
+                data = Video(
+                    data_path,
+                    display_name=video_sub_path,
+                    shape=(1,),
+                    mime_type=MIMEType.WEBM,
+                )
+
+                yield f"{label}_{video_sub_path}", {
+                    "video": data,
+                    "label": label,
+                }
+```
+
+## Audio
+
+音频类型。
+
+```python
+Audio(
+    fp: _TArtifactFP = "",
+    display_name: str = "",
+    mime_type: Optional[MIMEType] = None,
+)
+```
+
+|参数|说明|
+|---|---|
+|`fp`|音频文件的路径、IO对象或文件内容的bytes|
+|`display_name`|Dataset Viewer上展示的名字|
+|`mime_type`|MIMEType支持的类型|
+
+### 使用示例 {#audio-example}
 
 ```python
 import typing as t
@@ -305,9 +351,9 @@ carry_raw_data() -> Audio
 astype() -> Dict[str, t.Any]
 ```
 
-## starwhale.Text
+## Text
 
-文本类型，默认为 `utf-8` 格式。Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L380)。
+文本类型，默认为 `utf-8` 格式。
 
 ```python
 Text(
@@ -321,7 +367,7 @@ Text(
 |`content`|text内容|
 |`encoding`|text的编码格式|
 
-### Text使用示例
+### 使用示例 {#text-example}
 
 ```python
 import typing as t
@@ -369,9 +415,9 @@ astype() -> Dict[str, t.Any]
 to_str() -> str
 ```
 
-## starwhale.Binary
+## Binary
 
-二进制类型，用bytes存储，Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L258)。
+二进制类型，用bytes存储。
 
 ```python
 Binary(
@@ -405,9 +451,9 @@ carry_raw_data() -> Binary
 astype() -> Dict[str, t.Any]
 ```
 
-## starwhale.Link
+## Link
 
-Link类型，用来制作 `remote-link` 类型的数据集。Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L432)。
+Link类型，用来制作 `remote-link` 类型的数据集。
 
 ```python
 Link(
@@ -425,7 +471,7 @@ Link(
 |`auth`|Link Auth信息|
 |`offset`|数据相对uri指向的文件偏移量|
 |`size`|数据大小|
-|`data_type`|Link指向的实际数据类型，目前支持 `Binary`, `Image`, `Text`, `Audio` 四种类型|
+|`data_type`|Link指向的实际数据类型，目前支持 `Binary`, `Image`, `Text`, `Audio` 和 `Video` 类型|
 
 ### Link函数
 
@@ -435,9 +481,9 @@ Link(
 astype() -> Dict[str, t.Any]
 ```
 
-## starwhale.S3LinkAuth
+## S3LinkAuth
 
-当数据存储在基于S3协议的对象存储上时，该类型负责描述授权、密钥信息。Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L52)。
+当数据存储在基于S3协议的对象存储上时，该类型负责描述授权、密钥信息。
 
 ```python
 S3LinkAuth(
@@ -457,7 +503,7 @@ S3LinkAuth(
 |`endpoint`|S3连接中的endpoint地址|
 |`region`|bucket所在的S3 region，默认为local|
 
-### S3LinkAuth使用示例
+### 使用示例 {#s3-example}
 
 ```python
 import struct
@@ -498,25 +544,9 @@ class LinkRawDatasetProcessExecutor(UserRawBuildExecutor):
                 offset += image_size
 ```
 
-## starwhale.LocalFSLinkAuth
+## MIMEType
 
-描述数据存储在本地文件系统上，Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L151)。
-
-```python
-LocalFSLinkAuth = partial(LinkAuth, ltype=LinkType.LocalFS)
-```
-
-## starwhale.DefaultS3LinkAuth
-
-使用默认值初始化 `S3LinkAuth` 类型后得到的变量, Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L152)。
-
-```python
-DefaultS3LinkAuth = S3LinkAuth()
-```
-
-## starwhale.MIMEType
-
-描述Starwhale支持的多媒体类型，用Python Enum类型实现，用在 `Image`、`Video` 等类型的mime_type 属性上，能更好的进行Dataset Viewer。Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L106)。
+描述Starwhale支持的多媒体类型，用Python Enum类型实现，用在 `Image`、`Video` 等类型的mime_type 属性上，能更好的进行Dataset Viewer。
 
 ```python
 class MIMEType(Enum):
@@ -527,8 +557,10 @@ class MIMEType(Enum):
     GIF = "image/gif"
     APNG = "image/apng"
     AVIF = "image/avif"
+    PPM = "image/x-portable-pixmap"
     MP4 = "video/mp4"
     AVI = "video/avi"
+    WEBM = "video/webm"
     WAV = "audio/wav"
     MP3 = "audio/mp3"
     PLAIN = "text/plain"
@@ -538,9 +570,9 @@ class MIMEType(Enum):
     UNDEFINED = "x/undefined"
 ```
 
-## starwhale.LinkType
+## LinkType
 
-描述Starwhale支持的remote-link类型，用Python Enum类型实现，目前支持 `LocalFS` 和 `S3` 两种类型。Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/core/dataset/type.py#L23)。
+描述Starwhale支持的remote-link类型，用Python Enum类型实现，目前支持 `LocalFS` 和 `S3` 两种类型。
 
 ```python
 class LinkType(Enum):
@@ -549,33 +581,48 @@ class LinkType(Enum):
     UNDEFINED = "undefined"
 ```
 
-## starwhale.BoundingBox3D
+## Line
 
-提供在二维界面上绘制3D边界框的能力，需要前后两个边界框的`BoundingBox`信息`bbox_a`, `bbox_b`。Github上的[代码链接](https://github.com/star-whale/starwhale/blob/4d240d0c8ec1e7d7c98746ebbd814d2647fb16af/client/starwhale/core/dataset/type.py#L551)。
+描述直线。
 
 ```python
-BoundingBox3D(
-    bbox_a: BoundingBox,
-    bbox_b: BoundingBox,
-)
+from starwhale import ds, Point, Line
 
+with dataset("collections") as ds:
+    line_points = [
+        Point(x=0.0, y=1.0),
+        Point(x=0.0, y=100.0)
+    ]
+    ds.append({"line": line_points})
+    ds.commit()
 ```
 
-|参数| 说明                |
-|---|-------------------|
-|`bbox_a`| 在二维UI上，3D框靠近用户的一面 |
-|`bbox_b`| 在二维UI上，3D框远离用户的一面        |
+## Point
 
-## starwhale.NumpyBinary
-
-在构建`Dataset`的时候，用户可以使`NumpyBinary`来存储`ndarray`，以提高starwhale的存储效率。`fp`为`ndarray`在本地的存储路径，或者`bytes`，`dtype`是`numpy`的`dtype`，`shape`为`ndarray`的形状，`link`可以作为`fp`的备选输入。Github上的[代码链接](https://github.com/star-whale/starwhale/blob/02ed82a406ef403416a6faf67f41341e68c38acd/client/starwhale/core/dataset/type.py#L326)。
+描述点。
 
 ```python
-NumpyBinary(
-   self,
-   fp: _TArtifactFP,
-   dtype: t.Type,
-   shape: _TShape,
-   link: t.Optional[Link] = None,
-)
+from starwhale import ds, Point
+
+with dataset("collections") as ds:
+    ds.append(Point(x=0.0, y=100.0))
+    ds.commit()
+```
+
+## Polygon
+
+描述多边形。
+
+```python
+from starwhale import ds, Point, Polygon
+
+with dataset("collections") as ds:
+    polygon_points = [
+        Point(x=0.0, y=1.0),
+        Point(x=0.0, y=100.0),
+        Point(x=2.0, y=1.0),
+        Point(x=2.0, y=100.0),
+    ]
+    ds.append({"polygon": polygon_points})
+    ds.commit()
 ```
