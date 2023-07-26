@@ -18,15 +18,15 @@ swcli job [OPTIONS] COMMAND [ARGS]...
 
   |Command|Standalone|Cloud|
   |-------|----------|-----|
-  |create|✅|✅|
-  |compare|✅|❌|
-  |info|✅|✅|
-  |list|✅|✅|
-  |remove|✅|✅|
-  |recover|✅|✅|
-  |pause|✅|✅|
-  |cancel|✅|✅|
-  |resume|✅|✅|
+  |create|Y|Y|
+  |compare|Y|N|
+  |info|Y|Y|
+  |list|Y|Y|
+  |remove|Y|Y|
+  |recover|Y|Y|
+  |pause|Y|Y|
+  |cancel|Y|Y|
+  |resume|Y|Y|
 
 ## Create a job
 
@@ -42,15 +42,15 @@ swcli job create [OPTIONS] [PROJECT]
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--model`||✅|String||Model URI or model.yaml dir path|
-    |`--dataset`||✅|String||Dataset URI, one or more datasets|
-    |`--runtime`||❌|String||Runtime URI. If you set `--use-docker`, the option is required.|
-    |`--name`||❌|String|""|evaluation job name|
-    |`--desc`||❌|String|""|evaluation job description|
-    |`--resource`||❌|String|`cpu:1`|In cloud instance, the cpu or gpu resource will be allocated to the tasks of the job. Every task can use user specified resource. Resource format is [resource name]:[count]|
-    |`--use-docker`||❌|Boolean|False|Only for standalone instance, use docker environment to run evaluation job.|
-    |`--gencmd`||❌|Boolean|False|Only for standalone instance, only generate docker run commands.|
-    |`--phase`||❌|String, Option:[all, ppl]|all|Only for standalone instance, the phase of the evaluation.|
+    |`--model`||Y|String||Model URI or model.yaml dir path|
+    |`--dataset`||Y|String||Dataset URI, one or more datasets|
+    |`--runtime`||N|String||Runtime URI. If you set `--use-docker`, the option is required.|
+    |`--name`||N|String|""|evaluation job name|
+    |`--desc`||N|String|""|evaluation job description|
+    |`--resource`||N|String|`cpu:1`|In cloud instance, the cpu or gpu resource will be allocated to the tasks of the job. Every task can use user specified resource. Resource format is [resource name]:[count]|
+    |`--use-docker`||N|Boolean|False|Only for standalone instance, use docker environment to run evaluation job.|
+    |`--gencmd`||N|Boolean|False|Only for standalone instance, only generate docker run commands.|
+    |`--phase`||N|String, Option:[all, ppl]|all|Only for standalone instance, the phase of the evaluation.|
 
 - Example:
 
@@ -99,8 +99,8 @@ swcli job info [OPTIONS] JOB
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--page`||❌|Integer|1|Page number for tasks list|
-    |`--size`||❌|Integer|20|Page size for tasks list|
+    |`--page`||N|Integer|1|Page number for tasks list|
+    |`--size`||N|Integer|20|Page size for tasks list|
 
 - Example:
 
@@ -119,11 +119,11 @@ swcli job list [OPTIONS]
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--project`|`-p`|❌|String|Selected project|Project URI|
-    |`--fullname`||❌|Boolean|False|Show fullname of job version|
-    |`--show-removed`||❌|Boolean|False|Show removed jobs|
-    |`--page`||❌|Integer|1|Page number for jobs list|
-    |`--size`||❌|Integer|20|Page size for jobs list|
+    |`--project`|`-p`|N|String|Selected project|Project URI|
+    |`--fullname`||N|Boolean|False|Show fullname of job version|
+    |`--show-removed`||N|Boolean|False|Show removed jobs|
+    |`--page`||N|Integer|1|Page number for jobs list|
+    |`--size`||N|Integer|20|Page size for jobs list|
 
 ## Remove a job
 
@@ -137,7 +137,7 @@ swcli job remove [OPTIONS] JOB
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to remove|
+    |`--force`|`-f`|N|Boolean|False|Force to remove|
 
 - Example:
 
@@ -159,7 +159,7 @@ swcli job recover [OPTIONS] JOB
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to recover|
+    |`--force`|`-f`|N|Boolean|False|Force to recover|
 
 - Example:
 
@@ -177,7 +177,7 @@ swcli job recover [OPTIONS] JOB
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to pause|
+    |`--force`|`-f`|N|Boolean|False|Force to pause|
 
 ## Resume a job
 
@@ -188,7 +188,7 @@ swcli job recover [OPTIONS] JOB
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to resume|
+    |`--force`|`-f`|N|Boolean|False|Force to resume|
 
 ## Cancel a job
 
@@ -199,4 +199,4 @@ swcli job recover [OPTIONS] JOB
 
     |Option|Alias Option|Required|Type|Default|Description|
     |------|--------|-------|-----------|-----|-----------|
-    |`--force`|`-f`|❌|Boolean|False|Force to cancel|
+    |`--force`|`-f`|N|Boolean|False|Force to cancel|

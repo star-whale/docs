@@ -46,10 +46,10 @@ swcli [GLOBAL OPTIONS] instance login [OPTIONS] <INSTANCE>
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--username` | ❌ | String | | The login username. |
-| `--password` | ❌ | String | | The login password. |
-| `--token` | ❌ | String | | The login token. |
-| `--alias` | ✅ | String | | The alias of the instance. You can use it anywhere that requires an instance URI. |
+| `--username` | N | String | | The login username. |
+| `--password` | N | String | | The login password. |
+| `--token` | N | String | | The login token. |
+| `--alias` | Y | String | | The alias of the instance. You can use it anywhere that requires an instance URI. |
 
 `--username` and `--password` can not be used together with `--token`.
 

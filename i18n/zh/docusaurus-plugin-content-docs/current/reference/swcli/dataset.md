@@ -11,14 +11,14 @@ swcli [全局选项] dataset [选项] <SUBCOMMAND> [参数]...
 `dataset`命令包括以下子命令：
 
 * `build`
-* `copy`
+* `copy`(`cp`)
 * `diff`
 * `head`
 * `history`
 * `info`
-* `list`
+* `list`(`ls`)
 * `recover`
-* `remove`
+* `remove`(`rm`)
 * `summary`
 * `tag`
 
@@ -36,15 +36,15 @@ swcli [全局选项] dataset build [选项]
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-|`-if`或`--image`或 `--image-folder`| ❌ | String | | 如果不为空，则读取指定目录中的图片，进行数据集的构建。 |
-|`-af`或`--audio`或 `--audio-folder`| ❌ | String | | 如果不为空，则读取指定目录中的音频，进行数据集的构建。 |
-|`-vf`或`--video`或 `--video-folder`| ❌ | String | | 如果不为空，则读取指定目录中的视频，进行数据集的构建。 |
-|`-h`或`--handler`或 `--python-handler`| ❌ | String | | 如果不为空，则读取对应的Python Handler，运行该Handler进行数据集构建。 |
-|`-f`或`--yaml`或 `--dataset-yaml`| ❌ | cwd目录的dataset.yaml | | 如果不为空，则读取对应dataset yaml，进行数据集的构建。 |
-|`-jf`或`--json-file`| ❌ | String | | 如果不为空，则读取对应 json 文件，进行数据集的构建。 |
-|`-hf`或 `--huggingface`| ❌ | String | | 如果不为空，则读取对应 Huggingface 仓库，进行数据集的构建。 |
+|`-if`或`--image`或 `--image-folder`| N | String | | 如果不为空，则读取指定目录中的图片，进行数据集的构建。 |
+|`-af`或`--audio`或 `--audio-folder`| N | String | | 如果不为空，则读取指定目录中的音频，进行数据集的构建。 |
+|`-vf`或`--video`或 `--video-folder`| N | String | | 如果不为空，则读取指定目录中的视频，进行数据集的构建。 |
+|`-h`或`--handler`或 `--python-handler`| N | String | | 如果不为空，则读取对应的Python Handler，运行该Handler进行数据集构建。 |
+|`-f`或`--yaml`或 `--dataset-yaml`| N | cwd目录的dataset.yaml | | 如果不为空，则读取对应dataset yaml，进行数据集的构建。 |
+|`-jf`或`--json-file`| N | String | | 如果不为空，则读取对应 json 文件，进行数据集的构建。 |
+|`-hf`或 `--huggingface`| N | String | | 如果不为空，则读取对应 Huggingface 仓库，进行数据集的构建。 |
 
-**数据源相关参数是互斥的，只能指定一种方式**，如果都不指定，则会采用 `--dataset-yaml` 方式读取 cwd 目录下的 dataset.yaml 文件进行数据集构建。
+**数据源相关参数是互斥的，只能指定一种方式**，如果都不指定，则会采用 `--dataset-yaml` 方式读取 `cwd` 目录下的 dataset.yaml 文件进行数据集构建。
 
 * 其他参数：
 
@@ -52,19 +52,19 @@ swcli [全局选项] dataset build [选项]
 | --- | --- | --- |--- | --- | --- |
 | `-pt` 或 `--patch` | `--patch` 或 `--overwrite` 必选其一 | 全局 | Boolean | True | 使用补丁方式更新数据集，只更新计划变更的行和列，在新生成的版本中仍能读取到未受影响的行和列。|
 | `-ow` 或 `--overwrite`| `--patch` 或 `--overwrite` 必选其一 | 全局 | Boolean | False | 使用覆盖方式更新数据集，会将原来的所有行都删除，然后再进行更新，在新生成的版本中读取不到老数据。但请放心，删除的数据依旧可以通过旧版本进行访问。|
-| `-n` 或 `--name`| ❌ | 全局 | String | | 数据集名称 |
-| `-p` 或 `--project` | ❌ | 全局 | String | 默认Project | 存储数据集的项目 |
-| `-d` 或 `--desc` | ❌ | 全局 | String | | 数据集描述信息 |
-| `-as` 或 `--alignment-size` | ❌ | 全局 | String | 128B | 数据集 blob 文件中数据对齐的大小 |
-| `-vs` 或 `--volume-size` | ❌ | 全局 | String | 64MB | 单个数据集 blob 文件的大小 |
-| `-r` 或 `--runtime` | ❌ | 全局 | String | | 构建数据集所使用的Starwhale 运行时，不指定时则使用用当前shell环境的Python。|
-| `-w` 或 `--workdir` | ❌ | Python Handler 模式 | String | cwd 目录 | 搜索Python Handler的根目录 |
-| `--auto-label`/`--no-auto-label` | ❌ | 图片、视频、音频目录模式 | Boolean | True | 是否根据子目录名称自动对数据打标签。|
-| `--field-selector` | ❌ | JSON 文件模式 | String | | 定向提取JSON中的字段进行数据集构建，使用点(.)作为分隔符。|
-| `--subset` | ❌ | Huggingface 模式 | String | | HF的 subset 名字，如果HF数据集有subset，则必须要指定该参数。|
-| `--split` | ❌ | Huggingface 模式 | String | | HF的 split 名字，如果不指定则包含所有 splits。 |
-| `--revision` | ❌ | Huggingface 模式 | String | main | HF的数据集的版本，支持tag, branch 和 commit hash。|
-| `--cache`/`--no-cache` | ❌ | Huggingface 模式 | Boolean | True | 是否使用HF的本地缓存 |
+| `-n` 或 `--name`| N | 全局 | String | | 数据集名称 |
+| `-p` 或 `--project` | N | 全局 | String | 默认Project | 存储数据集的项目 |
+| `-d` 或 `--desc` | N | 全局 | String | | 数据集描述信息 |
+| `-as` 或 `--alignment-size` | N | 全局 | String | 128B | 数据集 blob 文件中数据对齐的大小 |
+| `-vs` 或 `--volume-size` | N | 全局 | String | 64MB | 单个数据集 blob 文件的大小 |
+| `-r` 或 `--runtime` | N | 全局 | String | | 构建数据集所使用的Starwhale 运行时，不指定时则使用用当前shell环境的Python。|
+| `-w` 或 `--workdir` | N | Python Handler 模式 | String | cwd 目录 | 搜索Python Handler的根目录 |
+| `--auto-label`/`--no-auto-label` | N | 图片、视频、音频目录模式 | Boolean | True | 是否根据子目录名称自动对数据打标签。|
+| `--field-selector` | N | JSON 文件模式 | String | | 定向提取JSON中的字段进行数据集构建，使用点(.)作为分隔符。|
+| `--subset` | N | Huggingface 模式 | String | | HF的 subset 名字，如果HF数据集有subset，则必须要指定该参数。|
+| `--split` | N | Huggingface 模式 | String | | HF的 split 名字，如果不指定则包含所有 splits。 |
+| `--revision` | N | Huggingface 模式 | String | main | HF的数据集的版本，支持tag, branch 和 commit hash。|
+| `--cache`/`--no-cache` | N | Huggingface 模式 | Boolean | True | 是否使用HF的本地缓存 |
 
 ### 数据集构建例子
 
@@ -110,7 +110,7 @@ swcli [全局选项] dataset copy [选项] <SRC> <DEST>
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-|`--force`或`-f`| ❌ | Boolean | False | 如果为true，`DEST`已经存在时会被强制覆盖。否则此命令会显示一条错误消息。|
+|`--force`或`-f`| N | Boolean | False | 如果为true，`DEST`已经存在时会被强制覆盖。否则此命令会显示一条错误消息。|
 |`-p`或`--patch`| `--patch` 或 `--overwrite` 必选其一 | Boolean | True | 使用补丁方式更新数据集，只更新计划变更的行和列，在新生成的版本中仍能读取到未受影响的行和列。 |
 |`-o`或`--overwrite`| `--patch` 或 `--overwrite` 必选其一 | Boolean | False | 使用覆盖方式更新数据集，会将原来的所有行都删除，然后再进行更新，在新生成的版本中读取不到老数据。但请放心，删除的数据依旧可以通过旧版本进行访问。|
 
@@ -157,7 +157,7 @@ swcli [全局选项] dataset diff [选项] <DATASET VERSION> <DATASET VERSION>
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-| `--show-details` | ❌ | Boolean | False | 使用该选项输出详细的差异信息 |
+| `--show-details` | N | Boolean | False | 使用该选项输出详细的差异信息 |
 
 ## swcli dataset head {#head}
 
@@ -169,9 +169,9 @@ swcli [全局选项] dataset head [选项] <DATASET VERSION>
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-| `-n`或`--rows` | ❌ | Int | 5 | 输出前n行数据集记录 |
-| `-srd`或`--show-raw-data` | ❌ | Boolean | False | 抓取blob数据，可能会用时较长。 |
-| `-st`或`--show-types` | ❌ | Boolean | False | 展示数据类型 |
+| `-n`或`--rows` | N | Int | 5 | 输出前n行数据集记录 |
+| `-srd`或`--show-raw-data` | N | Boolean | False | 抓取blob数据，可能会用时较长。 |
+| `-st`或`--show-types` | N | Boolean | False | 展示数据类型 |
 
 ### 数据集打印的例子
 
@@ -204,7 +204,7 @@ swcli [全局选项] dataset history [选项] <DATASET>
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-| `--fullname` | ❌ | Boolean | False | 显示完整的版本名称。如果没有使用该选项，则仅显示前 12 个字符。 |
+| `--fullname` | N | Boolean | False | 显示完整的版本名称。如果没有使用该选项，则仅显示前 12 个字符。 |
 
 ## swcli dataset info {#info}
 
@@ -224,12 +224,12 @@ swcli [全局选项] dataset list [选项]
 
 `dataset list` 命令显示所有的 Starwhale 数据集。
 
-| `--project` 或 `-p` | ❌ | String | | 要查看的项目的URI。如果未指定此选项，则使用[默认项目](../../swcli/uri.md#defaultProject)替代。 |
-| `--fullname` 或 `-f` | ❌ | Boolean | False | 显示完整的版本名称。如果没有使用该选项，则仅显示前 12 个字符。 |
-|`--show-removed`或`-sr` | ❌ | Boolean | False | 如果使用了该选项，则结果中会包含已删除但未被垃圾回收的数据集。 |
-| `--page` | ❌ | Integer | 1 | 起始页码，仅限Server和Cloud实例。 |
-| `--size` | ❌ | Integer | 20 | 一页中的数据集数量，仅限Server和Cloud实例。 |
-| `--filter`或`-fl` | ❌ | String | | 仅显示符合条件的数据集。该选项可以在一个命令中被多次重复使用。 |
+| `--project` 或 `-p` | N | String | | 要查看的项目的URI。如果未指定此选项，则使用[默认项目](../../swcli/uri.md#defaultProject)替代。 |
+| `--fullname` 或 `-f` | N | Boolean | False | 显示完整的版本名称。如果没有使用该选项，则仅显示前 12 个字符。 |
+|`--show-removed`或`-sr` | N | Boolean | False | 如果使用了该选项，则结果中会包含已删除但未被垃圾回收的数据集。 |
+| `--page` | N | Integer | 1 | 起始页码，仅限Server和Cloud实例。 |
+| `--size` | N | Integer | 20 | 一页中的数据集数量，仅限Server和Cloud实例。 |
+| `--filter`或`-fl` | N | String | | 仅显示符合条件的数据集。该选项可以在一个命令中被多次重复使用。 |
 
 | 过滤器 | 类型 | 说明 | 范例 |
 | --- | --- | --- | --- |
@@ -251,7 +251,7 @@ swcli [全局选项] dataset recover [选项] <DATASET>
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-| `--force`或`-f` | ❌ | Boolean | False | 如果使用了该选项，当前同名的Starwhale数据集或版本会被强制覆盖。 |
+| `--force`或`-f` | N | Boolean | False | 如果使用了该选项，当前同名的Starwhale数据集或版本会被强制覆盖。 |
 
 ## swcli dataset remove {#remove}
 
@@ -267,7 +267,7 @@ swcli [全局选项] dataset remove [选项] <DATASET>
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-| `--force`或`-f` | ❌ | Boolean | False | 使用此选项永久删除某个Starwhale数据集或版本。删除后不可恢复。 |
+| `--force`或`-f` | N | Boolean | False | 使用此选项永久删除某个Starwhale数据集或版本。删除后不可恢复。 |
 
 ## swcli dataset summary {#summary}
 
@@ -291,5 +291,5 @@ swcli [全局选项] dataset tag [选项] <DATASET> [TAGS]...
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-| `--remove`或`-r` | ❌ | Boolean | False | 使用该选项删除标签 |
-| `--quiet`或`-q` | ❌ | Boolean | False | 使用该选项以忽略错误，例如删除不存在的标签。 |
+| `--remove`或`-r` | N | Boolean | False | 使用该选项删除标签 |
+| `--quiet`或`-q` | N | Boolean | False | 使用该选项以忽略错误，例如删除不存在的标签。 |

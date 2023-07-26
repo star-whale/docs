@@ -11,14 +11,14 @@ swcli [GLOBAL OPTIONS] dataset [OPTIONS] <SUBCOMMAND> [ARGS]...
 The `dataset` command includes the following subcommands:
 
 * `build`
-* `copy`
+* `copy`(`cp`)
 * `diff`
 * `head`
 * `history`
 * `info`
-* `list`
+* `list`(`ls`)
 * `recover`
-* `remove`
+* `remove`(`rm`)
 * `summary`
 * `tag`
 
@@ -36,13 +36,13 @@ Build Starwhale Dataset. This command only supports to build standalone dataset.
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-|`-if` or `--image` or `--image-folder`| ❌ | String | | Build dataset from image folder, the folder should contain the image files. |
-|`-af` or `--audio` or `--audio-folder`| ❌ | String | | Build dataset from audio folder, the folder should contain the audio files. |
-|`-vf` or `--video` or `--video-folder`| ❌ | String | | Build dataset from video folder, the folder should contain the video files. |
-|`-h` or `--handler` or `--python-handler`| ❌ | String | | Build dataset from python executor handler, the handler format is [module path]:[class or func name]. |
-|`-f` or `--yaml` or `--dataset-yaml`| ❌ | dataset.yaml in cwd | | Build dataset from dataset.yaml file. Default uses dataset.yaml in the work directory(cwd). |
-|`-jf` or `--json-file`| ❌ | String | | Build dataset from json file, the json file option is a json file path or a http downloaded url.The json content structure should be a list[dict] or tuple[dict]. |
-|`-hf` or `--huggingface`| ❌ | String | | Build dataset from huggingface dataset, the huggingface option is a huggingface repo name. |
+|`-if` or `--image` or `--image-folder`| N | String | | Build dataset from image folder, the folder should contain the image files. |
+|`-af` or `--audio` or `--audio-folder`| N | String | | Build dataset from audio folder, the folder should contain the audio files. |
+|`-vf` or `--video` or `--video-folder`| N | String | | Build dataset from video folder, the folder should contain the video files. |
+|`-h` or `--handler` or `--python-handler`| N | String | | Build dataset from python executor handler, the handler format is [module path]:[class or func name]. |
+|`-f` or `--yaml` or `--dataset-yaml`| N | dataset.yaml in cwd | | Build dataset from dataset.yaml file. Default uses dataset.yaml in the work directory(cwd). |
+|`-jf` or `--json-file`| N | String | | Build dataset from json file, the json file option is a json file path or a http downloaded url.The json content structure should be a list[dict] or tuple[dict]. |
+|`-hf` or `--huggingface`| N | String | | Build dataset from huggingface dataset, the huggingface option is a huggingface repo name. |
 
 **Data source options are mutually exclusive, only one option is accepted.** If no set, `swcli dataset build` command will use dataset yaml mode to build dataset with the `dataset.yaml` in the cwd.
 
@@ -52,19 +52,19 @@ Build Starwhale Dataset. This command only supports to build standalone dataset.
 | --- | --- | --- |--- | --- | --- |
 | `-pt` or `--patch` | one of `--patch` and `--overwrite`  | Global | Boolean | True | Patch mode, only update the changed rows and columns for the existed dataset. |
 | `-ow` or `--overwrite`| one of `--patch` and `--overwrite` | Global | Boolean | False | Overwrite mode, update records and delete extraneous rows from the existed dataset. |
-| `-n` or `--name`| ❌ | Global | String | | Dataset name |
-| `-p` or `--project` | ❌ | Global | String | Default project | Project URI, the default is the current selected project. The dataset will store in the specified project. |
-| `-d` or `--desc` | ❌ | Global | String | | Dataset description |
-| `-as` or `--alignment-size` | ❌ | Global | String | 128B | swds-bin format dataset: alignment size |
-| `-vs` or `--volume-size` | ❌ | Global | String | 64MB | swds-bin format dataset: volume size |
-| `-r` or `--runtime` | ❌ | Global | String | | Runtime URI |
-| `-w` or `--workdir` | ❌ | Python Handler Mode | String | cwd |  work dir to search handler. |
-| `--auto-label`/`--no-auto-label` | ❌ | Image/Video/Audio Folder Mode | Boolean | True | Whether to auto label by the sub-folder name. |
-| `--field-selector` | ❌ | JSON File Mode | String | | The filed from which you would like to extract dataset array items. The filed is split by the dot(.) symbol. |
-| `--subset` | ❌ | Huggingface Mode | String | | Huggingface dataset subset name. If the huggingface dataset has multiple subsets, you must specify the subset name. |
-| `--split` | ❌ | Huggingface Mode | String | | Huggingface dataset split name. If the split name is not specified, the all splits dataset will be built.  |
-| `--revision` | ❌ | Huggingface Mode | String | main | Version of the dataset script to load. Defaults to 'main'. The option value accepts tag name, or branch name, or commit hash. |
-| `--cache`/`--no-cache` | ❌ | Huggingface Mode | Boolean | True | Whether to use huggingface dataset cache(download + local hf dataset). |
+| `-n` or `--name`| N | Global | String | | Dataset name |
+| `-p` or `--project` | N | Global | String | Default project | Project URI, the default is the current selected project. The dataset will store in the specified project. |
+| `-d` or `--desc` | N | Global | String | | Dataset description |
+| `-as` or `--alignment-size` | N | Global | String | 128B | swds-bin format dataset: alignment size |
+| `-vs` or `--volume-size` | N | Global | String | 64MB | swds-bin format dataset: volume size |
+| `-r` or `--runtime` | N | Global | String | | Runtime URI |
+| `-w` or `--workdir` | N | Python Handler Mode | String | cwd |  work dir to search handler. |
+| `--auto-label`/`--no-auto-label` | N | Image/Video/Audio Folder Mode | Boolean | True | Whether to auto label by the sub-folder name. |
+| `--field-selector` | N | JSON File Mode | String | | The filed from which you would like to extract dataset array items. The filed is split by the dot(.) symbol. |
+| `--subset` | N | Huggingface Mode | String | | Huggingface dataset subset name. If the huggingface dataset has multiple subsets, you must specify the subset name. |
+| `--split` | N | Huggingface Mode | String | | Huggingface dataset split name. If the split name is not specified, the all splits dataset will be built.  |
+| `--revision` | N | Huggingface Mode | String | main | Version of the dataset script to load. Defaults to 'main'. The option value accepts tag name, or branch name, or commit hash. |
+| `--cache`/`--no-cache` | N | Huggingface Mode | Boolean | True | Whether to use huggingface dataset cache(download + local hf dataset). |
 
 ### Examples for dataset building
 
@@ -112,7 +112,7 @@ swcli [GLOBAL OPTIONS] dataset copy [OPTIONS] <SRC> <DEST>
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--force` or `-f` | ❌ | Boolean | False | If true, `DEST` will be overwritten if it exists; otherwise, this command displays an error message. |
+| `--force` or `-f` | N | Boolean | False | If true, `DEST` will be overwritten if it exists; otherwise, this command displays an error message. |
 |`-p` or `--patch`| one of `--patch` and `--overwrite` | Boolean | True | Patch mode, only update the changed rows and columns for the remote dataset. |
 |`-o` or `--overwrite`| one of `--patch` and `--overwrite` | Boolean | False |  Overwrite mode, update records and delete extraneous rows from the remote dataset. |
 
@@ -159,7 +159,7 @@ swcli [GLOBAL OPTIONS] dataset diff [OPTIONS] <DATASET VERSION> <DATASET VERSION
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--show-details` | ❌ | Boolean | False | If true, outputs the detail information. |
+| `--show-details` | N | Boolean | False | If true, outputs the detail information. |
 
 ## swcli dataset head {#head}
 
@@ -171,9 +171,9 @@ Print the first n rows of the dataset. `DATASET VERSION` is a [dataset URI](../.
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `-n` or `--rows` | ❌ | Int | 5 |  Print the first NUM rows of the dataset. |
-| `-srd` or `--show-raw-data` | ❌ | Boolean | False | Fetch raw data content from objectstore. |
-| `-st` or `--show-types` | ❌ | Boolean | False | show data types. |
+| `-n` or `--rows` | N | Int | 5 |  Print the first NUM rows of the dataset. |
+| `-srd` or `--show-raw-data` | N | Boolean | False | Fetch raw data content from objectstore. |
+| `-st` or `--show-types` | N | Boolean | False | show data types. |
 
 ### Examples for dataset head
 
@@ -206,7 +206,7 @@ swcli [GLOBAL OPTIONS] dataset history [OPTIONS] <DATASET>
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--fullname` | ❌ | Boolean | False | Show the full version name. Only the first 12 characters are shown if this option is false. |
+| `--fullname` | N | Boolean | False | Show the full version name. Only the first 12 characters are shown if this option is false. |
 
 ## swcli dataset info {#info}
 
@@ -228,12 +228,12 @@ swcli [GLOBAL OPTIONS] dataset list [OPTIONS]
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--project` | ❌ | String | | The URI of the project to list. Use the [default project](../../swcli/uri.md#defaultProject) if not specified. |
-| `--fullname` | ❌ | Boolean | False | Show the full version name. Only the first 12 characters are shown if this option is false. |
-| `--show-removed` or `-sr` | ❌ | Boolean | False | If true, include datasets that are removed but not garbage collected. |
-| `--page` | ❌ | Integer | 1 | The starting page number.  Server and cloud instances only. |
-| `--size` | ❌ | Integer | 20 | The number of items in one page. Server and cloud instances only. |
-| `--filter` or `-fl` | ❌ | String | | Show only Starwhale Datasetes that match specified filters. This option can be used multiple times in one command. |
+| `--project` | N | String | | The URI of the project to list. Use the [default project](../../swcli/uri.md#defaultProject) if not specified. |
+| `--fullname` | N | Boolean | False | Show the full version name. Only the first 12 characters are shown if this option is false. |
+| `--show-removed` or `-sr` | N | Boolean | False | If true, include datasets that are removed but not garbage collected. |
+| `--page` | N | Integer | 1 | The starting page number.  Server and cloud instances only. |
+| `--size` | N | Integer | 20 | The number of items in one page. Server and cloud instances only. |
+| `--filter` or `-fl` | N | String | | Show only Starwhale Datasetes that match specified filters. This option can be used multiple times in one command. |
 
 | Filter | Type | Description | Example |
 | --- | --- | --- | --- |
@@ -255,7 +255,7 @@ Garbage-collected Starwhale Datasets or versions can not be recovered, as well a
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--force` or `-f` | ❌ | Boolean | False | If true, overwrite the Starwhale Dataset or version with the same name or version id. |
+| `--force` or `-f` | N | Boolean | False | If true, overwrite the Starwhale Dataset or version with the same name or version id. |
 
 ## swcli dataset remove {#remove}
 
@@ -273,7 +273,7 @@ Removed Starwhale Datasets or versions can be listed by `swcli dataset list --sh
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--force` or `-f` | ❌ | Boolean | False | If true, persistently delete the Starwhale Dataset or version. It can not be recovered. |
+| `--force` or `-f` | N | Boolean | False | If true, persistently delete the Starwhale Dataset or version. It can not be recovered. |
 
 ## swcli dataset summary {#summary}
 
@@ -299,5 +299,5 @@ Each dataset version can have any number of tags， but duplicated tag names are
 
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--remove` or `-r` | ❌ | Boolean | False | remove the tag if true |
-| `--quiet` or `-q` | ❌ | Boolean | False | ignore errors, for example, removing tags that do not exist. |
+| `--remove` or `-r` | N | Boolean | False | remove the tag if true |
+| `--quiet` or `-q` | N | Boolean | False | ignore errors, for example, removing tags that do not exist. |

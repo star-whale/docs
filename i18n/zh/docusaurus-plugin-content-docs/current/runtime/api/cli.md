@@ -16,19 +16,19 @@ runtime包含如下子命令：
 
 |命令|别名|Standalone|Cloud|
 |----|---|----------|-----|
-|activate|actv|✅|❌|
-|build||✅|❌|
-|copy|cp|✅|✅|
-|dockerize||✅|❌|
-|extract||✅|❌|
-|history||✅|✅|
-|info||✅|✅|
-|list|ls|✅|✅|
-|lock||✅|❌|
-|quickstart|qs|✅|❌|
-|recover||✅|✅|
-|remove|rm|✅|✅|
-|tag||✅|❌|
+|activate|actv|Y|N|
+|build||Y|N|
+|copy|cp|Y|Y|
+|dockerize||Y|N|
+|extract||Y|N|
+|history||Y|Y|
+|info||Y|Y|
+|list|ls|Y|Y|
+|lock||Y|N|
+|quickstart|qs|Y|N|
+|recover||Y|Y|
+|remove|rm|Y|Y|
+|tag||Y|N|
 
 ## 激活Runtime
 
@@ -45,7 +45,7 @@ swcli runtime activate [OPTIONS] URI
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force-restore`|`-f`|❌|Bool|False|对Runtime强制重新restore|
+|`--force-restore`|`-f`|N|Bool|False|对Runtime强制重新restore|
 
 ## 构建Runtime
 
@@ -82,16 +82,16 @@ swcli runtime build [OPTIONS] WORKDIR
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--project`|`-p`|❌|String|`swcli project select`命令设定的project|Project URI|
-|`--runtime-yaml`|`-f`|❌|String|runtime.yaml|建议使用默认的runtime.yaml，无需修改。|
-|`--gen-all-bundles`|`-gab`|❌|Boolean|False|设置该参数后，会在本地的venv或conda中下载所有python依赖，进行整体打包，多数情况下产生的Runtime swrt文件会比较大。|
-|`--include-editable`|`-ie`|❌|Boolean|False|是否携带editable的python package|
-|`--include-local-wheel`|`-ilw`|❌|Boolean|False|是否在requirements-sw-lock.txt文件中包含本地的wheel包地址，仅对venv模式有效。|
-|`--disable-env-lock`|`-del`|❌|Boolean|False|设置该参数后，不会进行环境初始化、安装依赖和环境导出，直接进行swrt打包。|
-|`--env-prefix-path`|`-ep`|❌|String||使用venv或conda目录prefix path作为Python隔离环境|
-|`--env-name`|`-en`|❌|String||使用conda环境的env name作为Python隔离环境|
-|`--env-use-shell`|`-es`|❌|Boolean|False|使用当前Shell中Python环境|
-|`--no-cache`|`-nc`|❌|Boolean|False|对于自动生成的Python隔离依赖环境，构建runtime时不使用已经安装过的Python Packages，相当于清除.starwhale/venv或.starwhale/conda目录后再安装依赖然后构建环境|
+|`--project`|`-p`|N|String|`swcli project select`命令设定的project|Project URI|
+|`--runtime-yaml`|`-f`|N|String|runtime.yaml|建议使用默认的runtime.yaml，无需修改。|
+|`--gen-all-bundles`|`-gab`|N|Boolean|False|设置该参数后，会在本地的venv或conda中下载所有python依赖，进行整体打包，多数情况下产生的Runtime swrt文件会比较大。|
+|`--include-editable`|`-ie`|N|Boolean|False|是否携带editable的python package|
+|`--include-local-wheel`|`-ilw`|N|Boolean|False|是否在requirements-sw-lock.txt文件中包含本地的wheel包地址，仅对venv模式有效。|
+|`--disable-env-lock`|`-del`|N|Boolean|False|设置该参数后，不会进行环境初始化、安装依赖和环境导出，直接进行swrt打包。|
+|`--env-prefix-path`|`-ep`|N|String||使用venv或conda目录prefix path作为Python隔离环境|
+|`--env-name`|`-en`|N|String||使用conda环境的env name作为Python隔离环境|
+|`--env-use-shell`|`-es`|N|Boolean|False|使用当前Shell中Python环境|
+|`--no-cache`|`-nc`|N|Boolean|False|对于自动生成的Python隔离依赖环境，构建runtime时不使用已经安装过的Python Packages，相当于清除.starwhale/venv或.starwhale/conda目录后再安装依赖然后构建环境|
 
 ## 分发Runtime
 
@@ -105,8 +105,8 @@ swcli runtime copy [OPTIONS] SRC DEST
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|`DEST` 存在相同version的Runtime，指定该参数后执行copy命令就会强制覆盖。|
-|`--dest-local-project`|`-dlp`|❌|String|当从Cloud Instance向Standalone Instance拷贝Runtime时，指定的目标Project，若不设置则通过DEST uri进行推断|Project URI|
+|`--force`|`-f`|N|Boolean|False|`DEST` 存在相同version的Runtime，指定该参数后执行copy命令就会强制覆盖。|
+|`--dest-local-project`|`-dlp`|N|String|当从Cloud Instance向Standalone Instance拷贝Runtime时，指定的目标Project，若不设置则通过DEST uri进行推断|Project URI|
 
 ## 制作Runtime的Docker Image
 
@@ -120,12 +120,12 @@ swcli runtime dockerize [OPTIONS] URI
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--tag`|`-t`|❌|String||Docker的tag，该参数可以指定多次|
-|`--push`||❌|Bool|False|是否push image到远端docker registry|
-|`--platform`||❌|Choice|amd64|支持多体系结构Image的构建，目前可选amd64和arm64，支持多次指定，同时构建多种体系结构的Image|
-|`--dry-run`||❌|Bool|False|不真正运行，只生成Dockerfile和打印docker构建命令|
-|`--use-starwhale-builder`||❌|Bool|False|创建一个支持多体系结构的starwhale buildx builder，用户也可以使用自己的builder，具体参考buildx相关命令|
-|`--reset-qemu-static`||❌|Bool|False|重置QEMU的配置，一般用来修复多体系结构构建失败问题|
+|`--tag`|`-t`|N|String||Docker的tag，该参数可以指定多次|
+|`--push`||N|Bool|False|是否push image到远端docker registry|
+|`--platform`||N|Choice|amd64|支持多体系结构Image的构建，目前可选amd64和arm64，支持多次指定，同时构建多种体系结构的Image|
+|`--dry-run`||N|Bool|False|不真正运行，只生成Dockerfile和打印docker构建命令|
+|`--use-starwhale-builder`||N|Bool|False|创建一个支持多体系结构的starwhale buildx builder，用户也可以使用自己的builder，具体参考buildx相关命令|
+|`--reset-qemu-static`||N|Bool|False|重置QEMU的配置，一般用来修复多体系结构构建失败问题|
 
 ![runtime-dockerize.png](../../img/runtime-dockerize.png)
 
@@ -139,8 +139,8 @@ swcli runtime extract [OPTIONS] RUNTIME
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|若曾经在target-dir目录中extract过，设定该参数后，会强制在target-dir目录覆盖旧的内容|
-|`--target-dir`||❌|String|Runtime URI对应的snapshot_workdir目录|解压Runtime后存储相关内容的目录|
+|`--force`|`-f`|N|Boolean|False|若曾经在target-dir目录中extract过，设定该参数后，会强制在target-dir目录覆盖旧的内容|
+|`--target-dir`||N|String|Runtime URI对应的snapshot_workdir目录|解压Runtime后存储相关内容的目录|
 
 ## 查看Runtime历史版本
 
@@ -152,7 +152,7 @@ swcli runtime history [OPTIONS] RUNTIME
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--fullname`||❌|Boolean|False|显示完整的版本信息，默认只显示版本号的前12位。|
+|`--fullname`||N|Boolean|False|显示完整的版本信息，默认只显示版本号的前12位。|
 
 ## 查看Runtime详细信息
 
@@ -164,7 +164,7 @@ swcli runtime info [OPTIONS] RUNTIME
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--fullname`||❌|Boolean|False|显示完整的版本信息，默认只显示版本号的前12位。|
+|`--fullname`||N|Boolean|False|显示完整的版本信息，默认只显示版本号的前12位。|
 
 ## 展示Runtime列表
 
@@ -176,12 +176,12 @@ swcli runtime list [OPTIONS]
 
 |参数| 参数别名 |必要性|类型|默认值|说明|
 |------|------|-------|-----------|-----|-----------|
-|`--project`|`-p`|❌|String|`swcli project select`命令选定的默认project|Project URI|
-|`--fullname`|`-f`|❌|Boolean|False|显示完整的版本信息，默认只显示版本号的前12位。|
-|`--show-removed`|`-sr`|❌|Boolean|False|显示本地已经删除但能恢复的Runtime。|
-|`--page`| |❌|Integer|1|Cloud Instance中分页显示中page序号。|
-|`--size`| |❌|Integer|20|Cloud Instance中分页显示中每页数量。|
-|`--filter`|`-fl`|❌| String  | | 过滤器，使用key=value格式或者flag，可使用多个filter，具体支持的filter如下： |
+|`--project`|`-p`|N|String|`swcli project select`命令选定的默认project|Project URI|
+|`--fullname`|`-f`|N|Boolean|False|显示完整的版本信息，默认只显示版本号的前12位。|
+|`--show-removed`|`-sr`|N|Boolean|False|显示本地已经删除但能恢复的Runtime。|
+|`--page`| |N|Integer|1|Cloud Instance中分页显示中page序号。|
+|`--size`| |N|Integer|20|Cloud Instance中分页显示中每页数量。|
+|`--filter`|`-fl`|N| String  | | 过滤器，使用key=value格式或者flag，可使用多个filter，具体支持的filter如下： |
 
 |Filter|类型|说明|示例|
 |----|--------|----------|----------|
@@ -228,15 +228,15 @@ prefix: /path-to-conda-env-dir
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--yaml-name`|`-f`|❌|String|runtime.yaml|默认会寻找 `TARGET_DIR` 目录中的 runtime.yaml 文件，也可以指定其他runtime yaml 文件名字。|
-|`--env-name`|`-n`|❌|String||Conda env的名称|
-|`--env-prefix-path`|`-p`|❌|String||Conda或Venv的目录Prefix|
-|`--env-use-shell`|`-s`|❌|Boolean|False|使用当前Shell中的Python环境|
-|`--stdout`|`-so`|❌|Boolean|False|将lock的内容只在shell终端中输出，而不会真正写入到 `requirements-sw-lock.txt` 文件中，一般用来做调试检查。|
-|`--include-editable`|`-ie`|❌|Boolean|False|lock时候是否包含editable的Python Package，某些editable的package可能使用本地目录，会在分发到其他环境后无法使用。目前该参数只针对venv场景，conda的无法导出editable package。|
-|`--include-local-wheel`|`-ilw`|❌|Boolean|False|lock时是否在requirements-sw-lock.txt文件中包含本地的wheel包地址，仅对venv模式有效。|
-|`--emit-pip-options`|`-epo`|❌|Boolean|False|是否忽略lock文件中pip config信息，一般包含index-url、extra-index-url和trusted-host等。|
-|`--no-cache`|`-nc`|❌|Boolean|False|对于自动生成的Python隔离依赖环境，锁定runtime时不使用已经安装过的Python Packages，相当于清除.starwhale/venv或.starwhale/conda目录后再安装依赖然后锁定环境|
+|`--yaml-name`|`-f`|N|String|runtime.yaml|默认会寻找 `TARGET_DIR` 目录中的 runtime.yaml 文件，也可以指定其他runtime yaml 文件名字。|
+|`--env-name`|`-n`|N|String||Conda env的名称|
+|`--env-prefix-path`|`-p`|N|String||Conda或Venv的目录Prefix|
+|`--env-use-shell`|`-s`|N|Boolean|False|使用当前Shell中的Python环境|
+|`--stdout`|`-so`|N|Boolean|False|将lock的内容只在shell终端中输出，而不会真正写入到 `requirements-sw-lock.txt` 文件中，一般用来做调试检查。|
+|`--include-editable`|`-ie`|N|Boolean|False|lock时候是否包含editable的Python Package，某些editable的package可能使用本地目录，会在分发到其他环境后无法使用。目前该参数只针对venv场景，conda的无法导出editable package。|
+|`--include-local-wheel`|`-ilw`|N|Boolean|False|lock时是否在requirements-sw-lock.txt文件中包含本地的wheel包地址，仅对venv模式有效。|
+|`--emit-pip-options`|`-epo`|N|Boolean|False|是否忽略lock文件中pip config信息，一般包含index-url、extra-index-url和trusted-host等。|
+|`--no-cache`|`-nc`|N|Boolean|False|对于自动生成的Python隔离依赖环境，锁定runtime时不使用已经安装过的Python Packages，相当于清除.starwhale/venv或.starwhale/conda目录后再安装依赖然后锁定环境|
 
 ![runtime-lock.gif](../../img/runtime-lock.gif)
 
@@ -254,11 +254,11 @@ swcli runtime quickstart shell [OPTIONS] WORKDIR
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|若曾经在WORKDIR目录中quickstart过，设定该参数后，会强制在WORKDIR目录覆盖旧的内容|
-|`--name`|`-n`|❌|String|父目录名称|runtime的名称|
-|`--python-env`|`-p`|❌|Choice|venv|runtime的mode：venv或conda|
-|`--create-env`|`-c`|❌|Boolean|False|是否直接创建隔离的venv或conda环境，并安装基础软件包|
-|`--interactive`|`-i`|❌|Boolean|False|若设置`--create-env`后，指定interactive参数，会尝试直接激活该环境|
+|`--force`|`-f`|N|Boolean|False|若曾经在WORKDIR目录中quickstart过，设定该参数后，会强制在WORKDIR目录覆盖旧的内容|
+|`--name`|`-n`|N|String|父目录名称|runtime的名称|
+|`--python-env`|`-p`|N|Choice|venv|runtime的mode：venv或conda|
+|`--create-env`|`-c`|N|Boolean|False|是否直接创建隔离的venv或conda环境，并安装基础软件包|
+|`--interactive`|`-i`|N|Boolean|False|若设置`--create-env`后，指定interactive参数，会尝试直接激活该环境|
 
 ![runtime-quickstart.gif](../../img/quickstart-shell.gif)
 
@@ -272,9 +272,9 @@ swcli runtime quickstart uri [OPTIONS] URI WORKDIR
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|若曾经在WORKDIR目录中quickstart过，设定该参数后，会强制在WORKDIR目录覆盖旧的内容|
-|`--name`|`-n`|❌|String|父目录名称|runtime的名称|
-|`--restore`||❌|Boolean|False|是否重建Runtime的Python依赖，包括创建venv或conda环境，并下载安装runtime.yaml的依赖|
+|`--force`|`-f`|N|Boolean|False|若曾经在WORKDIR目录中quickstart过，设定该参数后，会强制在WORKDIR目录覆盖旧的内容|
+|`--name`|`-n`|N|String|父目录名称|runtime的名称|
+|`--restore`||N|Boolean|False|是否重建Runtime的Python依赖，包括创建venv或conda环境，并下载安装runtime.yaml的依赖|
 
 ## 删除Runtime
 
@@ -286,7 +286,7 @@ swcli runtime remove [OPTIONS] RUNTIME
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|强制删除，不可恢复|
+|`--force`|`-f`|N|Boolean|False|强制删除，不可恢复|
 
 ## 恢复软删除的Runtime
 
@@ -298,7 +298,7 @@ swcli runtime recover [OPTIONS] RUNTIME
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--force`|`-f`|❌|Boolean|False|强制恢复，处理类似恢复版本冲突的情况。|
+|`--force`|`-f`|N|Boolean|False|强制恢复，处理类似恢复版本冲突的情况。|
 
 ## 标记Runtime
 
@@ -312,5 +312,5 @@ swcli runtime tag [OPTIONS] RUNTIME [TAGS]...
 
 |参数|参数别名|必要性|类型|默认值|说明|
 |------|--------|-------|-----------|-----|-----------|
-|`--remove`|`-r`|❌|Boolean|False|删除标签|
-|`--quiet`|`-q`|❌|Boolean|False|忽略标签操作中的错误，例如删除不存在的标签，添加不合法的标签等|
+|`--remove`|`-r`|N|Boolean|False|删除标签|
+|`--quiet`|`-q`|N|Boolean|False|忽略标签操作中的错误，例如删除不存在的标签，添加不合法的标签等|
