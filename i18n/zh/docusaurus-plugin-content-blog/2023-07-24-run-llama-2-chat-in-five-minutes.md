@@ -21,15 +21,15 @@ Llama 2 系列模型是一组使用了优化的自回归 Transformer 架构的�
 
 预训练：相比 Llama 1, Llama 2 的训练数据多了40%，用了2万亿个tokens进行训练，而且上下文长度是 Llama 1 的两倍，达到4096。Llama 2 适合用于各种自然语言生成任务。
 
-![image](https://github.com/star-whale/docs/assets/101299635/638a0d16-0126-458b-b425-84d9d7d18523)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/blog/llama2/cmp1-2.png)
 
 Meta将 Llama 2-70b 的结果与闭源模型进行了比较，在 MMLU 和 GSM8K 上的表现接近 GPT-3.5, 但在编码基准上存在显著差异。此外，几乎所有基准上， Llama 2-70b 的结果与谷歌 PaLM-540 b 持平或表现更好，与 GPT-4 和 PaLM-2-L 的性能仍存在较大差距。
 
-![image](https://github.com/star-whale/docs/assets/101299635/8dd71a5a-471d-412a-8631-c4ada99d8ed2)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/blog/llama2/evaluation.png)
 
 微调：Llama 2-Chat 是基于Llama 2 针对聊天对话场景微调的版本，使用 SFT (监督微调) 和 RLHF (人类反馈强化学习)进行迭代优化，以便更好的和人类偏好保持一致，提高安全性。微调数据使用了包括公开可用的指令数据集，以及一百多万新的人工标注样本。Llama 2-Chat 可用于类似助理的聊天。下图展示了单轮和多轮对话的违规百分比，与基线相比，Llama 2-Chat 在多轮对话中表现尤其良好。
 
-![image](https://github.com/star-whale/docs/assets/101299635/776e31b8-ea32-4a4c-9568-18117f933812)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/blog/llama2/voliation.png)
 
 ## 什么是 Starwhale
 
@@ -47,9 +47,9 @@ Starwhale是一个MLOps平台，提供MLOps全流程解决方案，能够让开�
 
 成功登录后进入项目列表页，点击右上角的**创建**项目按钮，输入项目名称,点击 提交 按钮即可新建一个项目。
 
-![image](https://github.com/star-whale/docs/assets/101299635/5228104d-eb26-4504-aa40-838c5bf177c2)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/blog/llama2/project-list.png)
 
-![image](https://github.com/star-whale/docs/assets/101299635/2494cac8-44f2-4d94-866d-a4d3cc01c453)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/blog/llama2/project-create.png)
 
 ### **三. 运行模型**
 
@@ -63,24 +63,24 @@ Starwhale是一个MLOps平台，提供MLOps全流程解决方案，能够让开�
 
 点击**提交**即可运行模型
 
-![image](https://github.com/star-whale/docs/assets/101299635/cc21187a-a40b-44a3-bce7-c785d5fc8d7b)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/blog/llama2/evaluation-create.png)
 
 #### **四. 查看运行结果和日志**
 
 作业列表页可以查看项目中的所有作业。
 
-![image](https://github.com/star-whale/docs/assets/101299635/5790352b-2d5f-44a5-8ac5-0fe02996b721)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/blog/llama2/job-list.png)
 
 点击**作业ID** ，进入任务详情页，点击**查看日志**可查看
 
 从任务提交到模型运行起来，总计用时5分04秒
 
-![image](https://github.com/star-whale/docs/assets/101299635/c412a427-f5b1-4b34-ab3f-95237f79ced4)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/blog/llama2/log.png)
 
 运行成功后返回任务列表，点击**终端**按钮，可打开 chatbox 页面，在 chatbox 页面和 Llama 2-Chat 对话
 
-![image](https://github.com/star-whale/docs/assets/101299635/e6e93ab4-d7ca-4bbb-a89a-14850e36ffcb)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/blog/llama2/job-list.png)
 
-![image](https://github.com/star-whale/docs/assets/101299635/e75f2221-f7ca-4492-981b-7672a2ed65eb)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/blog/llama2/chatbot.png)
 
 以上就是关于如何使用 Starwhale Cloud 运行 Llama 2-Chat 的说明，如果您在使用过程中有任何问题欢迎私信留言。您也可以通过[Starwhale官网](https://starwhale.cn/)了解更多信息，感谢您的关注和支持。
