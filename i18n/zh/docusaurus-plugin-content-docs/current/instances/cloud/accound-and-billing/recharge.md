@@ -12,15 +12,15 @@ Starwhale目前支持通过微信渠道进行充值。
 
 1 登录账户中心，点击“**去充值**”，可跳转至充值页面。
 
-![image](https://user-images.githubusercontent.com/101299635/235138724-5ff15e0e-a7b6-44d5-bab1-56ad7301740f.png)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/recharge.png)
 
-2 选择或者输入充值金额，充值金额需要大于50元，同时注意支付渠道的限额（超过限额会无法支付成功）。【前端改完后重新截图，现图title不对】
+2 选择或者输入充值金额，充值金额需要大于50元，同时注意支付渠道的限额（超过限额会无法支付成功）。
 
-![image](https://user-images.githubusercontent.com/101299635/235139093-c4bc35b2-869b-4530-a2d8-88b2d1e946d8.png)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/begin%20to%20recharge.png)
 
-3 选择充值方式，点击“**确认充值**”，跳转第三方支付渠道完成付款。【前端改完后重新截图，现图title不对】
+3 选择充值方式，点击“**确认充值**”，跳转第三方支付渠道完成付款。
 
-![image](https://user-images.githubusercontent.com/101299635/235139359-04c4b80c-f1e2-4991-9d35-a0c14ad3e14b.png)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/confirm%20to%20recharge.png)
 
 ## 充值订单
 
@@ -30,9 +30,9 @@ Starwhale目前支持通过微信渠道进行充值。
 
 1 登录账户中心，点击“**账户管理**”，可在**账户概览**页面查看最近充值订单，点击"**全部订单**，可跳转查看全部充值订单。
 
-![image](https://user-images.githubusercontent.com/101299635/235141796-640e19bf-3e86-4570-b4da-e31cf3264e1a.png)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/bills.png)
 
-![image](https://user-images.githubusercontent.com/101299635/235142019-50c281b4-19f6-46d2-b295-f2a7e1e269cc.png)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/all%20bills.png)
 
 ### 继续支付充值订单
 
@@ -42,15 +42,15 @@ Starwhale目前支持通过微信渠道进行充值。
 
 1 登录账户中心，点击“**账户管理**”，点击**账户管理>充值订单**菜单栏进入充值订单列表。
 
-![image](https://user-images.githubusercontent.com/101299635/235145184-1253bb93-15f0-40a6-b32a-9e1cb5c54ce1.png)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/recharge1.png)
 
 2 找到需要继续支付的订单，点击“**继续支付**”
 
-![image](https://user-images.githubusercontent.com/101299635/235145347-57fb9ebd-32d3-47d3-84b6-65a8c4bfb43e.png)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/continue%20to%20recharge1.png)
 
 3 选择充值方式，点击“**确认充值**”，跳转第三方支付渠道完成付款。
 
-![image](https://user-images.githubusercontent.com/101299635/235139359-04c4b80c-f1e2-4991-9d35-a0c14ad3e14b.png)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/confirm%20to%20recharge.png)
 
 ### 取消充值订单
 
@@ -58,10 +58,10 @@ Starwhale目前支持通过微信渠道进行充值。
 
 1 登录账户中心，点击“**账户管理**”，点击**账户管理>充值订单**菜单栏进入充值订单列表。
 
-![image](https://user-images.githubusercontent.com/101299635/235142019-50c281b4-19f6-46d2-b295-f2a7e1e269cc.png)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/cancel%20recharge1.png)
 
 2 找到需要取消的订单，点击“**取消**”，弹出确认弹窗后，点击“**是**”，可取消充值订单。
 
-![image](https://user-images.githubusercontent.com/101299635/235143268-7dea3084-8f2d-4e76-b08c-0160bd61da05.png)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/confirm-to-cancel.png)
 
 ![image](https://user-images.githubusercontent.com/101299635/235143659-fb987590-c0ba-455e-824c-c1167a4dc9aa.png)
