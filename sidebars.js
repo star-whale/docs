@@ -116,10 +116,10 @@ module.exports = {
                         id: "reference/sdk/overview"
                     },
                     items: [
-                        "reference/sdk/overview",
-                        "dataset/api/sdk",
-                        "dataset/api/data_type",
-                        "evaluation/api/sdk",
+                        "reference/sdk/dataset",
+                        "reference/sdk/type",
+                        "reference/sdk/evaluation",
+                        "reference/sdk/model",
                         "reference/sdk/other",
                     ]
                 }

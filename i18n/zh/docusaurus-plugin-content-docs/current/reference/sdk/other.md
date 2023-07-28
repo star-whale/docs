@@ -1,53 +1,27 @@
 ---
-title: 其他SDK
+title: 其他 SDK
 ---
 
-## starwhale.\__version__
+## \__version__
 
-Starwhale SDK和Cli版本，是字符串常量。
+Starwhale Python SDK 和 `swcli` 版本，是字符串常量。
 
 ```python
 >>> from starwhale import __version__
 >>> print(__version__)
-0.3.0rc10
+0.5.7
 ```
 
-## starwhale.URI
+## init_logger
 
-starwhale uri的类定义，可以将字符串转化成URI对象。Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/base/uri.py)。
+`init_logger` 用来设置日志输出级别。默认为`0` 。
 
-```python
-URI(
-    raw: str,
-    expected_type: str = URIType.UNKNOWN
-)
-```
-
-|参数|说明|
-|---|---|
-|`raw`| starwhale uri的字符串 |
-|`expected_type`| 可以对有歧义的uri字符串强制指定为某种类型 |
+- `0`: 输出 `errors` 信息，traceback 呈现最近的1个堆栈。
+- `1`: 输出 `errors` + `warnings` 信息，traceback 呈现最近的5个堆栈内容。
+- `2`: 输出 `errors` + `warnings` + `info` 信息，trackback 呈现最多10个堆栈内容。
+- `3`: 输出 `errors` + `warnings` + `info` + `debug` 信息，trackback 呈现最多100个堆栈内容。
+- `>=4`: 输出 `errors` + `warnings` + `info` + `debug` + `trace` 信息，trackback 呈现最多1000个堆栈内容。
 
 ```python
->>> dataset_uri = URI("mnist/version/latest", expected_type=URIType.DATASET)
->>> model_uri = URI("mnist/version/latest", expected_type=URIType.MODEL)
->>> runtime_uri = URI("mnist/version/latest", expected_type=URIType.RUNTIME)
->>> dataset_uri = URI("dataset/mnist/version/latest")
-```
-
-上面例子中，uri的原始字符串都是 `mnist/version/latest`，这是一个有歧义的URI，但当指定了 `expected_type` 参数后，可以明确指定为预期的URI。
-
-## starwhale.URIType
-
-描述 `starwhale.URI` 类型，Github上的[代码链接](https://github.com/star-whale/starwhale/blob/dc6e6fdeae2f7c5bd0e72ccd8fb50768b1ce0826/client/starwhale/base/type.py)。
-
-```python
-class URIType:
-    INSTANCE = "instance"
-    PROJECT = "project"
-    MODEL = "model"
-    DATASET = "dataset"
-    RUNTIME = "runtime"
-    EVALUATION = "evaluation"
-    UNKNOWN = "unknown"
+def init_logger(verbose: int = 0) -> None:
 ```
