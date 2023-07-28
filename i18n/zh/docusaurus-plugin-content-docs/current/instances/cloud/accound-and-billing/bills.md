@@ -8,15 +8,17 @@ title:账单明细
 
 1 登录账户中心，点击“**账户管理**”，可在账户概览页面查看最近账单明细，点击"**全部账单**”，可跳转查看全部账单明细。
 
-【截图：待研发调整后补充】
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/bills/bills.jpg)
+
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/bills/all-bills.jpg)
 
 **账单明细字段说明**
-
+ 
 账单编号：账单的唯一标识
 
 资源：用户所使用的各类资源
 
-资源明细：使用资源对应产生的Job
+资源明细：使用资源运行的作业
 
 消费时间：账单开始时间至账单结束时间
 
