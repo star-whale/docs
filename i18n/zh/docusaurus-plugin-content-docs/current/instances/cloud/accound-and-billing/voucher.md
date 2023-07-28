@@ -10,11 +10,11 @@ title:代金券
 
 登录starwhale，进入“账户中心>代金券” 可查看代金券的编号，面值，余额，状态等信息。
 
-![img_v2_8e6d882f-afd0-42bc-acad-afeef2808e9g](https://github.com/lijing-susan/docs/assets/101299635/e94a45b1-6cd0-4389-bf97-4bf732f02e76)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/voucher/voucher.jpg)
 
 点击右侧操作列“使用明细”打开“代金券使用明细页”，查看该代金券的交易时间、编号、支出等抵扣详细记录。
 
-(改完之后补截图)
+![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/voucher/detail.jpg)
 
 ## 如何使用代金券？
 
