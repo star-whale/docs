@@ -14,5 +14,9 @@
   "item.label.Slack": {
     "message": "Slack",
     "description": "Navbar item with label Slack"
+  },
+  "item.label.Blog": {
+    "message": "Blog",
+    "description": "Navbar item with label Blog"
   }
 }
