@@ -1,44 +1,71 @@
 {
-    "sidebar.mainSidebar.category.Getting Started": {
-        "message": "入门指南"
-    },
-    "sidebar.mainSidebar.category.Concepts": {
-        "message": "基本概念"
-    },
-    "sidebar.mainSidebar.category.Reference": {
-        "message": "参考指南"
-    },
-    "sidebar.mainSidebar.category.User Guides": {
-        "message": "用户指南"
-    },
-    "sidebar.mainSidebar.category.Starwhale Instances": {
-        "message": "Starwhale 实例"
-    },
-    "sidebar.mainSidebar.category.Command Line Interface": {
-        "message": "Starwhale Client"
-    },
-    "sidebar.mainSidebar.category.Community": {
-        "message": "社区"
-    },
-    "sidebar.mainSidebar.category.Installation Guide": {
-        "message": "安装指南"
-    },
-    "sidebar.mainSidebar.category.Install Starwhale Server with Docker": {
-        "message": "使用 Docker 安装 Starwhale Server"
-    },
-    "sidebar.mainSidebar.category.Configurations": {
-        "message": "配置文件"
-    },
-    "sidebar.mainSidebar.category.Heterogeneous-devices": {
-        "message": "异构设备"
-    },
-    "sidebar.mainSidebar.category.Overview": {
-        "message": "关于 Starwhale"
-    },
-    "sidebar.mainSidebar.category.Examples": {
-        "message": "使用示例"
-    },
-    "sidebar.mainSidebar.category.FAQ": {
-        "message": "常见问题"
-    }
+  "sidebar.mainSidebar.category.Getting Started": {
+    "message": "入门指南",
+    "description": "The label for category Getting Started in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Concepts": {
+    "message": "基本概念",
+    "description": "The label for category Concepts in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Reference": {
+    "message": "参考指南",
+    "description": "The label for category Reference in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.User Guides": {
+    "message": "用户指南",
+    "description": "The label for category User Guides in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Starwhale Instances": {
+    "message": "Starwhale 实例"
+  },
+  "sidebar.mainSidebar.category.Command Line Interface": {
+    "message": "Starwhale Client"
+  },
+  "sidebar.mainSidebar.category.Community": {
+    "message": "社区",
+    "description": "The label for category Community in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Installation Guide": {
+    "message": "安装指南",
+    "description": "The label for category Installation Guide in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Install Starwhale Server with Docker": {
+    "message": "使用 Docker 安装 Starwhale Server",
+    "description": "The label for category Install Starwhale Server with Docker in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Configurations": {
+    "message": "配置文件"
+  },
+  "sidebar.mainSidebar.category.Heterogeneous-devices": {
+    "message": "异构设备"
+  },
+  "sidebar.mainSidebar.category.Overview": {
+    "message": "关于 Starwhale"
+  },
+  "sidebar.mainSidebar.category.Examples": {
+    "message": "使用示例"
+  },
+  "sidebar.mainSidebar.category.FAQ": {
+    "message": "常见问题"
+  },
+  "version.label": {
+    "message": "WIP",
+    "description": "The label for version current"
+  },
+  "sidebar.mainSidebar.category.Starwhale Client(swcli)": {
+    "message": "Starwhale Client(swcli)",
+    "description": "The label for category Starwhale Client(swcli) in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Starwhale Server": {
+    "message": "Starwhale Server",
+    "description": "The label for category Starwhale Server in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Starwhale Client": {
+    "message": "Starwhale Client",
+    "description": "The label for category Starwhale Client in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Python SDK": {
+    "message": "Python SDK",
+    "description": "The label for category Python SDK in sidebar mainSidebar"
+  }
 }
