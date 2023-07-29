@@ -57,7 +57,7 @@ title: Starwhale 模型评测 SDK
 - 单个 `data` 参数：
   - `data` 为 一个类 dict 类型，能够读取到数据集的 features 内容。
   - 当 `batch_size=1` 或不设置 `batch_size` 时，可以通过 `data['label']` 或 `data.label` 方式读取 label feature。
-  - 当设置 `batch_size` > 1 时，data 为一个 list。
+  - 当设置 `batch_size` > 1 时，`data` 为一个 list。
 
   ```python
   from starwhale import evaluation
@@ -408,7 +408,7 @@ def llama_fine_tuning():
 ## @multi_classification
 
 `@multi_classification` 修饰器使用sklearn lib对多分类问题进行结果分析，输出confusion matrix, roc, auc等值，并且会写入到 starwhale DataStore 相关表中。
-使用的时候需要对所修饰的函数返回值有一定要求，返回(label, result, probability_matrix) 或 (label, result)。
+使用的时候需要对所修饰的函数返回值有一定要求，返回`(label, result, probability_matrix)` 或 `(label, result)`。
 
 ```python
 def multi_classification(
@@ -624,7 +624,7 @@ def predict_view(file: t.Any) -> t.Any:
 
 ## starwhale.api.service.Service
 
-如果希望自定义 web service 的实现, 可以继承 `Service` 并重写 `serve` 函数即可
+如果希望自定义 web service 的实现, 可以继承 `Service` 并重写 `serve` 函数即可。
 
 ```python
 class CustomService(Service):
@@ -647,7 +647,7 @@ def handler(data):
 
 Request 和 Response 分别是用于接收用户请求和返回给用户结果的处理类, 可以简单的理解成是 `handler` 的前处理和后处理逻辑
 
-Starwhale 将支持 Dataset 内置类型的 Request 实现以及 Json Response 的实现, 同时用户可以自定义处理逻辑来使用, 自定义的示例如下
+Starwhale 将支持 Dataset 内置类型的 Request 实现以及 Json Response 的实现, 同时用户可以自定义处理逻辑来使用, 自定义的示例如下：
 
 ```python
 import typing as t
