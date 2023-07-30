@@ -1,7 +1,6 @@
 ---
 title: Starwhale Runtime入门指南
 ---
----
 
 本文演示如何搭建Pytorch环境的Starwhale Runtime以及如何在不同环境中使用它。该runtime可以满足Starwhale中六个例子的依赖需求：mnist、speech commands、nmt、cifar10、ag_news、PennFudan。相关代码链接：[example/runtime/pytorch](https://github.com/star-whale/starwhale/tree/main/example/runtime/pytorch)。
 

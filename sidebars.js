@@ -85,8 +85,60 @@ module.exports = {
                         "server/project",
                     ]
                 },
-                "userguide/model",
-                "userguide/runtime",
+                {
+                    type: "category",
+                    label: "Starwhale Model",
+                    link: {
+                        type: "doc",
+                        id: "model/index",
+                    },
+                    collapsed: true,
+                    items: []
+                },
+                {
+                    type: "category",
+                    label: "Starwhale Runtime",
+                    link: {
+                        type: "doc",
+                        id: "runtime/index",
+                    },
+                    collapsed: true,
+                    items: []
+                },
+                {
+                    type: "category",
+                    label: "Starwhale Dataset",
+                    link: {
+                        type: "doc",
+                        id: "dataset/index",
+                    },
+                    collapsed: true,
+                    items: []
+                },
+                {
+                    type: "category",
+                    label: "Starwhale Model Evaluation",
+                    link: {
+                        type: "doc",
+                        id: "evaluation/index",
+                    },
+                    collapsed: true,
+                    items: [
+                        {
+                            type: 'category',
+                            label: 'Heterogeneous Devices',
+                            link: {
+                                type: "doc",
+                                id: "evaluation/heterogeneous/node-able",
+                            },
+                            collapsed: true,
+                            items: [
+                                "evaluation/heterogeneous/node-able",
+                                "evaluation/heterogeneous/virtual-node",
+                            ]
+                        },
+                    ]
+                },
             ]
         },
         {
@@ -125,6 +177,7 @@ module.exports = {
                 }
             ],
         },
+        "faq/index",
         {
             "Community": [
                 "community/contribute",

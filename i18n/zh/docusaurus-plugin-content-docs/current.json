@@ -60,6 +60,18 @@
     "message": "Starwhale Server",
     "description": "The label for category Starwhale Server in sidebar mainSidebar"
   },
+  "sidebar.mainSidebar.category.Starwhale Model": {
+    "message": "Starwhale 模型",
+    "description": "The label for category Starwhale Model in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Starwhale Runtime": {
+    "message": "Starwhale 运行时",
+    "description": "The label for category Starwhale Runtime in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Starwhale Dataset": {
+    "message": "Starwhale 数据集",
+    "description": "The label for category Starwhale Dataset in sidebar mainSidebar"
+  },
   "sidebar.mainSidebar.category.Starwhale Client": {
     "message": "Starwhale Client",
     "description": "The label for category Starwhale Client in sidebar mainSidebar"
@@ -67,5 +79,13 @@
   "sidebar.mainSidebar.category.Python SDK": {
     "message": "Python SDK",
     "description": "The label for category Python SDK in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Starwhale Model Evaluation": {
+    "message": "Starwhale Model Evaluation",
+    "description": "The label for category Starwhale Model Evaluation in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Heterogeneous Devices": {
+    "message": "Heterogeneous Devices",
+    "description": "The label for category Heterogeneous Devices in sidebar mainSidebar"
   }
 }
