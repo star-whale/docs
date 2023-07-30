@@ -113,7 +113,9 @@ module.exports = {
                         id: "dataset/index",
                     },
                     collapsed: true,
-                    items: []
+                    items: [
+                        "dataset/yaml"
+                    ]
                 },
                 {
                     type: "category",

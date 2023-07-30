@@ -6,7 +6,7 @@ Starwhale 模型是一种机器学习模型的标准包格式，可用于多种�
 
 ## 创建一个 Starwhale 模型
 
-创建 Starwhale 模型有两种方法：通过 [swcli](../reference/swcli/model.md) 或通过SDK。
+创建 Starwhale 模型有两种方法：通过 [swcli](../reference/swcli/model.md) 或通过 [SDK](../reference/sdk/model.md)。
 
 ### 使用 swcli 创建 Starwhale 模型
 
