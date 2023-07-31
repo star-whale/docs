@@ -179,7 +179,7 @@ module.exports = {
                 }
             ],
         },
-        "faq/index",
+        //"faq/index",
         {
             "Community": [
                 "community/contribute",
