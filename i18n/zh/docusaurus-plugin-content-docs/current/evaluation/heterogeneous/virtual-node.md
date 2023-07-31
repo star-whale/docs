@@ -121,4 +121,4 @@ virtual-kubelet --provider mock --provider-config /path/to/mock.json
 
 * 增加 `PodLifecycleHandler` 的实现, 将 Pod 编排中的重要信息转化为 ssh 命令执行, 并且收集日志待 Starwhale Controller 收集
 
-具体实现可参考 [ssh executor](https://github.com/jialeicui/remote-provider/tree/master/cmd/virtual-kubelet/internal/provider/mock)
+具体实现可参考 [ssh executor](https://github.com/jialeicui/remote-provider/tree/master/cmd/virtual-kubelet/internal/provider/mock)。
