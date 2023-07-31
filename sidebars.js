@@ -35,7 +35,7 @@ module.exports = {
             items: [
                 {
                     type: "category",
-                    label: "Starwhale Client(swcli)",
+                    label: "Starwhale Client(swcli) User Guide",
                     link: {
                         type: "doc",
                         id: "swcli/index"
@@ -49,7 +49,7 @@ module.exports = {
                 },
                 {
                     type: 'category',
-                    label: "Starwhale Server",
+                    label: "Starwhale Server User Guide",
                     link: {
                         type: "doc",
                         id: "server/index"
@@ -84,6 +84,32 @@ module.exports = {
                         "server/guides/server_admin",
                         "server/project",
                     ]
+                },
+                {
+                    type: "category",
+                    label: "Starwhale Cloud User Guide",
+                    link: {
+                        type: "doc",
+                        id: "cloud/index"
+                    },
+                    collapsed: true,
+                    items: [
+                        {
+                            type: 'category',
+                            label: "Cloud Billing",
+                            link: {
+                                type: "doc",
+                                id: "cloud/billing/billing",
+                            },
+                            collapsed: true,
+                            items: [
+                                "cloud/billing/bills",
+                                "cloud/billing/recharge",
+                                "cloud/billing/refund",
+                                "cloud/billing/voucher",
+                            ]
+                        }
+                    ],
                 },
                 {
                     type: "category",
