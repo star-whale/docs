@@ -12,7 +12,7 @@ title: Starwhale Server入门指南
 
 打开浏览器并在地址栏中输入服务器的 URL。 使用默认用户名（starwhale）和密码（abcd1234）登录。
 
-![console-artifacts.gif](../img/console-artifacts.gif)
+![console-artifacts.gif](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/console-artifacts.gif)
 
 ### 创建一个新项目
 
@@ -38,6 +38,6 @@ swcli runtime copy pytorch server/project/demo
 
 使用浏览器打开“demo”项目并创建一个新的评估。
 
-![console-create-job.gif](../img/console-create-job.gif)
+![console-create-job.gif](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/console-create-job.gif)
 
 **恭喜！ 您已完成Starwhale Server的入门指南。**

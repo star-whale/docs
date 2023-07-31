@@ -17,7 +17,7 @@ cd starwhale
 
 To save time in the example downloading, we skip git-lfs and other commits info. We will use ML/DL HelloWorld code MNIST to start your Starwhale journey. The following steps are all performed in the starwhale directory.
 
-![Core Workflow](../img/standalone-core-workflow.gif)
+![Core Workflow](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/standalone-core-workflow.gif)
 
 ## Building a Pytorch Runtime
 

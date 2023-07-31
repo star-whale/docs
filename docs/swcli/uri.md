@@ -6,7 +6,7 @@ title: Starwhale Resources URI
 **Resource URI is widely used in Starwhale client commands. The URI can refer to a resource in the local instance or any other resource in a remote instance. In this way, the Starwhale client can easily manipulate any resource.**
 :::
 
-![concepts-org.jpg](../img/concepts-org.jpg)
+![concepts-org.jpg](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/concepts-org.jpg)
 
 ## Instance URI  {#instance}
 

@@ -17,7 +17,7 @@ cd starwhale
 
 为了节省例子的下载时间，我们执行git clone命令时，忽略了git-lfs，并只保留最近一次的commit信息。我们选用ML/DL领域的HelloWorld程序-MNIST来介绍如何从零开始构建数据集、模型包和运行环境，并最终完成模型评测。接下来的操作都在 starwhale 目录中进行。
 
-![核心工作流程](../img/standalone-core-workflow.gif)
+![核心工作流程](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/standalone-core-workflow.gif)
 
 ## 构建 Pytorch 运行时
 

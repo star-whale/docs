@@ -36,6 +36,6 @@ swcli runtime copy pytorch swcloud/project/demo
 
 ## 使用 Web UI 运行评估
 
-![console-create-job.gif](../img/console-create-job.gif)
+![console-create-job.gif](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/console-create-job.gif)
 
 **恭喜！ 您已完成Starwhale Cloud的入门指南。**
