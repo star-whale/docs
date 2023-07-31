@@ -2,8 +2,6 @@
 title：申请退款
 ---
 
-## 操作路径
-
 1 登录账户中心，点击“**账户管理**”，点击**账户管理>充值订单**菜单栏进入充值订单列表。
 
 ![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/refund/refoud.png)
