@@ -2,7 +2,7 @@
 title:账单明细
 ---
 
-**账单明细查看**
+## 账单明细查看
 
 操作路径
 
@@ -12,8 +12,8 @@ title:账单明细
 
 ![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/bills/all-bills.jpg)
 
-**账单明细字段说明**
- 
+## 账单明细字段说明
+
 账单编号：账单的唯一标识
 
 资源：用户所使用的各类资源
