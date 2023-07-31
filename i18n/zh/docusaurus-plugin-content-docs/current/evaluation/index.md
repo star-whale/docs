@@ -39,7 +39,7 @@ title: Starwhale 模型评测
 
 ### 典型工作流程
 
-![eval-workflow.jpg](../img/eval-workflow.jpg)
+![eval-workflow.jpg](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/eval-workflow.jpg)
 
 ## job-step-task 抽象
 

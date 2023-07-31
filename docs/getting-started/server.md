@@ -12,7 +12,7 @@ To install Starwhale Server, see the [installation guide](../server/installation
 
 Open your browser and enter your server's URL in the address bar. Login with your username(starwhale) and password(abcd1234).
 
-![console-artifacts.gif](../img/console-artifacts.gif)
+![console-artifacts.gif](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/console-artifacts.gif)
 
 ### Create a new project
 
@@ -38,6 +38,6 @@ swcli runtime copy pytorch server/project/demo
 
 Navigate to the "demo" project in your browser and create a new one.
 
-![console-create-job.gif](../img/console-create-job.gif)
+![console-create-job.gif](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/console-create-job.gif)
 
 **Congratulations! You have completed the Starwhale Server Getting Started Guide.**

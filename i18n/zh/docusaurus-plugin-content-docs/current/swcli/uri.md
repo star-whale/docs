@@ -6,7 +6,7 @@ title: Starwhale 资源URI
 **资源 URI 在 Starwhale Client 中被广泛使用。URI 可以引用本地实例中的资源或远程实例中的任何其他资源。 这样 Starwhale Client 就可以轻松操作任何资源。**
 :::
 
-![concepts-org.jpg](../img/concepts-org.jpg)
+![concepts-org.jpg](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/concepts-org.jpg)
 
 ## 实例URI {#instance}
 

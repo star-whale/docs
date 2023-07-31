@@ -14,7 +14,7 @@ title: Starwhale 数据集
 - 数据加载：Data Scientist、ML Developer
 - 数据可视化：Data Engineer、Data Scientist、ML Developer
 
-![mlops-users](../img/mlops-users.png)
+![mlops-users](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/mlops-users.png)
 
 ### 核心功能
 
@@ -29,7 +29,7 @@ title: Starwhale 数据集
 ### 关键元素
 
 - `swds` 虚拟包文件：swds 与 swmp 和 swrt 不一样，不是一个打包的单一文件，而是一个虚拟的概念，具体指的是一个目录，是 Starwhale 数据集某个版本包含的数据集相关的文件，包括 `_manifest.yaml`, `dataset.yaml`, 数据集构建的Python脚本和数据文件的链接等。可以通过 `swcli dataset info` 命令查看swds所在目录。swds 是Starwhale Dataset 的简写。
-![swds-tree.png](../img/swds-tree.png)
+![swds-tree.png](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/swds-tree.png)
 - `swcli dataset` 命令行：一组dataset相关的命令，包括构建、分发和管理等功能，具体说明参考[CLI Reference](../reference/swcli/dataset.md)。
 - `dataset.yaml` 配置文件：描述数据集的构建过程，可以完全省略，通过 `swcli dataset build` 参数指定，可以认为 `dataset.yaml` 是build命令行参数的一种配置文件表示方式。`swcli dataset build` 参数优先级高于 `dataset.yaml`。
 - Dataset Python SDK：包括数据构建、数据加载和若干预定义的数据类型，具体说明参考[Python SDK](../reference/sdk/dataset.md)。
@@ -63,7 +63,7 @@ title: Starwhale 数据集
 
 `Starwhale Dataset` 使用的核心流程如下图：
 
-![dataset-workflow.jpg](../img/dataset-workflow.jpg)
+![dataset-workflow.jpg](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/dataset-workflow.jpg)
 
 ## Starwhale Dataset Viewer
 
