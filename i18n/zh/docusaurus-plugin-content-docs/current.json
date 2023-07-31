@@ -49,16 +49,24 @@
         "message": "WIP",
         "description": "The label for version current"
     },
-    "sidebar.mainSidebar.category.Starwhale Client(swcli)": {
-        "message": "Starwhale Client(swcli)",
+    "sidebar.mainSidebar.category.Starwhale Client(swcli) User Guide": {
+        "message": "Starwhale Client(swcli) 用户指南",
         "description": "The label for category Starwhale Client(swcli) in sidebar mainSidebar"
     },
-    "sidebar.mainSidebar.category.Starwhale Server": {
-        "message": "Starwhale Server",
+    "sidebar.mainSidebar.category.Starwhale Server User Guide": {
+        "message": "Starwhale Server 用户指南",
         "description": "The label for category Starwhale Server in sidebar mainSidebar"
+    },
+    "sidebar.mainSidebar.category.Starwhale Cloud User Guide": {
+        "message": "Starwhale Cloud 用户指南",
+        "description": "The label for category Starwhale Cloud in sidebar mainSidebar"
     },
     "sidebar.mainSidebar.category.Starwhale Model": {
         "message": "Starwhale 模型",
+        "description": "The label for category Starwhale Model in sidebar mainSidebar"
+    },
+    "sidebar.mainSidebar.category.Cloud Billing": {
+        "message": "产品计费",
         "description": "The label for category Starwhale Model in sidebar mainSidebar"
     },
     "sidebar.mainSidebar.category.Starwhale Runtime": {
