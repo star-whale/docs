@@ -23,6 +23,12 @@ module.exports = {
                 htmlLang: 'en-US',
                 calendar: 'gregory',
             },
+            zh: {
+                label: '简体中文',
+                direction: 'ltr',
+                htmlLang: 'zh-CN',
+                calendar: 'gregory',
+            }
         },
     },
 
