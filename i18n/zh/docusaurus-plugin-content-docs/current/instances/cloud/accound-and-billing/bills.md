@@ -4,8 +4,6 @@ title:账单明细
 
 ## 账单明细查看
 
-操作路径
-
 1 登录账户中心，点击“**账户管理**”，可在账户概览页面查看最近账单明细，点击"**全部账单**”，可跳转查看全部账单明细。
 
 ![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/bills/bills.jpg)
