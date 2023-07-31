@@ -4,11 +4,11 @@ title:代金券
 
 ## 什么是代金券
 
-代金券是starwhale以虚拟券形式给予客户的资金类权益，可用于抵扣计算资源的费用。
+代金券是starwhale以虚拟券形式给予客户的资金类权益，可用于抵扣运行时所使用资源的费用。
 
 ## 如何查看我的代金券？
 
-登录starwhale，进入“账户中心>代金券” 可查看代金券的编号，面值，余额，状态等信息。
+登录Starwhale，进入“账户中心>代金券” 可查看代金券的编号，面值，余额，状态等信息。
 
 ![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/voucher/voucher.jpg)
 
