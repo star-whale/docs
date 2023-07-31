@@ -63,5 +63,3 @@ Starwhale目前支持通过微信渠道进行充值。
 2 找到需要取消的订单，点击“**取消**”，弹出确认弹窗后，点击“**是**”，可取消充值订单。
 
 ![image](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/account-and-billing/recharge/confirm-to-cancel.png)
-
-![image](https://user-images.githubusercontent.com/101299635/235143659-fb987590-c0ba-455e-824c-c1167a4dc9aa.png)
