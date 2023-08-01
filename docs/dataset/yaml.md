@@ -1,5 +1,5 @@
 ---
-title: dataset.yaml Guide
+title: The dataset.yaml Specification
 ---
 
 :::tip
@@ -11,7 +11,7 @@ Building `Starwhale Dataset` uses `dataset.yaml`. Omitting `dataset.yaml` allows
 ## YAML Field Descriptions
 
 |Field|Description|Required|Type|Default|
-|-|-|-|-|-|  
+|-|-|-|-|-|
 |name|Name of the Starwhale Dataset|Yes|String||
 |handler|Importable address of a class that inherits `starwhale.SWDSBinBuildExecutor`, `starwhale.UserRawBuildExecutor` or `starwhale.BuildExecutor`, or a function that returns a Generator or iterable object. Format is `{module path}:{class name\|function name}`|Yes|String||
 |desc|Dataset description|No|String|""|
@@ -25,7 +25,7 @@ Building `Starwhale Dataset` uses `dataset.yaml`. Omitting `dataset.yaml` allows
 ### Simplest Example
 
 ```yaml
-name: helloworld 
+name: helloworld
 handler: dataset:ExampleProcessExecutor
 ```
 
@@ -48,7 +48,7 @@ attr:
 
 ```yaml
 name: helloworld
-handler: dataset:iter_item 
+handler: dataset:iter_item
 ```
 
 `dataset.py` contents:
