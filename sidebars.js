@@ -119,7 +119,9 @@ module.exports = {
                         id: "model/index",
                     },
                     collapsed: true,
-                    items: []
+                    items: [
+                        "model/yaml"
+                    ]
                 },
                 {
                     type: "category",
@@ -129,7 +131,9 @@ module.exports = {
                         id: "runtime/index",
                     },
                     collapsed: true,
-                    items: []
+                    items: [
+                        "runtime/yaml"
+                    ]
                 },
                 {
                     type: "category",
