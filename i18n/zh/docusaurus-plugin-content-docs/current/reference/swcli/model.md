@@ -42,7 +42,8 @@ swcli [全局选项] model build [选项] <WORKDIR>
 | `--name` 或 `-n` | N | String | | 模型包的名字 |
 | `--desc` 或 `-d` | N | String | | 模型包的描述 |
 | `--package-runtime` 或 `--no-package-runtime` | N | Boolean | True | 当使用 `--runtime` 参数时，默认情况下，会将对应的 Starwhale 运行时变成 Starwhale 模型的内置运行时。可以通过 `--no-package-runtime` 参数禁用该特性。|
-| `--add-all` | N | Boolean | False | Starwhale 模型打包的时候会自动忽略一些类似 pyc/venv/conda 构建目录等，可以通过该参数将这些文件也进行打包。即使该参数使用，也不影响 `.swignore` 文件的预期作用。 |
+| `--add-all` | N | Boolean | False | Starwhale 模型打包的时候会自动忽略一些类似 pyc/venv/conda 构建目录等，可以通过该参数将这些文件也进行打包。即使该参数使用，也不影响 `.swignore` 文件的预期作用。|
+| `-t` 或 `--tag` | N | 全局 | String | | 用户自定义标签，可以指定多次。|
 
 ### Starwhale 模型构建的例子
 
@@ -55,6 +56,8 @@ swcli model build . --module mnist.evaluate --module mnist.train --module mnist.
 swcli model build . --module mnist.evaluate --runtime pytorch/version/v1
 # forbid to package Starwhale Runtime into the model.
 swcli model build . --module mnist.evaluate --runtime pytorch/version/v1 --no-package-runtime
+# build model package with tags.
+swcli model build . --tag tag1 --tag tag2
 ```
 
 ## swcli model copy {#copy}
@@ -65,9 +68,12 @@ swcli [全局选项] model copy [选项] <SRC> <DEST>
 
 `model copy` 将模型从 `SRC` 复制到 `DEST`，用来实现不同实例的模型分享。这里 `SRC` 和 `DEST` 都是[模型URI](../../swcli/uri.md#model-dataset-runtime)。
 
+Starwhale 模型复制时，默认会带上用户自定义的所有标签，可以使用 `--ignore-tag` 参数，忽略某些标签。另外，`latest` 和 `^v\d+$` 标签是 Starwhale 系统内建标签，只在当前实例中使用，不会拷贝到其他实例中。
+
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-|`--force`或`-f`| N | Boolean | False | 如果为true，`DEST`已经存在时会被强制覆盖。否则此命令会显示一条错误消息。 |
+|`--force`或`-f`| N | Boolean | False | 如果为true，`DEST`已经存在时会被强制覆盖。否则此命令会显示一条错误消息。另外，如果复制时携带的标签已经被其他版本使用，通过该参数可以强制更新标签到此版本上。|
+|`-i`或`--ignore-tag`| N |String | | 可以指定多次，忽略多个用户自定义标签。|
 
 ### Starwhale 模型复制的例子
 
@@ -98,6 +104,9 @@ swcli model cp mnist-local/version/latest pre-k8s/project/mnist
 
 #- copy standalone instance(local) project(myproject)'s mnist-local model to cloud instance(pre-k8s) mnist project with standalone instance model name 'mnist-local'
 swcli model cp local/project/myproject/model/mnist-local/version/latest cloud://pre-k8s/project/mnist
+
+#- copy without some tags
+swcli model cp mnist cloud://cloud.starwhale.cn/project/starwhale:public --ignore-tag t1
 ```
 
 ## swcli model diff {#diff}
@@ -313,7 +322,7 @@ swcli model serve --workdir . --runtime pytorch --module mnist.evaluator
 swcli [全局选项] model tag [选项] <MODEL> [TAGS]...
 ```
 
-`model tag`将标签附加到指定的Starwhale模型版本。可以在模型URI中使用标签替代版本ID。
+`model tag`将标签附加到指定的Starwhale模型版本，同时支持删除和列出所有标签的功能。可以在模型URI中使用标签替代版本ID。
 
 `MODEL`是一个[模型URI](../../swcli/uri.md#model-dataset-runtime)。
 
@@ -323,3 +332,20 @@ swcli [全局选项] model tag [选项] <MODEL> [TAGS]...
 | --- | --- | --- | --- | --- |
 | `--remove`或`-r` | N | Boolean | False | 使用该选项删除标签 |
 | `--quiet`或`-q` | N | Boolean | False | 使用该选项以忽略错误，例如删除不存在的标签。 |
+| `--force-add`或`-f`| N | Boolean | False | 当向 server/cloud 实例中添加标签时，若遇到其他版本的模型已经使用该标签会提示报错，强制更新时可以使用 `--force-add` 参数。|
+
+### Starwhale 模型标签的例子
+
+```bash
+#- list tags of the mnist model
+swcli model tag mnist
+
+#- add tags for the mnist model
+swcli model tag mnist -t t1 -t t2
+swcli model tag cloud://cloud.starwhale.cn/project/public:starwhale/model/mnist/version/latest -t t1 --force-add
+swcli model tag mnist -t t1 --quiet
+
+#- remove tags for the mnist model
+swcli model tag mnist -r -t t1 -t t2
+swcli model tag cloud://cloud.starwhale.cn/project/public:starwhale/model/mnist --remove -t t1
+```
