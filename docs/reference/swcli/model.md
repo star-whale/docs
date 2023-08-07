@@ -43,6 +43,7 @@ swcli [GLOBAL OPTIONS] model build [OPTIONS] <WORKDIR>
 | `--desc` or `-d` | N | String | | model package description |
 | `--package-runtime` 或 `--no-package-runtime` | N | Boolean | True | When using the `--runtime` parameter, by default, the corresponding Starwhale runtime will become the built-in runtime for the Starwhale model. This feature can be disabled with the `--no-package-runtime` parameter. |
 | `--add-all` | N | Boolean | False | Add all files in the working directory to the model package(excludes python cache files and virtual environment files when disabled).The `.swignore` file still takes effect. |
+| `-t` or `--tag` | N | Global | String | | Model tags, the option can be used multiple times. |
 
 ### Examples for model build
 
@@ -55,6 +56,8 @@ swcli model build . --module mnist.evaluate --module mnist.train --module mnist.
 swcli model build . --module mnist.evaluate --runtime pytorch/version/v1
 # forbid to package Starwhale Runtime into the model.
 swcli model build . --module mnist.evaluate --runtime pytorch/version/v1 --no-package-runtime
+# build model package with tags.
+swcli model build . --tag tag1 --tag tag2
 ```
 
 ## swcli model copy {#copy}
@@ -67,9 +70,12 @@ swcli [GLOBAL OPTIONS] model copy [OPTIONS] <SRC> <DEST>
 
 `SRC` and `DEST` are both [model URIs](../../swcli/uri.md#model-dataset-runtime).
 
+When copying Starwhale Model, all custom user-defined labels will be copied by default. You can use the `--ignore-tag` parameter to ignore certain labels. In addition, the `latest` and `^v\d+$` labels are Starwhale built-in labels that are only used within the instance itself and will not be copied to other instances.
+
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--force` or `-f` | N | Boolean | False | If true, `DEST` will be overwritten if it exists; otherwise, this command displays an error message. |
+| `--force` or `-f` | N | Boolean | False | If true, `DEST` will be overwritten if it exists. In addition, if the labels carried during duplication have already been used by other versions, this parameter can be used to forcibly update the labels to this version.|
+|`-i` or `--ignore-tag`| N |String | | Ignore tags to copy. The option can be used multiple times.|
 
 ### Examples for model copy
 
@@ -100,6 +106,9 @@ swcli model cp mnist-local/version/latest pre-k8s/project/mnist
 
 #- copy standalone instance(local) project(myproject)'s mnist-local model to cloud instance(pre-k8s) mnist project with standalone instance model name 'mnist-local'
 swcli model cp local/project/myproject/model/mnist-local/version/latest cloud://pre-k8s/project/mnist
+
+#- copy without some tags
+swcli model cp mnist cloud://cloud.starwhale.cn/project/starwhale:public --ignore-tag t1
 ```
 
 ## swcli model diff {#diff}
@@ -316,7 +325,7 @@ swcli model serve --workdir . --runtime pytorch --module mnist.evaluator
 swcli [GLOBAL OPTIONS] model tag [OPTIONS] <MODEL> [TAGS]...
 ```
 
-`model tag` attaches a tag to a specified Starwhale Model version. The tag can be used in a model URI instead of the version id.
+`model tag` attaches a tag to a specified Starwhale Model version. At the same time, tag command also supports list and remove tags. The tag can be used in a model URI instead of the version id.
 
 `MODEL` is a [model URI](../../swcli/uri.md#model-dataset-runtime).
 
@@ -328,3 +337,20 @@ Each model version can have any number of tags， but duplicated tag names are n
 | --- | --- | --- | --- | --- |
 | `--remove` or `-r` | N | Boolean | False | remove the tag if true |
 | `--quiet` or `-q` | N | Boolean | False | ignore errors, for example, removing tags that do not exist. |
+| `--force-add` or `-f`| N | Boolean | False | When adding labels to server/cloud instances, if the label is already used by another model version, an error will be prompted. In this case, you can force an update using the `--force-add` parameter. |
+
+### Examples for model tag
+
+```bash
+#- list tags of the mnist model
+swcli model tag mnist
+
+#- add tags for the mnist model
+swcli model tag mnist -t t1 -t t2
+swcli model tag cloud://cloud.starwhale.cn/project/public:starwhale/model/mnist/version/latest -t t1 --force-add
+swcli model tag mnist -t t1 --quiet
+
+#- remove tags for the mnist model
+swcli model tag mnist -r -t t1 -t t2
+swcli model tag cloud://cloud.starwhale.cn/project/public:starwhale/model/mnist --remove -t t1
+```

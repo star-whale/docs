@@ -65,6 +65,7 @@ Build Starwhale Dataset. This command only supports to build standalone dataset.
 | `--split` | N | Huggingface Mode | String | | Huggingface dataset split name. If the split name is not specified, the all splits dataset will be built.  |
 | `--revision` | N | Huggingface Mode | String | main | Version of the dataset script to load. Defaults to 'main'. The option value accepts tag name, or branch name, or commit hash. |
 | `--cache`/`--no-cache` | N | Huggingface Mode | Boolean | True | Whether to use huggingface dataset cache(download + local hf dataset). |
+| `-t` or `--tag` | N | Global | String | | Dataset tags, the option can be used multiple times. |
 
 ### Examples for dataset building
 
@@ -73,6 +74,7 @@ Build Starwhale Dataset. This command only supports to build standalone dataset.
 swcli dataset build  # build dataset from dataset.yaml in the current work directory(pwd)
 swcli dataset build --yaml /path/to/dataset.yaml  # build dataset from /path/to/dataset.yaml, all the involved files are related to the dataset.yaml file.
 swcli dataset build --overwrite --yaml /path/to/dataset.yaml  # build dataset from /path/to/dataset.yaml, and overwrite the existed dataset.
+swcli dataset build --tag tag1 --tag tag2
 
 #- from handler
 swcli dataset build --handler mnist.dataset:iter_mnist_item # build dataset from mnist.dataset:iter_mnist_item handler, the workdir is the current work directory(pwd).
@@ -110,11 +112,14 @@ swcli [GLOBAL OPTIONS] dataset copy [OPTIONS] <SRC> <DEST>
 
 `SRC` and `DEST` are both [dataset URIs](../../swcli/uri.md#model-dataset-runtime).
 
+When copying Starwhale Dataset, all custom user-defined labels will be copied by default. You can use the `--ignore-tag` parameter to ignore certain labels. In addition, the `latest` and `^v\d+$` labels are Starwhale built-in labels that are only used within the instance itself and will not be copied to other instances.
+
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-| `--force` or `-f` | N | Boolean | False | If true, `DEST` will be overwritten if it exists; otherwise, this command displays an error message. |
+| `--force` or `-f` | N | Boolean | False | If true, `DEST` will be overwritten if it exists. In addition, if the labels carried during duplication have already been used by other versions, this parameter can be used to forcibly update the labels to this version.|
 |`-p` or `--patch`| one of `--patch` and `--overwrite` | Boolean | True | Patch mode, only update the changed rows and columns for the remote dataset. |
 |`-o` or `--overwrite`| one of `--patch` and `--overwrite` | Boolean | False |  Overwrite mode, update records and delete extraneous rows from the remote dataset. |
+|`-i` or `--ignore-tag`| N |String | | Ignore tags to copy. The option can be used multiple times.|
 
 ### Examples for dataset copy
 
@@ -145,6 +150,9 @@ swcli dataset cp mnist-local/version/latest pre-k8s/project/mnist
 
 #- copy standalone instance(local) project(myproject)'s mnist-local dataset to cloud instance(pre-k8s) mnist project with standalone instance dataset name 'mnist-local'
 swcli dataset cp local/project/myproject/dataset/mnist-local/version/latest cloud://pre-k8s/project/mnist
+
+#- copy without some tags
+swcli dataset cp mnist cloud://cloud.starwhale.cn/project/starwhale:public --ignore-tag t1 --force
 ```
 
 ## swcli dataset diff {#diff}
@@ -289,7 +297,7 @@ Show dataset summary. `DATASET` is a [dataset URI](../../swcli/uri.md#model-data
 swcli [GLOBAL OPTIONS] dataset tag [OPTIONS] <DATASET> [TAGS]...
 ```
 
-`dataset tag` attaches a tag to a specified Starwhale Dataset version. The tag can be used in a dataset URI instead of the version id.
+`dataset tag` attaches a tag to a specified Starwhale Dataset version. At the same time, tag command also supports list and remove tags. The tag can be used in a dataset URI instead of the version id.
 
 `DATASET` is a [dataset URI](../../swcli/uri.md#model-dataset-runtime).
 
@@ -301,3 +309,20 @@ Each dataset version can have any number of tags， but duplicated tag names are
 | --- | --- | --- | --- | --- |
 | `--remove` or `-r` | N | Boolean | False | remove the tag if true |
 | `--quiet` or `-q` | N | Boolean | False | ignore errors, for example, removing tags that do not exist. |
+| `--force-add` or `-f`| N | Boolean | False | When adding labels to server/cloud instances, if the label is already used by another dataset version, an error will be prompted. In this case, you can force an update using the `--force-add` parameter. |
+
+### Examples for dataset tag
+
+```bash
+#- list tags of the mnist dataset
+swcli dataset tag mnist
+
+#- add tags for the mnist dataset
+swcli dataset tag mnist -t t1 -t t2
+swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist/version/latest -t t1 --force-add
+swcli dataset tag mnist -t t1 --quiet
+
+#- remove tags for the mnist dataset
+swcli dataset tag mnist -r -t t1 -t t2
+swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist --remove -t t1
+```

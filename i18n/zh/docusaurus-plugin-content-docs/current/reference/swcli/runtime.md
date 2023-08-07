@@ -69,6 +69,7 @@ swcli [全局选项] runtime build [选项]
 | `--arch` | N | conda/venv/shell 模式 | Choice[amd64/arm64/noarch] | noarch | 体系结构 |
 | `-epo` 或 `--emit-pip-options` | N | 全局 | Boolean | False | 是否导出 `~/.pip/pip.conf`，默认导出。|
 | `-ecc` 或 `--emit-condarc` | N | 全局 | Boolean | False | 是否导出 `~/.condarc`，默认导出。|
+| `-t` 或 `--tag` | N | 全局 | String | | 用户自定义标签，可以指定多次。|
 
 ### Starwhale 运行时构建的例子
 
@@ -77,6 +78,7 @@ swcli [全局选项] runtime build [选项]
 swcli runtime build  # use the current directory as the workdir and use the default runtime.yaml file
 swcli runtime build -y example/pytorch/runtime.yaml # use example/pytorch/runtime.yaml as the runtime.yaml file
 swcli runtime build --yaml runtime.yaml # use runtime.yaml at the current directory as the runtime.yaml file
+swcli runtime build --tag tag1 --tag tag2
 
 #- from conda name:
 swcli runtime build -c pytorch # lock pytorch conda environment and use `pytorch` as the runtime name
@@ -107,9 +109,12 @@ swcli [全局选项] runtime copy [选项] <SRC> <DEST>
 
 `runtime copy` 将 runtime 从 `SRC` 复制到 `DEST`，可以实现不同实例之间的运行时分享。这里 `SRC` 和 `DEST` 都是[运行时URI](../../swcli/uri.md#model-dataset-runtime)。
 
+Starwhale 运行时复制时，默认会带上用户自定义的所有标签，可以使用 `--ignore-tag` 参数，忽略某些标签。另外，`latest` 和 `^v\d+$` 标签是 Starwhale 系统内建标签，只在当前实例中使用，不会拷贝到其他实例中。
+
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-|`--force`或`-f`| N | Boolean | False | 如果为true，`DEST`已经存在时会被强制覆盖。否则此命令会显示一条错误消息。 |
+|`--force`或`-f`| N | Boolean | False | 如果为true，`DEST`已经存在时会被强制覆盖。否则此命令会显示一条错误消息。另外，如果复制时携带的标签已经被其他版本使用，通过该参数可以强制更新标签到此版本上。|
+|`-i`或`--ignore-tag`| N |String | | 可以指定多次，忽略多个用户自定义标签。|
 
 ### Starwhale 运行时复制的例子
 
@@ -140,6 +145,9 @@ swcli runtime cp mnist-local/version/latest pre-k8s/project/mnist
 
 #- copy standalone instance(local) project(myproject)'s mnist-local runtime to cloud instance(pre-k8s) mnist project with standalone instance runtime name 'mnist-local'
 swcli runtime cp local/project/myproject/runtime/mnist-local/version/latest cloud://pre-k8s/project/mnist
+
+#- copy without some tags
+swcli runtime cp pytorch cloud://cloud.starwhale.cn/project/starwhale:public --ignore-tag t1
 ```
 
 ## swcli runtime dockerize {#dockerize}
@@ -275,7 +283,7 @@ swcli [全局选项] runtime remove [选项] <RUNTIME>
 swcli [全局选项] runtime tag [选项] <RUNTIME> [TAGS]...
 ```
 
-`runtime tag` 命令将标签附加到指定的 Starwhale 运行时版本。可以在运行时URI中使用标签替代版本 ID。
+`runtime tag` 命令将标签附加到指定的 Starwhale 运行时版本，同时支持删除和列出所有标签的功能。可以在运行时URI中使用标签替代版本 ID。
 
 `RUNTIME` 是一个[运行时URI](../../swcli/uri.md#model-dataset-runtime)。
 
@@ -287,3 +295,20 @@ swcli [全局选项] runtime tag [选项] <RUNTIME> [TAGS]...
 | --- | --- | --- | --- | --- |
 | `--remove`或`-r` | N | Boolean | False | 使用该选项删除标签 |
 | `--quiet`或`-q` | N | Boolean | False | 使用该选项以忽略错误，例如删除不存在的标签。 |
+| `--force-add`或`-f`| N | Boolean | False | 当向 server/cloud 实例中添加标签时，若遇到其他版本的运行时已经使用该标签会提示报错，强制更新时可以使用 `--force-add` 参数。|
+
+### Starwhale 运行时标签的例子
+
+```bash
+#- list tags of the pytorch runtime
+swcli runtime tag pytorch
+
+#- add tags for the pytorch runtime
+swcli runtime tag mnist -t t1 -t t2
+swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch/version/latest -t t1 --force-add
+swcli runtime tag mnist -t t1 --quiet
+
+#- remove tags for the pytorch runtime
+swcli runtime tag mnist -r -t t1 -t t2
+swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch --remove -t t1
+```

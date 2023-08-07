@@ -65,6 +65,7 @@ swcli [全局选项] dataset build [选项]
 | `--split` | N | Huggingface 模式 | String | | HF的 split 名字，如果不指定则包含所有 splits。 |
 | `--revision` | N | Huggingface 模式 | String | main | HF的数据集的版本，支持tag, branch 和 commit hash。|
 | `--cache`/`--no-cache` | N | Huggingface 模式 | Boolean | True | 是否使用HF的本地缓存 |
+| `-t` 或 `--tag` | N | 全局 | String | | 用户自定义标签，可以指定多次。|
 
 ### 数据集构建例子
 
@@ -73,6 +74,7 @@ swcli [全局选项] dataset build [选项]
 swcli dataset build  # build dataset from dataset.yaml in the current work directory(pwd)
 swcli dataset build --yaml /path/to/dataset.yaml  # build dataset from /path/to/dataset.yaml, all the involved files are related to the dataset.yaml file.
 swcli dataset build --overwrite --yaml /path/to/dataset.yaml  # build dataset from /path/to/dataset.yaml, and overwrite the existed dataset.
+swcli dataset build --tag tag1 --tag tag2
 
 #- from handler
 swcli dataset build --handler mnist.dataset:iter_mnist_item # build dataset from mnist.dataset:iter_mnist_item handler, the workdir is the current work directory(pwd).
@@ -108,11 +110,14 @@ swcli [全局选项] dataset copy [选项] <SRC> <DEST>
 
 `dataset copy` 将数据集从 `SRC` 复制到 `DEST` 。这里 `SRC` 和 `DEST` 都是[数据集URI](../../swcli/uri.md#model-dataset-runtime)。
 
+Starwhale 数据集复制时，默认会带上用户自定义的所有标签，可以使用 `--ignore-tag` 参数，忽略某些标签。另外，`latest` 和 `^v\d+$` 标签是 Starwhale 系统内建标签，只在当前实例中使用，不会拷贝到其他实例中。
+
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-|`--force`或`-f`| N | Boolean | False | 如果为true，`DEST`已经存在时会被强制覆盖。否则此命令会显示一条错误消息。|
+|`--force`或`-f`| N | Boolean | False | 如果为true，`DEST`已经存在时会被强制覆盖。另外，如果复制时携带的标签已经被其他版本使用，通过该参数可以强制更新标签到此版本上。|
 |`-p`或`--patch`| `--patch` 或 `--overwrite` 必选其一 | Boolean | True | 使用补丁方式更新数据集，只更新计划变更的行和列，在新生成的版本中仍能读取到未受影响的行和列。 |
 |`-o`或`--overwrite`| `--patch` 或 `--overwrite` 必选其一 | Boolean | False | 使用覆盖方式更新数据集，会将原来的所有行都删除，然后再进行更新，在新生成的版本中读取不到老数据。但请放心，删除的数据依旧可以通过旧版本进行访问。|
+|`-i`或`--ignore-tag`| N |String | | 可以指定多次，忽略多个用户自定义标签。|
 
 ### 数据集复制的例子
 
@@ -143,6 +148,9 @@ swcli dataset cp mnist-local/version/latest pre-k8s/project/mnist
 
 #- copy standalone instance(local) project(myproject)'s mnist-local dataset to cloud instance(pre-k8s) mnist project with standalone instance dataset name 'mnist-local'
 swcli dataset cp local/project/myproject/dataset/mnist-local/version/latest cloud://pre-k8s/project/mnist
+
+#- copy without some tags
+swcli dataset cp mnist cloud://cloud.starwhale.cn/project/starwhale:public --ignore-tag t1 --force
 ```
 
 ## swcli dataset diff {#diff}
@@ -283,7 +291,7 @@ swcli [全局选项] dataset summary <DATASET>
 swcli [全局选项] dataset tag [选项] <DATASET> [TAGS]...
 ```
 
-`dataset tag`将标签附加到指定的Starwhale数据集版本。可以在数据集URI中使用标签替代版本ID。
+`dataset tag` 将标签附加到指定的Starwhale数据集版本，同时支持删除和列出所有标签的功能。可以在数据集URI中使用标签替代版本ID。
 
 `DATASET`是一个[数据集URI](../../swcli/uri.md#model-dataset-runtime)。
 
@@ -293,3 +301,20 @@ swcli [全局选项] dataset tag [选项] <DATASET> [TAGS]...
 | --- | --- | --- | --- | --- |
 | `--remove`或`-r` | N | Boolean | False | 使用该选项删除标签 |
 | `--quiet`或`-q` | N | Boolean | False | 使用该选项以忽略错误，例如删除不存在的标签。 |
+| `--force-add`或`-f`| N | Boolean | False | 当向 server/cloud 实例中添加标签时，若遇到其他版本的数据集已经使用该标签会提示报错，强制更新时可以使用 `--force-add` 参数。|
+
+### 数据集标签的例子
+
+```bash
+#- list tags of the mnist dataset
+swcli dataset tag mnist
+
+#- add tags for the mnist dataset
+swcli dataset tag mnist -t t1 -t t2
+swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist/version/latest -t t1 --force-add
+swcli dataset tag mnist -t t1 --quiet
+
+#- remove tags for the mnist dataset
+swcli dataset tag mnist -r -t t1 -t t2
+swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist --remove -t t1
+```

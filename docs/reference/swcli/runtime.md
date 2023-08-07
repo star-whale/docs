@@ -69,6 +69,7 @@ The `runtime build` command can build a shareable and reproducible runtime envir
 | `--arch` | N | conda/venv/shell mode | Choice[amd64/arm64/noarch] | noarch | Architecture |
 | `-epo` or `--emit-pip-options` | N | Global | Boolean | False | Whether to export `~/.pip/pip.conf`, exported by default.|
 | `-ecc` or `--emit-condarc` | N | Global | Boolean | False | Whether to export `~/.condarc`, exported by default.|
+| `-t` or `--tag` | N | Global | String | | Runtime tags, the option can be used multiple times. |
 
 ### Examples for Starwhale Runtime building
 
@@ -77,6 +78,7 @@ The `runtime build` command can build a shareable and reproducible runtime envir
 swcli runtime build  # use the current directory as the workdir and use the default runtime.yaml file
 swcli runtime build -y example/pytorch/runtime.yaml # use example/pytorch/runtime.yaml as the runtime.yaml file
 swcli runtime build --yaml runtime.yaml # use runtime.yaml at the current directory as the runtime.yaml file
+swcli runtime build --tag tag1 --tag tag2
 
 #- from conda name:
 swcli runtime build -c pytorch # lock pytorch conda environment and use `pytorch` as the runtime name
@@ -107,9 +109,12 @@ swcli [GLOBAL OPTIONS] runtime copy [OPTIONS] <SRC> <DEST>
 
 `runtime copy` copies from `SRC` to `DEST`. `SRC` and `DEST` are both [Runtime URIs](../../swcli/uri.md#model-dataset-runtime).
 
+When copying Starwhale Runtime, all custom user-defined labels will be copied by default. You can use the `--ignore-tag` parameter to ignore certain labels. In addition, the `latest` and `^v\d+$` labels are built-in Starwhale system labels that are only used within the instance itself and will not be copied to other instances.
+
 | Option | Required | Type | Defaults | Description |
 | --- | --- | --- | --- | --- |
-|`--force` or `-f`| N | Boolean | False | If true, `DEST` will be overwritten if it exists; otherwise, this command displays an error message. |
+|`--force` or `-f`| N | Boolean | False | If true, `DEST` will be overwritten if it exists. In addition, if the labels carried during duplication have already been used by other versions, this parameter can be used to forcibly update the labels to this version.|
+|`-i` or `--ignore-tag`| N |String | | Ignore tags to copy. The option can be used multiple times.|
 
 ### Examples for Starwhale Runtime copy
 
@@ -140,6 +145,9 @@ swcli runtime cp mnist-local/version/latest pre-k8s/project/mnist
 
 #- copy standalone instance(local) project(myproject)'s mnist-local runtime to cloud instance(pre-k8s) mnist project with standalone instance runtime name 'mnist-local'
 swcli runtime cp local/project/myproject/runtime/mnist-local/version/latest cloud://pre-k8s/project/mnist
+
+#- copy without some tags
+swcli runtime cp pytorch cloud://cloud.starwhale.cn/project/starwhale:public --ignore-tag t1
 ```
 
 ## swcli runtime dockerize {#dockerize}
@@ -276,7 +284,7 @@ Removed Starwhale Runtimes or versions can be listed by `swcli runtime list --sh
 swcli [GLOBAL OPTIONS] runtime tag [OPTIONS] <RUNTIME> [TAGS]...
 ```
 
-`runtime tag` attaches a tag to a specified Starwhale Runtime version. The tag can be used in a runtime URI instead of the version id.
+`runtime tag` attaches a tag to a specified Starwhale Runtime version. At the same time, tag command also supports list and remove tags. The tag can be used in a runtime URI instead of the version id.
 
 `RUNTIME` is a [Runtime URI](../../swcli/uri.md#model-dataset-runtime).
 
@@ -288,3 +296,20 @@ Each runtime version can have any number of tags， but duplicated tag names are
 | --- | --- | --- | --- | --- |
 | `--remove` or `-r` | N | Boolean | False | Remove the tag if true |
 | `--quiet` or `-q` | N | Boolean | False | Ignore errors, for example, removing tags that do not exist. |
+| `--force-add` or `-f`| N | Boolean | False | When adding labels to server/cloud instances, if the label is already used by another runtime version, an error will be prompted. In this case, you can force an update using the `--force-add` parameter. |
+
+### Examples for runtime tag
+
+```bash
+#- list tags of the pytorch runtime
+swcli runtime tag pytorch
+
+#- add tags for the pytorch runtime
+swcli runtime tag mnist -t t1 -t t2
+swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch/version/latest -t t1 --force-add
+swcli runtime tag mnist -t t1 --quiet
+
+#- remove tags for the pytorch runtime
+swcli runtime tag mnist -r -t t1 -t t2
+swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch --remove -t t1
+```
