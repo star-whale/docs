@@ -25,6 +25,8 @@ Starwhale provides a series of Python SDKs to help manage datasets, models, eval
 - `init_logger`: Set log level, implement 5-level logging.
 - `dataset`: Get `starwhale.Dataset` object, by creating new datasets or loading existing datasets.
 - `@starwhale.api.service.api`: Decorator to provide a simple Web Handler input definition based on Gradio.
+- `login`: Log in to the server/cloud instance.
+- `logout`: Log out of the server/cloud instance.
 
 ## Data Types
 
