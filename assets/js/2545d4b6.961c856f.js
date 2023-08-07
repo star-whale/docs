@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstarwhale_docs=self.webpackChunkstarwhale_docs||[]).push([[904],{65540:a=>{a.exports=JSON.parse('{"label":"Model Package","permalink":"/blog/tags/model-package","allTagsPath":"/blog/tags","count":1}')}}]);
