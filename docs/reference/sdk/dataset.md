@@ -81,6 +81,7 @@ def from_huggingface(
     volume_size: int | str = D_FILE_VOLUME_SIZE,
     mode: DatasetChangeMode | str = DatasetChangeMode.PATCH,
     cache: bool = True,
+    tags: t.List[str] | None = None,
 ) -> Dataset:
 ```
 
@@ -107,6 +108,8 @@ def from_huggingface(
 - `cache`: (bool, optional)
   - Whether to use huggingface dataset cache(download + local hf dataset).
   - The default value is True.
+- `tags`: (List[str], optional)
+  - The user custom tags of the dataset.
 
 #### Examples {#hf-example}
 
@@ -135,6 +138,7 @@ def from_json(
     alignment_size: int | str = D_ALIGNMENT_SIZE,
     volume_size: int | str = D_FILE_VOLUME_SIZE,
     mode: DatasetChangeMode | str = DatasetChangeMode.PATCH,
+    tags: t.List[str] | None = None,
 ) -> Dataset:
 ```
 
@@ -155,6 +159,8 @@ def from_json(
   - The default value is `64MB`.
 - `mode`: (str|DatasetChangeMode, optional)
   - The dataset change mode. The default value is `patch`. Mode choices are `patch` and `overwrite`.
+- `tags`: (List[str], optional)
+  - The user custom tags of the dataset.
 
 #### Examples {#json-example}
 
@@ -205,6 +211,7 @@ def from_folder(
     alignment_size: int | str = D_ALIGNMENT_SIZE,
     volume_size: int | str = D_FILE_VOLUME_SIZE,
     mode: DatasetChangeMode | str = DatasetChangeMode.PATCH,
+    tags: t.List[str] | None = None,
 ) -> Dataset:
 ```
 
@@ -229,6 +236,8 @@ def from_folder(
   - The default value is `64MB`.
 - `mode`: (str|DatasetChangeMode, optional)
   - The dataset change mode. The default value is `patch`. Mode choices are `patch` and `overwrite`.
+- `tags`: (List[str], optional)
+  - The user custom tags of the dataset.
 
 #### Examples ${folder-example}
 
@@ -463,7 +472,14 @@ ds.close()
 For a dataset, if some data is added without calling `commit`, but `close` is called or the process exits directly instead, the data will still be written to the dataset, just without generating a new version.
 
 ```python
-def commit(self, tags: t.Optional[t.List[str]] = None, message: str = "") -> str:
+@_check_readonly
+def commit(
+    self,
+    tags: t.Optional[t.List[str]] = None,
+    message: str = "",
+    force_add_tags: bool = False,
+    ignore_add_tags_errors: bool = False,
+) -> str:
 ```
 
 #### Parameters {#commit-params}
@@ -472,6 +488,12 @@ def commit(self, tags: t.Optional[t.List[str]] = None, message: str = "") -> str
   - tag as a list
 - `message`: (str, optional)
   - commit message. The default value is empty.
+- `force_add_tags`: (bool, optional)
+  - For server/cloud instances, when adding labels to this version, if a label has already been applied to other dataset versions, you can use the `force_add_tags=True` parameter to forcibly add the label to this version, otherwise an exception will be thrown.
+  - The default is `False`.
+- `ignore_add_tags_errors`: (bool, optional)
+  - Ignore any exceptions thrown when adding labels.
+  - The default is `False`.
 
 #### Examples {#commit-example}
 
@@ -596,6 +618,7 @@ def copy(
   dest_local_project_uri: str = "",
   force: bool = False,
   mode: str = DatasetChangeMode.PATCH.value,
+  ignore_tags: t.List[str] | None = None,
 ) -> None:
 ```
 
@@ -608,10 +631,15 @@ def copy(
 - `force`: (bool, optional)
   - Whether to forcibly overwrite the dataset if there is already one with the same version on the target instance.
   - The default value is `False`.
+  - When the tags are already used for the other dataset version in the dest instance, you should use `force` option or adjust the tags.
 - `mode`: (str, optional)
   - Dataset copy mode, default is 'patch'. Mode choices are: 'patch', 'overwrite'.
   - `patch`: Patch mode, only update the changed rows and columns for the remote dataset.
   - `overwrite`: Overwrite mode, update records and delete extraneous rows from the remote dataset.
+- `ignore_tags` (List[str], optional)
+  - Ignore tags when copying.
+  - In default, copy dataset with all user custom tags.
+  - `latest` and `^v\d+$` are the system builtin tags, they are ignored automatically.
 
 #### Examples {#copy-example}
 

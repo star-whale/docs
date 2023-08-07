@@ -15,6 +15,7 @@ def build(
     desc: str = "",
     remote_project_uri: t.Optional[str] = None,
     add_all: bool = False,
+    tags: t.List[str] | None = None,
 ) -> None:
 ```
 
@@ -39,6 +40,9 @@ def build(
 - `add_all`: (bool, optional)
   - Add all files in the working directory to the model package(excludes python cache files and virtual environment files when disabled).The `.swignore` file still takes effect.
   - The default value is `False`.
+- `tags`: (List[str], optional)
+  - The tags for the model version.
+  - `latest` and `^v\d+$` tags are reserved tags.
 
 ### Examples {#build-example}
 
@@ -63,4 +67,7 @@ model.build(["user.code1", "user.code2"])
 
 # no search handlers, use imported modules
 model.build()
+
+# add user custom tags
+model.build(tags=["t1", "t2"])
 ```

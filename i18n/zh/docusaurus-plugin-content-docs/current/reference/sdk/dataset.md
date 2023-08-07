@@ -81,6 +81,7 @@ def from_huggingface(
     volume_size: int | str = D_FILE_VOLUME_SIZE,
     mode: DatasetChangeMode | str = DatasetChangeMode.PATCH,
     cache: bool = True,
+    tags: t.List[str] | None = None,
 ) -> Dataset:
 ```
 
@@ -108,7 +109,9 @@ def from_huggingface(
 - `cache`: (bool, optional)
   - 是否使用 Huggingface 的本地缓存。
   - 默认使用缓存。
-  - 缓存 = 下载文件缓存 + 本地Huggingface 数据集缓存
+  - 缓存 = 下载文件缓存 + 本地Huggingface 数据集缓存。
+- `tags`: (List[str], optional)
+  - 用户自定义的数据集标签。
 
 #### 使用示例 {#hf-example}
 
@@ -137,6 +140,7 @@ def from_json(
     alignment_size: int | str = D_ALIGNMENT_SIZE,
     volume_size: int | str = D_FILE_VOLUME_SIZE,
     mode: DatasetChangeMode | str = DatasetChangeMode.PATCH,
+    tags: t.List[str] | None = None,
 ) -> Dataset:
 ```
 
@@ -158,6 +162,8 @@ def from_json(
 - `mode`: (str|DatasetChangeMode, optional)
   - 数据集更新的模式，包括 `patch` 模式和 `overwrite` 模式。
   - 默认为 `patch` 模式。
+- `tags`: (List[str], optional)
+  - 用户自定义的数据集标签。
 
 #### 使用示例 {#json-example}
 
@@ -208,6 +214,7 @@ def from_folder(
     alignment_size: int | str = D_ALIGNMENT_SIZE,
     volume_size: int | str = D_FILE_VOLUME_SIZE,
     mode: DatasetChangeMode | str = DatasetChangeMode.PATCH,
+    tags: t.List[str] | None = None,
 ) -> Dataset:
 ```
 
@@ -233,6 +240,8 @@ def from_folder(
 - `mode`: (str|DatasetChangeMode, optional)
   - 数据集更新的模式，包括 `patch` 模式和 `overwrite` 模式。
   - 默认为 `patch` 模式。
+- `tags`: (List[str], optional)
+  - 用户自定义的数据集标签。
 
 #### 使用示例 ${folder-example}
 
@@ -467,15 +476,28 @@ ds.close()
 对于一个数据集，如果添加一些数据后，并没有调用 `commit` 方法，而是直接调用 `close` 或退出进程，那么这些数据依旧会写入到数据集中，只是没有一个生成一个新的版本。
 
 ```python
-def commit(self, tags: t.Optional[t.List[str]] = None, message: str = "") -> str:
+@_check_readonly
+def commit(
+    self,
+    tags: t.Optional[t.List[str]] = None,
+    message: str = "",
+    force_add_tags: bool = False,
+    ignore_add_tags_errors: bool = False,
+) -> str:
 ```
 
 #### 参数 {#commit-params}
 
-- `tags`: (list(str), optional)
+- `tags`: (List(str), optional)
   - 指定 tags，可以指定多个tag。
 - `message`: (str, optional)
   - 提交信息，默认为空。
+- `force_add_tags`: (bool, optional)
+  - 当给改版本添加标签时，对于 server/cloud 实例，若标签已经被应用到其他数据集版本时，可以使用 `force_add_tags=True` 参数强制将标签添加到此版本上，否则会抛出异常。
+  - 默认为 `False` 。
+- `ignore_add_tags_errors`: (bool, optional)
+  - 忽略添加标签是否抛出的异常。
+  - 默认为 `False` 。
 
 #### 使用示例 {#commit-example}
 
@@ -600,6 +622,7 @@ def copy(
   dest_local_project_uri: str = "",
   force: bool = False,
   mode: str = DatasetChangeMode.PATCH.value,
+  ignore_tags: t.List[str] | None = None,
 ) -> None:
 ```
 
@@ -612,10 +635,15 @@ def copy(
 - `force`: (bool, optional)
   - 当目标实例上已经有相同版本的数据集时，是否强制覆盖。
   - 默认不覆盖。
+  - 当复制标签到远端 Server/Cloud 实例时，若标签已经被其他版本使用，使用 `force=True` 参数可以强制变更标签到本版本上。
 - `mode`: (str, optional)
   - 数据集复制模式，分为 `patch` 模式 和 `overwrite` 模式，默认为 `patch` 。
   - `patch`: 使用补丁方式更新数据集，只更新计划变更的行和列，在新生成的版本中仍能读取到未受影响的行和列。
   - `overwrite`: 使用覆盖方式更新数据集，会将原来的所有行都删除，然后再进行更新，在新生成的版本中读取不到老数据。但请放心，删除的数据依旧可以通过旧版本进行访问。
+- `ignore_tags` (List[str], optional)
+  - 复制数据集时，可以忽略的自定义标签。
+  - 默认会复制所有用户自定义标签到其他实例中。
+  - 复制标签会忽略 `latest` 和 `^v\d+$` 内建标签。
 
 #### 使用示例 {#copy-example}
 

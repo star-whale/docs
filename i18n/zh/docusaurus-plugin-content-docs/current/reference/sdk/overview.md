@@ -25,6 +25,8 @@ Starwhale 提供一系列的 Python SDK，帮助用户管理数据集、模型�
 - `init_logger`: 设置日志输出级别，实现五种级别日志输出。
 - `dataset`: 获取 `starwhale.Dataset` 对象，包括创建新的数据集和加载已经存在的数据集两种方式。
 - `@starwhale.api.service.api`: 修饰器，提供基于 Gradio 的简易 Web Handler 输入定义，实现在线评测。
+- `login`: 登录 server/cloud 实例。
+- `logout`: 登出 server/cloud 实例。
 
 ## 数据类型
 

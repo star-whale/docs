@@ -15,6 +15,7 @@ def build(
     desc: str = "",
     remote_project_uri: t.Optional[str] = None,
     add_all: bool = False,
+    tags: t.List[str] | None = None,
 ) -> None:
 ```
 
@@ -41,6 +42,9 @@ def build(
 - `add_all`: (bool, optional)
   - Starwhale 模型打包的时候会自动忽略一些类似 pyc/venv/conda 构建目录等，可以通过该参数将这些文件也进行打包。即使该参数使用，也不影响 `.swignore` 文件的预期作用。
   - 默认为 `False`。
+- `tags`: (List[str], optional)
+  - 用户自定义标签。
+  - 不能指定 `latest` 和 `^v\d+$` 这两个 Starwhale 系统内建标签。
 
 ### 使用示例 {#build-example}
 
@@ -65,4 +69,7 @@ model.build(["user.code1", "user.code2"])
 
 # no search handlers, use imported modules
 model.build()
+
+# add user custom tags
+model.build(tags=["t1", "t2"])
 ```
