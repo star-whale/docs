@@ -267,6 +267,7 @@ swcli [GLOBAL OPTIONS] model run [OPTIONS]
 | `--dataset` or `-d` | N | String | | Dataset URI, the Starwhale dataset required for model running. This parameter can be set multiple times. |
 | `--in-container` | N | Boolean | False | Use docker container to run the model. This option is only available for standalone instances. For server and cloud instances, a docker image is always used. If the runtime is a docker image, this option is always implied. |
 | `--forbid-snapshot` or `-fs` | N | Boolean | False | In model URI mode, each model run uses a new snapshot directory. Setting this parameter will directly use the model's workdir as the run directory. In local dev mode, this parameter does not take effect, each run is in the `--workdir` specified directory. |
+| `-- --user-arbitrary-args` | N | String |  | Specify [the args you defined in your handlers](https://github.com/star-whale/starwhale/pull/2614). |
 
 ### Examples for model run
 
@@ -286,6 +287,16 @@ swcli model run -w .
 swcli model run --workdir . --module mnist.evaluator --handler 1
 # run index fullname(mnist.evaluator:MNISTInference.cmp) handler from the working directory, search mnist.evaluator module to get runnable handlers
 swcli model run --workdir . --module mnist.evaluator --handler mnist.evaluator:MNISTInference.cmp
+# run the f handler in th.py from the working directory with the args defined in th:f
+# @handler()
+# def f(
+#     x=ListInput(IntInput()),
+#     y=2,
+#     mi=MyInput(),
+#     ds=DatasetInput(required=True),
+#     ctx=ContextInput(),
+# )
+swcli model run -w . -m th --handler th:f -- -x 2 -x=1 --mi=blab-la --ds mnist
 ```
 
 ## swcli model serve {#serve}

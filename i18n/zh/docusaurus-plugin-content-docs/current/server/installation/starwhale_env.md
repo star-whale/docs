@@ -31,7 +31,12 @@ SW_JWT_TOKEN_EXPIRE_MINUTES=43200
 # The JWT secret key. All strings are valid, but we strongly recommend you to use a random string with at least 16 characters.
 SW_JWT_SECRET=
 ################################################################################
-# The Kubernetes namespace to use when running a task
+# The scheduler controller to use. Valid values are:
+# docker: Controller schedule jobs by leveraging docker
+# k8s: Controller schedule jobs by leveraging Kubernetes
+SW_SCHEDULER=k8s
+
+# The Kubernetes namespace to use when running a task when SW_SCHEDULER is k8s
 SW_K8S_NAME_SPACE=default
 
 # The path on the Kubernetes host node's filesystem to cache Python packages. Use the setting only if you have
@@ -39,6 +44,8 @@ SW_K8S_NAME_SPACE=default
 # path cache is used. Leave it blank if you do not want to use it.
 SW_K8S_HOST_PATH_FOR_CACHE=
 
+# The ip for the containers created by Controller when SW_SCHEDULER is docker
+SW_DOCKER_CONTAINER_NODE_IP=127.0.0.1
 ###############################################################################
 # *** Required ***
 # The object storage system type. Valid values are:

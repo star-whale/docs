@@ -266,6 +266,7 @@ model URI模式需要一个预先构建好的模型包，本地开发模式仅�
 | `--dataset` 或 `-d` | N | String | | Dataset URI，模型运行所需要的 Starwhale 数据集。该参数可以被设置多次。|
 | `--in-container` | N | Boolean | False | 使用docker镜像来运行模型。此选项仅适用于 Standalone 实例。Server 和 Cloud 实例始终使用 docker 镜像。如果指定的 runtime 是基于 docker 镜像构建的，此选项总是为真。|
 | `--forbid-snapshot` 或 `-fs` | N | Boolean | False | 当在model URI模式下，每次模型运行，都会使用一个全新的快照目录，设置该参数后直接使用模型的 workdir 目录作为运行目录。本地开发模式下，此参数不生效，每次运行都是在 `--workdir` 指定的目录中。|
+| `-- --user-arbitrary-args` | N | String | | 给[你在handlers中预设的参数](https://github.com/star-whale/starwhale/pull/2614) 赋值. |
 
 ### Starwhale 模型运行的例子
 
@@ -285,6 +286,16 @@ swcli model run -w .
 swcli model run --workdir . --module mnist.evaluator --handler 1
 # run index fullname(mnist.evaluator:MNISTInference.cmp) handler from the working directory, search mnist.evaluator module to get runnable handlers
 swcli model run --workdir . --module mnist.evaluator --handler mnist.evaluator:MNISTInference.cmp
+# run the f handler in th.py from the working directory with the args defined in th:f
+# @handler()
+# def f(
+#     x=ListInput(IntInput()),
+#     y=2,
+#     mi=MyInput(),
+#     ds=DatasetInput(required=True),
+#     ctx=ContextInput(),
+# )
+swcli model run -w . -m th --handler th:f -- -x 2 -x=1 --mi=blab-la --ds mnist
 ```
 
 ## swcli model serve {#serve}

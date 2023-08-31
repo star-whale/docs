@@ -16,7 +16,7 @@ Starwhale Server可以通过环境变量进行配置。
 
 Docker的env文件模板参考[此处](starwhale_env)。您可以通过修改模板来创建自己的env文件。
 
-## 准备kubeconfig文件
+## 准备kubeconfig文件[可选][SW_SCHEDULER=k8s]
 
 kubeconfig文件用于访问Kubernetes集群。 有关kubeconfig文件的更多信息，请参阅[官方Kubernetes文档](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)。
 

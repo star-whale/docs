@@ -77,6 +77,7 @@ module.exports = {
                                     collapsed: true,
                                     items: [
                                         "server/installation/starwhale_env",
+                                        "server/installation/docker-compose",
                                     ]
                                 },
                             ],
