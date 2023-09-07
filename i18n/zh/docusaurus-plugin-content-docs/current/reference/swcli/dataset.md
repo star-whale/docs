@@ -36,13 +36,14 @@ swcli [全局选项] dataset build [选项]
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-|`-if`或`--image`或 `--image-folder`| N | String | | 如果不为空，则读取指定目录中的图片，进行数据集的构建。 |
-|`-af`或`--audio`或 `--audio-folder`| N | String | | 如果不为空，则读取指定目录中的音频，进行数据集的构建。 |
-|`-vf`或`--video`或 `--video-folder`| N | String | | 如果不为空，则读取指定目录中的视频，进行数据集的构建。 |
-|`-h`或`--handler`或 `--python-handler`| N | String | | 如果不为空，则读取对应的Python Handler，运行该Handler进行数据集构建。 |
-|`-f`或`--yaml`或 `--dataset-yaml`| N | cwd目录的dataset.yaml | | 如果不为空，则读取对应dataset yaml，进行数据集的构建。 |
-|`-jf`或`--json-file`| N | String | | 如果不为空，则读取对应 json 文件，进行数据集的构建。 |
-|`-hf`或 `--huggingface`| N | String | | 如果不为空，则读取对应 Huggingface 仓库，进行数据集的构建。 |
+|`-if`或`--image`或 `--image-folder`| N | String | | 如果不为空，则读取指定目录中的图片，进行数据集的构建。|
+|`-af`或`--audio`或 `--audio-folder`| N | String | | 如果不为空，则读取指定目录中的音频，进行数据集的构建。|
+|`-vf`或`--video`或 `--video-folder`| N | String | | 如果不为空，则读取指定目录中的视频，进行数据集的构建。|
+|`-h`或`--handler`或 `--python-handler`| N | String | | 如果不为空，则读取对应的Python Handler，运行该Handler进行数据集构建。|
+|`-f`或`--yaml`或 `--dataset-yaml`| N | cwd目录的dataset.yaml | | 如果不为空，则读取对应dataset yaml，进行数据集的构建。|
+|`-jf`或`--json`| N | String | | 如果不为空，则读取对应 json或jsonl 文件，进行数据集的构建。|
+|`-hf`或 `--huggingface`| N | String | | 如果不为空，则读取对应 Huggingface 仓库，进行数据集的构建。|
+|`-c`或 `--csv`| N | String | | 如果不为空，则读取csv文件进行数据集构建，参数支持文件，目录和HTTP地址三种方式。该参数可以指定多次。|
 
 **数据源相关参数是互斥的，只能指定一种方式**，如果都不指定，则会采用 `--dataset-yaml` 方式读取 `cwd` 目录下的 dataset.yaml 文件进行数据集构建。
 
@@ -61,11 +62,18 @@ swcli [全局选项] dataset build [选项]
 | `-w` 或 `--workdir` | N | Python Handler 模式 | String | cwd 目录 | 搜索Python Handler的根目录 |
 | `--auto-label`/`--no-auto-label` | N | 图片、视频、音频目录模式 | Boolean | True | 是否根据子目录名称自动对数据打标签。|
 | `--field-selector` | N | JSON 文件模式 | String | | 定向提取JSON中的字段进行数据集构建，使用点(.)作为分隔符。|
-| `--subset` | N | Huggingface 模式 | String | | HF的 subset 名字，如果HF数据集有subset，则必须要指定该参数。|
+| `--subset` | N | Huggingface 模式 | String | | HF的 subset 名字。若不指定，则包含所有subsets。|
 | `--split` | N | Huggingface 模式 | String | | HF的 split 名字，如果不指定则包含所有 splits。 |
 | `--revision` | N | Huggingface 模式 | String | main | HF的数据集的版本，支持tag, branch 和 commit hash。|
-| `--cache`/`--no-cache` | N | Huggingface 模式 | Boolean | True | 是否使用HF的本地缓存 |
+| `--add-hf-info`/`--no-add-hf-info` | N | Huggingface 模式 | Boolean | True | 是否添加subset/splits等信息到数据集中。subset 对应 `_hf_subset` 列，split 对应 `_hf_split` 列。|
+| `--cache`/`--no-cache` | N | Huggingface 模式 | Boolean | True | 是否使用HF的本地缓存。 |
 | `-t` 或 `--tag` | N | 全局 | String | | 用户自定义标签，可以指定多次。|
+| `--encoding` | N | CSV/JSON/JSONL模式 | String | | 文件编码格式。|
+| `--dialect` | N | CSV模式 | String | excel | csv格式，支持`excel`, `excel-tab`和`unix` 三种格式。|
+| `--delimiter` | N | CSV模式 | String | `,` | 一个用于分隔字段的单字符。|
+| `--quotechar` | N | CSV模式 | String | `"` | 一个单字符，用于包住含有特殊字符的字段，特殊字符如 定界符 或 引号字符 或换行符。|
+| `--skipinitialspace`/`--no-skipinitialspace` | N | CSV模式 | Bool | False | 解析CSV时，是否跳过分隔符后面的空格。默认不跳过空格。|
+| `--strict`/`--no-strict` | N | CSV模式 | Bool | False | 当CSV格式错误时是否抛出异常。默认不抛异常。|
 
 ### 数据集构建例子
 
@@ -90,16 +98,25 @@ swcli dataset build --audio-folder /path/to/audio/folder  # build dataset from /
 #- from video folder
 swcli dataset build --video-folder /path/to/video/folder  # build dataset from /path/to/video/folder, search all video type files.
 
-#- from json file
-swcli dataset build --json-file /path/to/example.json
-swcli dataset build --json-file http://example.com/example.json
-swcli dataset build --json-file /path/to/example.json --field-selector a.b.c # extract the json_content["a"]["b"]["c"] field from the json file.
-swcli dataset build --name qald9 --json-file https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-test-multilingual.json --field-selector questions
+#- from json/jsonl file
+swcli dataset build --json /path/to/example.json 
+swcli dataset build --json http://example.com/example.json 
+swcli dataset build --json /path/to/example.json --field-selector a.b.c # extract the json_content["a"]["b"]["c"] field from the json file.  
+swcli dataset build --name qald9 --json https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-test-multilingual.json --field-selector questions 
+swcli dataset build --json /path/to/test01.jsonl --json /path/to/test02.jsonl 
+swcli dataset build --json https://modelscope.cn/api/v1/datasets/damo/100PoisonMpts/repo\?Revision\=master\&FilePath\=train.jsonl
 
 #- from huggingface dataset
 swcli dataset build --huggingface mnist
 swcli dataset build -hf mnist --no-cache
 swcli dataset build -hf cais/mmlu --subset anatomy --split auxiliary_train --revision 7456cfb
+
+#- from csv files
+swcli dataset build --csv /path/to/example.csv 
+swcli dataset build --csv /path/to/example.csv --csv-file /path/to/example2.csv 
+swcli dataset build --csv /path/to/csv-dir  
+swcli dataset build --csv http://example.com/example.csv 
+swcli dataset build --name product-desc-modelscope --csv https://modelscope.cn/api/v1/datasets/lcl193798/product_description_generation/repo\?Revision\=master\&FilePath\=test.csv --encoding=utf-8-sig
 ```
 
 ## swcli dataset copy {#copy}
@@ -310,11 +327,11 @@ swcli [全局选项] dataset tag [选项] <DATASET> [TAGS]...
 swcli dataset tag mnist
 
 #- add tags for the mnist dataset
-swcli dataset tag mnist -t t1 -t t2
-swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist/version/latest -t t1 --force-add
-swcli dataset tag mnist -t t1 --quiet
+swcli dataset tag mnist t1 t2
+swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist/version/latest t1 --force-ad
+swcli dataset tag mnist t1 --quiet
 
 #- remove tags for the mnist dataset
-swcli dataset tag mnist -r -t t1 -t t2
-swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist --remove -t t1
+swcli dataset tag mnist -r t1 t2
+swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist --remove t1
 ```

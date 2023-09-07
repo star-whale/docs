@@ -42,11 +42,6 @@ swcli [GLOBAL OPTIONS] job info [OPTIONS] <JOB>
 
 `JOB` is a [job URI](../../swcli/uri.md#job).
 
-| Option | Required | Type | Defaults | Description |
-| --- | --- | --- | --- | --- |
-| `--page` | N | Integer | 1 | The starting page number.  Server and cloud instances only. |
-| `--size` | N | Integer | 20 | The number of items in one page. Server and cloud instances only. |
-
 ## swcli job list {#list}
 
 ```bash

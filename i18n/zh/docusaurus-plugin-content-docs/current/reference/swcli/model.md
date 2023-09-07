@@ -352,11 +352,11 @@ swcli [全局选项] model tag [选项] <MODEL> [TAGS]...
 swcli model tag mnist
 
 #- add tags for the mnist model
-swcli model tag mnist -t t1 -t t2
-swcli model tag cloud://cloud.starwhale.cn/project/public:starwhale/model/mnist/version/latest -t t1 --force-add
-swcli model tag mnist -t t1 --quiet
+swcli model tag mnist t1 t2
+swcli model tag cloud://cloud.starwhale.cn/project/public:starwhale/model/mnist/version/latest t1 --force-add
+swcli model tag mnist t1 --quiet
 
 #- remove tags for the mnist model
-swcli model tag mnist -r -t t1 -t t2
-swcli model tag cloud://cloud.starwhale.cn/project/public:starwhale/model/mnist --remove -t t1
+swcli model tag mnist -r t1 t2
+swcli model tag cloud://cloud.starwhale.cn/project/public:starwhale/model/mnist --remove t1
 ```
