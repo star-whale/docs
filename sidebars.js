@@ -205,6 +205,7 @@ module.exports = {
                         "reference/sdk/type",
                         "reference/sdk/evaluation",
                         "reference/sdk/model",
+                        "reference/sdk/job",
                         "reference/sdk/other",
                     ]
                 }
