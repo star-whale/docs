@@ -42,11 +42,6 @@ swcli [全局选项] job info [选项] <JOB>
 
 `JOB` 是一个[作业URI](../../swcli/uri.md#job)。
 
-| 选项 | 必填项 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
-| `--page` | N | Integer | 1 | 起始页码。仅限 Server 和 Cloud 实例。 |
-| `--size` | N | Integer | 20 | 一页中的作业数。仅限 Server 和 Cloud 实例。 |
-
 ## swcli job list {#list}
 
 ```bash
@@ -57,10 +52,10 @@ swcli [全局选项] job list [选项]
 
 | 选项 | 必填项 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
-| `--project` | N | String | | 要查看的项目的 URI。如果未指定此选项，则使用[默认项目](../../swcli/uri.md#defaultProject)替代。 |
-| `--show-removed` | N | Boolean | False | 如果使用了该选项，则结果中会包含已删除但未被垃圾回收的作业。 |
-| `--page` | N | Integer | 1 | 起始页码。仅限 Server 和 Cloud 实例。 |
-| `--size` | N | Integer | 20 | 一页中的作业数。仅限 Server 和 Cloud 实例。 |
+| `--project` | N | String | | 要查看的项目的 URI。如果未指定此选项，则使用[默认项目](../../swcli/uri.md#defaultProject)替代。|
+| `--show-removed` | N | Boolean | False | 如果使用了该选项，则结果中会包含已删除但未被垃圾回收的作业。|
+| `--page` | N | Integer | 1 | 起始页码。仅限 Server 和 Cloud 实例。|
+| `--size` | N | Integer | 20 | 一页中的作业数。仅限 Server 和 Cloud 实例。|
 
 ## swcli job pause {#pause}
 

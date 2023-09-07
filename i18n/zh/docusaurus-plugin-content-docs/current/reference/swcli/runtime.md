@@ -304,11 +304,11 @@ swcli [全局选项] runtime tag [选项] <RUNTIME> [TAGS]...
 swcli runtime tag pytorch
 
 #- add tags for the pytorch runtime
-swcli runtime tag mnist -t t1 -t t2
-swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch/version/latest -t t1 --force-add
-swcli runtime tag mnist -t t1 --quiet
+swcli runtime tag mnist t1 t2
+swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch/version/latest t1 --force-add
+swcli runtime tag mnist t1 --quiet
 
 #- remove tags for the pytorch runtime
-swcli runtime tag mnist -r -t t1 -t t2
-swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch --remove -t t1
+swcli runtime tag mnist -r t1 t2
+swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch --remove t1
 ```
