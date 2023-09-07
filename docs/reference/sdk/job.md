@@ -9,14 +9,14 @@ Get a `starwhale.Job` object through the Job URI parameter, which represents a J
 ```python
 @classmethod
 def job(
-    cls, 
+    cls,
     uri: str,
 ) -> Job:
 ```
 
 ### Parameters {#job-func-params}
 
-- `uri`: (str, required) 
+- `uri`: (str, required)
   - Job URI format.
 
 ### Usage Example {#job-func-example}
@@ -25,7 +25,7 @@ def job(
 from starwhale import job
 
 # get job object of uri=https://server/job/1
-j1 = job("https://server/job/1") 
+j1 = job("https://server/job/1")
 
 # get job from standalone instance
 j2 = job("local/project/self/job/xm5wnup")
@@ -44,7 +44,7 @@ j3 = job("xm5wnup")
 @classmethod
 def list(
     cls,
-    project: str = "", 
+    project: str = "",
     page_index: int = DEFAULT_PAGE_IDX,
     page_size: int = DEFAULT_PAGE_SIZE,
 ) -> Tuple[List[Job], Dict]:
@@ -55,7 +55,7 @@ def list(
 - `project`: (str, optional)
   - Project URI, can be projects on Standalone/Server/Cloud instances.
   - If `project` is not specified, the project selected by `swcli project selected` will be used.
-- `page_index`: (int, optional) 
+- `page_index`: (int, optional)
   - When getting the jobs list from Server/Cloud instances, paging is supported. This parameter specifies the page number.
     - Default is 1.
     - Page numbers start from 1.
@@ -77,7 +77,7 @@ jobs, pagination_info = Job.list()
 # list jobs of starwhale/public project in the cloud.starwhale.cn instance
 jobs, pagination_info = Job.list("https://cloud.starwhale.cn/project/starwhale:public")
 
-# list jobs of id=1 project in the server instance, page index is 2, page size is 10  
+# list jobs of id=1 project in the server instance, page index is 2, page size is 10
 jobs, pagination_info = Job.list("https://server/project/1", page_index=2, page_size=10)
 ```
 
@@ -93,7 +93,7 @@ from starwhale import Job
 # get job object of uri=https://server/job/1
 j1 = Job.get("https://server/job/1")
 
-# get job from standalone instance 
+# get job from standalone instance
 j2 = Job.get("local/project/self/job/xm5wnup")
 j3 = Job.get("xm5wnup")
 ```
@@ -102,7 +102,7 @@ j3 = Job.get("xm5wnup")
 
 `summary` is a property that returns the data written to the summary table during the job execution, in dict type.
 
-```python 
+```python
 @property
 def summary(self) -> Dict[str, Any]:
 ```
@@ -122,7 +122,7 @@ print(j1.summary)
 `tables` is a property that returns the names of tables created during the job execution (not including the summary table, which is created automatically at the project level), in list type.
 
 ```python
-@property  
+@property
 def tables(self) -> List[str]:
 ```
 
@@ -145,7 +145,7 @@ def get_table_rows(
     self,
     name: str,
     start: Any = None,
-    end: Any = None, 
+    end: Any = None,
     keep_none: bool = False,
     end_inclusive: bool = False,
 ) -> Iterator[Dict[str, Any]]:
@@ -162,13 +162,13 @@ def get_table_rows(
   - The ending ID value of the returned records.
   - Default is None, meaning until the end of the table.
   - If both `start` and `end` are None, all records in the table will be returned as an iterator.
-- `keep_none`: (bool, optional) 
+- `keep_none`: (bool, optional)
   - Whether to return records with `None` values.
   - Default is False.
 - `end_inclusive`: (bool, optional)
   - When `end` is set, whether the iteration includes the `end` record.
   - Default is False.
-  
+
 ### Usage Example
 
 ```python
@@ -180,9 +180,9 @@ table_name = j.tables[0]
 
 for row in j.get_table_rows(table_name):
   print(row)
-  
+
 rows = list(j.get_table_rows(table_name, start=0, end=100))
 
 # return the first record from the results table
-result = list(j.get_table_rows('results', start=0, end=1))[0] 
+result = list(j.get_table_rows('results', start=0, end=1))[0]
 ```

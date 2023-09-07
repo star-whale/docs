@@ -17,7 +17,7 @@ def job(
 ### 参数 {#job-func-params}
 
 - `uri`: (str, required)
-  - Job URI格式的字符串。 
+  - Job URI格式的字符串。
 
 ### 使用示例 {#job-func-example}
 
@@ -62,8 +62,8 @@ def list(
   - 当获取 Server/Cloud 实例的项目列表时，支持翻页操作，该参数可以指定每页返回的任务数量。
     - 默认值为 1。
     - 页面起始序号为 1。
-  - Standalone 实例不支持翻页操作，设置该参数无效。 
-  
+  - Standalone 实例不支持翻页操作，设置该参数无效。
+
 ### 使用示例 {#list-example}
 
 ```python
@@ -146,17 +146,17 @@ def get_table_rows(
   - datastore 表名。通过 `tables` 属性获得的表名，可以传给 `name` 参数。
 - `start`: (Any, optional)
   - 返回记录中，ID的起始值。
-  - 默认值为 None，表示从头开始。 
+  - 默认值为 None，表示从头开始。
 - `end`: (Any, optional)
   - 返回记录中，ID的结束值。
   - 默认值为 `None` ，表示一直到表末尾。
-  - 若 `start` 和 `end` 都为 None，则会以迭代器方式返回整个表的数据。 
+  - 若 `start` 和 `end` 都为 None，则会以迭代器方式返回整个表的数据。
 - `keep_none`: (bool, optional)
   - 是否返回值为 None的记录。
-  - 默认为 False。 
+  - 默认为 False。
 - `end_inclusive`: (bool, optional)
   - 当 `end` 参数设置时，迭代记录的时候，是否包含`end`记录。
-  - 默认为 False。 
+  - 默认为 False。
 
 ### 使用示例
 
@@ -167,6 +167,6 @@ table_name = j.tables[0]
 for row in j.get_table_rows(table_name):
     print(row)
 rows = list(j.get_table_rows(table_name, start=0, end=100))
-# return the first record from the results table 
-result = list(j.get_table_rows('results', start=0, end=1))[0] 
+# return the first record from the results table
+result = list(j.get_table_rows('results', start=0, end=1))[0]
 ```

@@ -521,10 +521,10 @@ class PipelineHandler(metaclass=ABCMeta):
 
 The `PipelineHandler.run` decorator can be used to describe resources for the `predict` and `evaluate` methods, supporting definitions of `replicas` and `resources`:
 
-- The `PipelineHandler.run` decorator can only decorate `predict` and `evaluate` methods in subclasses inheriting from `PipelineHandler`. 
+- The `PipelineHandler.run` decorator can only decorate `predict` and `evaluate` methods in subclasses inheriting from `PipelineHandler`.
 - The `predict` method can set the `replicas` parameter. The `replicas` value for the `evaluate` method is always 1.
 - The `resources` parameter is defined and used in the same way as the `resources` parameter in `@evaluation.predict` or `@evaluation.evaluate`.
-- The `PipelineHandler.run` decorator is optional. 
+- The `PipelineHandler.run` decorator is optional.
 - The `PipelineHandler.run` decorator only takes effect on Server and Cloud instances, not Standalone instances that don't support resource definition.
 
 ```python

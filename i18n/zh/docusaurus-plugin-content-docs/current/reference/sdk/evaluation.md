@@ -518,7 +518,7 @@ class PipelineHandler(metaclass=ABCMeta):
 - `predict_log_dataset_features`: (bool, optional)
   - 等价于 `@evaluation.predict` 中的 `log_dataset_features` 参数。
   - 默认值为空，对记录所有 features。
-  
+
 ### PipelineHandler.run 修饰符 {#pl-run}
 
 `PipelineHandler.run` 修饰符可以对 `predict` 和 `evaluate` 方法进行资源描述，支持 `replicas` 和 `resources` 的定义：

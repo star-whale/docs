@@ -42,7 +42,6 @@ swcli [全局选项] job info [选项] <JOB>
 
 `JOB` 是一个[作业URI](../../swcli/uri.md#job)。
 
-
 ## swcli job list {#list}
 
 ```bash
