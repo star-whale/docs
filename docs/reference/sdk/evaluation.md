@@ -517,6 +517,23 @@ class PipelineHandler(metaclass=ABCMeta):
   - Equivalent to the `log_dataset_features parameter` in `@evaluation.predict`.
   - Default is `None`, which records all features.
 
+### PipelineHandler.run Decorator {#pl-run}
+
+The `PipelineHandler.run` decorator can be used to describe resources for the `predict` and `evaluate` methods, supporting definitions of `replicas` and `resources`:
+
+- The `PipelineHandler.run` decorator can only decorate `predict` and `evaluate` methods in subclasses inheriting from `PipelineHandler`. 
+- The `predict` method can set the `replicas` parameter. The `replicas` value for the `evaluate` method is always 1.
+- The `resources` parameter is defined and used in the same way as the `resources` parameter in `@evaluation.predict` or `@evaluation.evaluate`.
+- The `PipelineHandler.run` decorator is optional. 
+- The `PipelineHandler.run` decorator only takes effect on Server and Cloud instances, not Standalone instances that don't support resource definition.
+
+```python
+@classmethod
+def run(
+    cls, resources: t.Optional[t.Dict[str, t.Any]] = None, replicas: int = 1
+) -> t.Callable:
+```
+
 ### Examples {#pl-example}
 
 ```python
@@ -531,11 +548,13 @@ class Example(PipelineHandler):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = self._load_model(self.device)
 
+    @PipelineHandler.run(replicas=4, resources={"memory": 1 * 1024 * 1024 *1024, "nvidia.com/gpu": 1}) # 1G Memory, 1 GPU
     def predict(self, data: t.Dict):
         data_tensor = self._pre(data.img)
         output = self.model(data_tensor)
         return self._post(output)
 
+    @PipelineHandler.run(resources={"memory": 1 * 1024 * 1024 *1024}) # 1G Memory
     def evaluate(self, ppl_result):
         result, label, pr = [], [], []
         for _data in ppl_result:

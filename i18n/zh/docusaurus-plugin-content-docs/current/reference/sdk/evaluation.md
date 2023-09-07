@@ -470,7 +470,7 @@ def evaluate(ppl_result) -> t.Tuple[t.List[int], t.List[int], t.List[t.List[floa
 
 `PipelineHandler` 是一个类，提供默认的模型评测过程定义，需要用户实现 `predict` 和 `evaluate` 函数。
 
-`PipelineHandler` 等价于 `@evaluation.predict` + `@evaluation.evaluate`，展示使用方式不一样，背后的模型评测过程一致。**`PipelineHandler` 目前不支持 `resources` 参数的定义**。
+`PipelineHandler` 等价于 `@evaluation.predict` + `@evaluation.evaluate`，展示使用方式不一样，背后的模型评测过程一致。
 
 用户需要实现如下函数：
 
@@ -518,6 +518,23 @@ class PipelineHandler(metaclass=ABCMeta):
 - `predict_log_dataset_features`: (bool, optional)
   - 等价于 `@evaluation.predict` 中的 `log_dataset_features` 参数。
   - 默认值为空，对记录所有 features。
+  
+### PipelineHandler.run 修饰符 {#pl-run}
+
+`PipelineHandler.run` 修饰符可以对 `predict` 和 `evaluate` 方法进行资源描述，支持 `replicas` 和 `resources` 的定义：
+
+- `PipelineHandler.run` 只能修饰继承自 `PipelineHandler` 子类中的 `predict` 和 `evaluate`方法。
+- `predict` 方法可以设置 `replicas` 参数。`evaluate` 方法的 `replicas` 值永远为1。
+- `resources` 参数与 `@evaluation.predict` 或 `@evaluation.evaluate` 中的 `resources` 参数定义和使用方法保持一致。
+- `PipelineHandler.run` 修饰器是可选的。
+- `PipelineHandler.run` 仅在 Server 和 Cloud 实例中生效，Standalone 实例不支持资源定义。
+
+```python
+@classmethod
+def run(
+    cls, resources: t.Optional[t.Dict[str, t.Any]] = None, replicas: int = 1
+) -> t.Callable:
+```
 
 ### 使用示例 {#pl-example}
 
@@ -533,11 +550,13 @@ class Example(PipelineHandler):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = self._load_model(self.device)
 
+    @PipelineHandler.run(replicas=4, resources={"memory": 1 * 1024 * 1024 *1024, "nvidia.com/gpu": 1}) # 1G Memory, 1 GPU
     def predict(self, data: t.Dict):
         data_tensor = self._pre(data.img)
         output = self.model(data_tensor)
         return self._post(output)
 
+    @PipelineHandler.run(resources={"memory": 1 * 1024 * 1024 *1024}) # 1G Memory
     def evaluate(self, ppl_result):
         result, label, pr = [], [], []
         for _data in ppl_result:
