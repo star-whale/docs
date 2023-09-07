@@ -10,6 +10,7 @@ Starwhale 提供一系列的 Python SDK，帮助用户管理数据集、模型�
 - `class Context`: 执行模型评测过程中传入的上下文信息，包括 Project、Task ID 等。
 - `class Dataset`: Starwhale 数据集类。
 - `class starwhale.api.service.Service`: 在线评测的基础类。
+- `class Job`: 提供Job相关的操作。
 
 ## 函数
 
@@ -27,6 +28,8 @@ Starwhale 提供一系列的 Python SDK，帮助用户管理数据集、模型�
 - `@starwhale.api.service.api`: 修饰器，提供基于 Gradio 的简易 Web Handler 输入定义，实现在线评测。
 - `login`: 登录 server/cloud 实例。
 - `logout`: 登出 server/cloud 实例。
+- `job`: 根据Job URI获得 `starwhale.Job` 对象。
+- `@PipelineHandler.run`: 修饰器，定义 PipelineHandler 子类中 predict 和 evaluate 方法的资源。
 
 ## 数据类型
 
@@ -56,4 +59,5 @@ Starwhale 提供一系列的 Python SDK，帮助用户管理数据集、模型�
 - 如果您想构建、管理数据集，请阅读 [Starwhale 数据集 SDK](dataset) 和 [Starwhale 数据类型](type)。
 - 如果您想编写模型评测和微调程序，请阅读 [Starwhale 模型评测 SDK](evaluation)。
 - 如果您想通过 Python Script 构建和管理 Starwhale 模型包，请阅读 [Starwhale 模型 SDK](model)。
+- 如果您想获得Job信息和模型评测结果等，请阅读 [Starwhale 任务 SDK](job)。
 - 如果您想了解其他功能性函数，请阅读 [其他 SDK](other)。
