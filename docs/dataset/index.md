@@ -2,6 +2,8 @@
 title: Starwhale Dataset User Guide
 ---
 
+![overview](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/dataset-overview.svg)
+
 ## Design Overview
 
 ### Starwhale Dataset Positioning
