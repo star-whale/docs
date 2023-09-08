@@ -2,6 +2,8 @@
 title: Starwhale 模型
 ---
 
+![overview](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/model-overview.svg)
+
 Starwhale 模型是一种机器学习模型的标准包格式，可用于多种用途，例如模型微调、模型评估和在线服务。 Starwhale 模型包含模型文件、推理代码、配置文件等等。
 
 ## 创建一个 Starwhale 模型
