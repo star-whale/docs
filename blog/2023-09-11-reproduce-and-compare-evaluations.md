@@ -25,7 +25,7 @@ After successful login, you will be directed to the project list page. Click the
 
 Go to the **Evaluations** list pag, click the **Create** button, and then choose the parameters.
 
-For example, to reproduce the result the cmmlu dataset in baichuan2-13b, refer to the following:
+For example, to reproduce the evaluation result of baichuan2-13b with the cmmlu dataset, refer to the following:
 
  1) Choose the running resource, recommend to select A10\*24G\*2;
  2) Select the model: Choose the models you want to reproduce, e.g.: starwhale/llm-leaderboard/baichuan2-13b/atgoiscm(v1、latest);
