@@ -11,9 +11,9 @@ hide_table_of_contents: false
 
 If you have doubts about the findings of this report or any other evaluations, how should you reproduce and compare the evaluation results?
 
-Workflow：Login → Create a project → Run the model → Create a report
+Workflow: Login → Create a project → Run the model → Create a report
 
-### STEP1：Login
+### STEP1: Login
 
 First, you have to log in to the Starwhale platform by clicking on the [login](https://cloud.starwhale.cn/login?lang=zh). If you haven't registered yet, you can click on the [sign-up](https://cloud.starwhale.cn/signup) to create an account.
 
