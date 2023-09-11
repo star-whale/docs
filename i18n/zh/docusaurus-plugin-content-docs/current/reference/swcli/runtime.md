@@ -67,8 +67,8 @@ swcli [全局选项] runtime build [选项]
 | `--cuda` | N | conda/venv/shell 模式 | Choice[11.3/11.4/11.5/11.6/11.7/] |  | CUDA 版本，默认不使用 CUDA。 |
 | `--cudnn` | N | conda/venv/shell 模式 | Choice[8/] |  | cuDNN 版本，默认不使用 cuDNN。|
 | `--arch` | N | conda/venv/shell 模式 | Choice[amd64/arm64/noarch] | noarch | 体系结构 |
-| `-epo` 或 `--emit-pip-options` | N | 全局 | Boolean | False | 是否导出 `~/.pip/pip.conf`，默认导出。|
-| `-ecc` 或 `--emit-condarc` | N | 全局 | Boolean | False | 是否导出 `~/.condarc`，默认导出。|
+| `-dpo` 或 `--dump-pip-options` | N | 全局 | Boolean | False | 从 `~/.pip/pip.conf` 导出 pip 的配置参数。|
+| `-dcc` 或 `--dump-condarc` | N | 全局 | Boolean | False | 从 `~/.condarc` 导出 conda 的配置参数。|
 | `-t` 或 `--tag` | N | 全局 | String | | 用户自定义标签，可以指定多次。|
 
 ### Starwhale 运行时构建的例子
@@ -304,11 +304,11 @@ swcli [全局选项] runtime tag [选项] <RUNTIME> [TAGS]...
 swcli runtime tag pytorch
 
 #- add tags for the pytorch runtime
-swcli runtime tag mnist -t t1 -t t2
-swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch/version/latest -t t1 --force-add
-swcli runtime tag mnist -t t1 --quiet
+swcli runtime tag mnist t1 t2
+swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch/version/latest t1 --force-add
+swcli runtime tag mnist t1 --quiet
 
 #- remove tags for the pytorch runtime
-swcli runtime tag mnist -r -t t1 -t t2
-swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch --remove -t t1
+swcli runtime tag mnist -r t1 t2
+swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch --remove t1
 ```

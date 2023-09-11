@@ -2,6 +2,8 @@
 title: Starwhale 数据集
 ---
 
+![overview](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/dataset-overview.svg)
+
 ## 设计概述
 
 ### Starwhale Dataset 定位

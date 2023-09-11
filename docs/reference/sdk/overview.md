@@ -10,6 +10,7 @@ Starwhale provides a series of Python SDKs to help manage datasets, models, eval
 - `Context`: Passes context information during model evaluation, including Project, Task ID etc.
 - `class Dataset`: Starwhale Dataset class.
 - `class starwhale.api.service.Service`: The base class of online evaluation.
+- `class Job`: Provides operations for Job.
 
 ## Functions
 
@@ -27,6 +28,8 @@ Starwhale provides a series of Python SDKs to help manage datasets, models, eval
 - `@starwhale.api.service.api`: Decorator to provide a simple Web Handler input definition based on Gradio.
 - `login`: Log in to the server/cloud instance.
 - `logout`: Log out of the server/cloud instance.
+- `job`: Get `starwhale.Job` object by the Job URI.
+- `@PipelineHandler.run`: Decorator to define the resources for the predict and evaluate methods in PipelineHandler subclasses.
 
 ## Data Types
 
@@ -55,5 +58,6 @@ Starwhale provides a series of Python SDKs to help manage datasets, models, eval
 
 - If you want to build and manage datasets, read about the [Starwhale Dataset SDK](dataset) and [Starwhale Data Types](type).
 - If you want to write model evaluation and fine-tuning programs, read about the [Starwhale Evaluation SDK](evaluation).
+- If you want to get job info and evaluation results, read about the [Starwhale Job SDK](job).
 - If you want to build and manage Starwhale model packages through Python scripts, read about the [Starwhale Model SDK](model).
 - If you want to learn about other utility functions, read about [Other SDKs](other).

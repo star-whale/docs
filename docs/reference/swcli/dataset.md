@@ -41,8 +41,9 @@ Build Starwhale Dataset. This command only supports to build standalone dataset.
 |`-vf` or `--video` or `--video-folder`| N | String | | Build dataset from video folder, the folder should contain the video files. |
 |`-h` or `--handler` or `--python-handler`| N | String | | Build dataset from python executor handler, the handler format is [module path]:[class or func name]. |
 |`-f` or `--yaml` or `--dataset-yaml`| N | dataset.yaml in cwd | | Build dataset from dataset.yaml file. Default uses dataset.yaml in the work directory(cwd). |
-|`-jf` or `--json-file`| N | String | | Build dataset from json file, the json file option is a json file path or a http downloaded url.The json content structure should be a list[dict] or tuple[dict]. |
+|`-jf` or `--json`| N | String | | Build dataset from json or jsonl file, the json or jsonl file option is a json file path or a http downloaded url.The json content structure should be a list[dict] or tuple[dict]. |
 |`-hf` or `--huggingface`| N | String | | Build dataset from huggingface dataset, the huggingface option is a huggingface repo name. |
+|`-c` or `--csv`| N | String | | Build dataset from csv files. The option is a csv file path, dir path or a http downloaded url.The option can be used multiple times.|
 
 **Data source options are mutually exclusive, only one option is accepted.** If no set, `swcli dataset build` command will use dataset yaml mode to build dataset with the `dataset.yaml` in the cwd.
 
@@ -61,11 +62,18 @@ Build Starwhale Dataset. This command only supports to build standalone dataset.
 | `-w` or `--workdir` | N | Python Handler Mode | String | cwd |  work dir to search handler. |
 | `--auto-label`/`--no-auto-label` | N | Image/Video/Audio Folder Mode | Boolean | True | Whether to auto label by the sub-folder name. |
 | `--field-selector` | N | JSON File Mode | String | | The filed from which you would like to extract dataset array items. The filed is split by the dot(.) symbol. |
-| `--subset` | N | Huggingface Mode | String | | Huggingface dataset subset name. If the huggingface dataset has multiple subsets, you must specify the subset name. |
-| `--split` | N | Huggingface Mode | String | | Huggingface dataset split name. If the split name is not specified, the all splits dataset will be built.  |
+| `--subset` | N | Huggingface Mode | String | | Huggingface dataset subset name. If the subset name is not specified, the all subsets will be built. |
+| `--split` | N | Huggingface Mode | String | | Huggingface dataset split name. If the split name is not specified, the all splits will be built.  |
 | `--revision` | N | Huggingface Mode | String | main | Version of the dataset script to load. Defaults to 'main'. The option value accepts tag name, or branch name, or commit hash. |
+| `--add-hf-info`/`--no-add-hf-info` | N | Huggingface Mode | Boolean | True | Whether to add huggingface dataset info to the dataset rows, currently support to add subset and split into the dataset rows. Subset uses `_hf_subset` field name, split uses `_hf_split` field name.|
 | `--cache`/`--no-cache` | N | Huggingface Mode | Boolean | True | Whether to use huggingface dataset cache(download + local hf dataset). |
 | `-t` or `--tag` | N | Global | String | | Dataset tags, the option can be used multiple times. |
+| `--encoding` | N | CSV/JSON/JSONL Mode | String | | file encoding. |
+| `--dialect` | N | CSV Mode | String | `excel` | The csv file dialect, the default is `excel`. Current supports `excel`, `excel-tab` and `unix` formats. |
+| `--delimiter` | N | CSV Mode | String | `,` | A one-character string used to separate fields for the csv file. |
+| `--quotechar` | N | CSV Mode | String | `"` | A one-character string used to quote fields containing special characters, such as the delimiter or quotechar, or which contain new-line characters. |
+| `--skipinitialspace`/`--no-skipinitialspace` | N | CSV Mode | Bool | False | Whether to skip spaces after delimiter for the csv file. |
+| `--strict`/`--no-strict` | N | CSV Mode | Bool | False | When True, raise exception Error if the csv is not well formed.|
 
 ### Examples for dataset building
 
@@ -90,16 +98,25 @@ swcli dataset build --audio-folder /path/to/audio/folder  # build dataset from /
 #- from video folder
 swcli dataset build --video-folder /path/to/video/folder  # build dataset from /path/to/video/folder, search all video type files.
 
-#- from json file
-swcli dataset build --json-file /path/to/example.json
-swcli dataset build --json-file http://example.com/example.json
-swcli dataset build --json-file /path/to/example.json --field-selector a.b.c # extract the json_content["a"]["b"]["c"] field from the json file.
-swcli dataset build --name qald9 --json-file https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-test-multilingual.json --field-selector questions
+#- from json/jsonl file
+swcli dataset build --json /path/to/example.json 
+swcli dataset build --json http://example.com/example.json 
+swcli dataset build --json /path/to/example.json --field-selector a.b.c # extract the json_content["a"]["b"]["c"] field from the json file.  
+swcli dataset build --name qald9 --json https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-test-multilingual.json --field-selector questions 
+swcli dataset build --json /path/to/test01.jsonl --json /path/to/test02.jsonl 
+swcli dataset build --json https://modelscope.cn/api/v1/datasets/damo/100PoisonMpts/repo\?Revision\=master\&FilePath\=train.jsonl
 
 #- from huggingface dataset
 swcli dataset build --huggingface mnist
 swcli dataset build -hf mnist --no-cache
 swcli dataset build -hf cais/mmlu --subset anatomy --split auxiliary_train --revision 7456cfb
+
+#- from csv files
+swcli dataset build --csv /path/to/example.csv 
+swcli dataset build --csv /path/to/example.csv --csv-file /path/to/example2.csv 
+swcli dataset build --csv /path/to/csv-dir  
+swcli dataset build --csv http://example.com/example.csv 
+swcli dataset build --name product-desc-modelscope --csv https://modelscope.cn/api/v1/datasets/lcl193798/product_description_generation/repo\?Revision\=master\&FilePath\=test.csv --encoding=utf-8-sig
 ```
 
 ## swcli dataset copy {#copy}
@@ -318,11 +335,11 @@ Each dataset version can have any number of tags， but duplicated tag names are
 swcli dataset tag mnist
 
 #- add tags for the mnist dataset
-swcli dataset tag mnist -t t1 -t t2
-swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist/version/latest -t t1 --force-add
-swcli dataset tag mnist -t t1 --quiet
+swcli dataset tag mnist t1 t2
+swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist/version/latest t1 --force-ad
+swcli dataset tag mnist t1 --quiet
 
 #- remove tags for the mnist dataset
-swcli dataset tag mnist -r -t t1 -t t2
-swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist --remove -t t1
+swcli dataset tag mnist -r t1 t2
+swcli dataset tag cloud://cloud.starwhale.cn/project/public:starwhale/dataset/mnist --remove t1
 ```

@@ -77,6 +77,7 @@ module.exports = {
                                     collapsed: true,
                                     items: [
                                         "server/installation/starwhale_env",
+                                        "server/installation/docker-compose",
                                     ]
                                 },
                             ],
@@ -204,6 +205,7 @@ module.exports = {
                         "reference/sdk/type",
                         "reference/sdk/evaluation",
                         "reference/sdk/model",
+                        "reference/sdk/job",
                         "reference/sdk/other",
                     ]
                 }

@@ -67,8 +67,8 @@ The `runtime build` command can build a shareable and reproducible runtime envir
 | `--cuda` | N | conda/venv/shell mode | Choice[11.3/11.4/11.5/11.6/11.7/] | | CUDA version, CUDA will not be used by default.|
 | `--cudnn` | N | conda/venv/shell mode | Choice[8/] | | cuDNN version, cuDNN will not be used by default.|
 | `--arch` | N | conda/venv/shell mode | Choice[amd64/arm64/noarch] | noarch | Architecture |
-| `-epo` or `--emit-pip-options` | N | Global | Boolean | False | Whether to export `~/.pip/pip.conf`, exported by default.|
-| `-ecc` or `--emit-condarc` | N | Global | Boolean | False | Whether to export `~/.condarc`, exported by default.|
+| `-dpo` or `--dump-pip-options` | N | Global | Boolean | False | Dump pip config options from the `~/.pip/pip.conf` file.|
+| `-dcc` or `--dump-condarc` | N | Global | Boolean | False |  Dump conda config from the `~/.condarc` file. |
 | `-t` or `--tag` | N | Global | String | | Runtime tags, the option can be used multiple times. |
 
 ### Examples for Starwhale Runtime building
@@ -305,11 +305,11 @@ Each runtime version can have any number of tags， but duplicated tag names are
 swcli runtime tag pytorch
 
 #- add tags for the pytorch runtime
-swcli runtime tag mnist -t t1 -t t2
-swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch/version/latest -t t1 --force-add
-swcli runtime tag mnist -t t1 --quiet
+swcli runtime tag mnist t1 t2
+swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch/version/latest t1 --force-add
+swcli runtime tag mnist t1 --quiet
 
 #- remove tags for the pytorch runtime
-swcli runtime tag mnist -r -t t1 -t t2
-swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch --remove -t t1
+swcli runtime tag mnist -r t1 t2
+swcli runtime tag cloud://cloud.starwhale.cn/project/public:starwhale/runtime/pytorch --remove t1
 ```

@@ -16,7 +16,7 @@ Starwhale Server can be configured by environment variables.
 
 An env file template for Docker is [here](../config/starwhale_env). You may create your own env file by modifying the template.
 
-## Prepare a kubeconfig file
+## Prepare a kubeconfig file [Optional][SW_SCHEDULER=k8s]
 
 The kubeconfig file is used for accessing the Kubernetes cluster. For more information about kubeconfig files, see the [Official Kubernetes Documentation](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/).
 
