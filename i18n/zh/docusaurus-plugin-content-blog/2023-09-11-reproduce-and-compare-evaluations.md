@@ -1,7 +1,7 @@
 ---
 title: 如何复现评测结果
 description: 评测结果复现
-slug: run-llama2-chat-in-five-minutes
+slug: reproduce-and-compare-evals
 authors:
   - name: Starwhale
 tags: [模型,模型评测]
