@@ -48,6 +48,6 @@ hide_table_of_contents: false
  6) 点击 **发布到项目** 按钮发布报告；
  7) 如想分享给其他人，进入 **报告列表页** ，打开 **分享** 开关，获得报告链接的人即可浏览报告。
 
-![reproduce-and-compare-evals.gif](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/Blog/reproduce-and-compare-evals.gif)
+![reproduce and compare evals](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/Blog/reproduce-and-compare-evals.gif)
 
 以上就是关于如何使用 Starwhale Cloud 复现和对比评测结果的说明，如果您在使用过程中有任何问题欢迎私信留言。您也可以通过[Starwhale官网](https://starwhale.cn/)了解更多信息，感谢您的关注和支持。
