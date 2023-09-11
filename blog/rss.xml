@@ -4,10 +4,31 @@
         <title>Starwhale Blog</title>
         <link>https://doc.starwhale.ai/blog</link>
         <description>Starwhale Blog</description>
-        <lastBuildDate>Mon, 24 Jul 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 11 Sep 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Reporduce and compare evaluations using Starwhale]]></title>
+            <link>https://doc.starwhale.ai/blog/reproduce-and-compare-evals</link>
+            <guid>https://doc.starwhale.ai/blog/reproduce-and-compare-evals</guid>
+            <pubDate>Mon, 11 Sep 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Reproduce and compare evaluations]]></description>
+            <content:encoded><![CDATA[<p>If you have doubts about the findings of this report or any other evaluations, how should you reproduce and compare the evaluation results?</p><p>Workflow: Login → Create a project → Run the model → Create a report</p><h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="step1-login">STEP1: Login<a href="#step1-login" class="hash-link" aria-label="Direct link to STEP1: Login" title="Direct link to STEP1: Login">​</a></h3><p>First, you have to log in to the Starwhale platform by clicking on the <a href="https://cloud.starwhale.cn/login?lang=zh" target="_blank" rel="noopener noreferrer">login</a>. If you haven't registered yet, you can click on the <a href="https://cloud.starwhale.cn/signup" target="_blank" rel="noopener noreferrer">sign-up</a> to create an account.</p><h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="step2-create-a-project">STEP2: Create a project<a href="#step2-create-a-project" class="hash-link" aria-label="Direct link to STEP2: Create a project" title="Direct link to STEP2: Create a project">​</a></h3><p>After successful login, you will be directed to the project list page. Click the <strong>Create</strong> button in the top right corner to create a new project. Enter the project name and click the <strong>Submit</strong> button to create the project.</p><h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="step3-run-the-models">STEP3: Run the models<a href="#step3-run-the-models" class="hash-link" aria-label="Direct link to STEP3: Run the models" title="Direct link to STEP3: Run the models">​</a></h3><p>Go to the <strong>Evaluations</strong> list pag, click the <strong>Create</strong> button, and then choose the parameters.</p><p>For example, to reproduce the evaluation result of baichuan2-13b with the cmmlu dataset, refer to the following:</p><p> 1) Choose the running resource, recommend to select A10<!-- -->*<!-- -->24G<!-- -->*<!-- -->2;
+2) Select the model: Choose the models you want to reproduce, e.g.: starwhale/llm-leaderboard/baichuan2-13b/atgoiscm(v1、latest);
+3) Choose the handler: Select the option "src.evaluation:evaluation_results";
+4) Choose the dataset: Select the option "starwhale/llm-leaderboard/cmmlu/kiwtxza7(v1、latest)";
+5) Choose the runtime: Select the option "starwhale/llm-leaderboard/llm-leaderboard/ickinf6q(v1、latest)".
+6) Advanced configuration: Turn off the auto-release switch.</p><p>Click <strong>Submit</strong> to run the model. During the evaluation process, you can click <strong>View Log</strong> on the task tab of the evaluation details page to understand the running status of the evaluation. When the evaluation status is "Successed," you can view the results on the list and details pages.</p><h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="step4-compare-the-evaluation-results">STEP4: Compare the evaluation results<a href="#step4-compare-the-evaluation-results" class="hash-link" aria-label="Direct link to STEP4: Compare the evaluation results" title="Direct link to STEP4: Compare the evaluation results">​</a></h3><p>To create a report, go to the <strong>Report</strong> list page and click the <strong>Create</strong> button in the upper right corner.</p><p>Reports provide rich text editing capabilities, and here we mainly introduce how to compare your evaluation results with Starwhale or other evaluation results.</p><p> 1) Input the report title and description;
+2) Input <strong>/</strong>, select and click the <strong>Panel</strong> option;
+3) Click the <strong>Add Evaluation</strong> button, select the project, such as "llm-leaderboard", and then to check the evaluations you want to add. Click <strong>Add</strong> to add evaluations to the evaluation list. You can add multiple evaluations that you want to compare across different projects;
+4) After adding the evaluations, click the <strong>Column Management</strong> settings icon to set the columns in the evaluation list and their display order. When you hover over a column in the evaluation list, you can fix that column or sort it in ascending or descending order;
+5) You can click the <strong>Add Chart</strong> button and select the chart type, such as Bar Chart, then add Metrics related to accuracy (support for metric fuzzy search). Input a chart title (optional) and click <strong>Submit</strong> to display the data in bar chart format for intuitive analysis.
+6) Click <strong>Publish to Project</strong> button to publish the report;
+7) If you want to share the report with others, go to the <strong>Report</strong> list page, turn on the "Share" switch, and people who obtain the report link can view it.</p><p><img loading="lazy" src="https://starwhale-examples.oss-cn-beijing.aliyuncs.com/Blog/reproduce-and-compare-evals.gif" alt="reproduce-and-compare-evals.gif" class="img_ev3q"></p><p>These are the instructions on how to reproduce and compare evaluations using Starwhale. Please leave a private message if you encounter any issues during the using process. You can also visit the <a href="https://starwhale.cn" target="_blank" rel="noopener noreferrer">Starwhale official website</a> for more information. Thank you for your attention and support.</p>]]></content:encoded>
+            <category>Model Package</category>
+            <category>Model Evaluaitons</category>
+        </item>
         <item>
             <title><![CDATA[Run Llama 2-Chat from scratch in 5 minutes]]></title>
             <link>https://doc.starwhale.ai/blog/run-llama2-chat-in-five-minutes</link>
