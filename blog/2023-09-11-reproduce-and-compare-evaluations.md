@@ -32,9 +32,9 @@ Go to the **Evaluations** list page and click the **Create** button.
  5) Choose the runtime: Select the option "starwhale/llm-leaderboard/llm-leaderboard/ickinf6q(v1、latest)".
  6) Advanced configuration: Turn off the auto-release switch.
 
-Click **Submit** to run the model. During the evaluation process, you can click **View Lo** on the task tab page of the evaluation details page to understand the running status of the evaluation. When the evaluation status is "Successed," you can view the results on the list and details pages.
+Click **Submit** to run the model. During the evaluation process, you can click **View Log** on the task tab of the evaluation details page to understand the running status of the evaluation. When the evaluation status is "Successed," you can view the results on the list and details pages.
 
-### STEP4：Compare the evaluation results
+### STEP4: Compare the evaluation results
 
 To create a report, go to the **Report** list page and click the **Create** button in the upper right corner.
 
@@ -50,4 +50,4 @@ Reports provide rich text editing capabilities, and here we mainly introduce how
 
 ![reproduce-and-compare-evals.gif](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/Blog/reproduce-and-compare-evals.gif)
 
-These are the instructions on how to reproduce and compare evaluations using Starwhale.Please leave a private message if you encounter any issues during the process. You can also visit the [Starwhale official website](https://starwhale.cn) for more information. Thank you for your attention and support.
+These are the instructions on how to reproduce and compare evaluations using Starwhale. Please leave a private message if you encounter any issues during the using process. You can also visit the [Starwhale official website](https://starwhale.cn) for more information. Thank you for your attention and support.
