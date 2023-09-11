@@ -9,7 +9,7 @@ image: https://starwhale.cn/assets/images/banner-9c279049eb74ef96a8c1eb6ac363636
 hide_table_of_contents: false
 ---
 
-对[Starwhale的开源大语言模型评测报告](https://cloud.starwhale.cn/projects/349/reports/5)的评测结果或其他人的评测结果存疑，应该如何复现和对比评测结果？下文将为大家逐一讲解说明
+对[Starwhale的开源大语言模型评测报告](https://cloud.starwhale.cn/simple/report/preview/?rid=e9067622-fec2-4701-a960-eb142a54ff94)的评测结果或其他人的评测结果存疑，应该如何复现和对比评测结果？下文将为大家逐一讲解说明
 
 **基本流程**：登录账号 → 创建项目 → 运行评测 → 对比结果
 
