@@ -23,7 +23,9 @@ hide_table_of_contents: false
 
 ### STEP3：运行评测
 
-进入**评测**列表页，点击右上角的 **创建** 评测按钮。如想复现baichuan2-13b使用cmmlu数据集评测的结果，可参考以下内容进行操作：
+进入**评测**列表页，点击右上角的 **创建** 评测按钮，并选择相应参数。
+
+例如想复现baichuan2-13b使用cmmlu数据集评测的结果，可参考以下内容进行操作：
 
  1) 选择运行资源，推荐选择资源：A10 24G 2；
  2) 选择模型：starwhale/llm-leaderboard/baichuan2-13b/atgoiscm(v1、latest)；
