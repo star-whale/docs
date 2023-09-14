@@ -604,7 +604,7 @@ def list(
     show_removed: bool = False,
     page_index: int = DEFAULT_PAGE_IDX,
     page_size: int = DEFAULT_PAGE_SIZE,
-) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+) -> Tuple[DatasetListType, Dict[str, Any]]:
 ```
 
 ### copy
