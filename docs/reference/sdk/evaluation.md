@@ -15,10 +15,10 @@ The `@evaluation.predict` decorator defines the inference process in the Starwha
 ### Parameters {#predict-params}
 
 - `resources`: (dict, optional)
-  - Defines the resources required by each `predict` task when running on the Server instance, including `mem`, `cpu`, and `nvidia.com/gpu`.
-  - `mem`: The unit is Bytes, int and float types are supported.
-    - Supports setting `request` and `limit` as a dictionary, e.g. `resources={"mem": {"request": 100 * 1024, "limit": 200 * 1024}}`.
-    - If only a single number is set, the Python SDK will automatically set `request` and `limit` to the same value, e.g. `resources={"mem": 100 * 1024}` is _equivalent_ to `resources={"mem": {"request": 100 * 1024, "limit": 100 * 1024}}`.
+  - Defines the resources required by each `predict` task when running on the Server instance, including `memory`, `cpu`, and `nvidia.com/gpu`.
+  - `memory`: The unit is Bytes, int and float types are supported.
+    - Supports setting `request` and `limit` as a dictionary, e.g. `resources={"memory": {"request": 100 * 1024, "limit": 200 * 1024}}`.
+    - If only a single number is set, the Python SDK will automatically set `request` and `limit` to the same value, e.g. `resources={"memory": 100 * 1024}` is _equivalent_ to `resources={"memory": {"request": 100 * 1024, "limit": 100 * 1024}}`.
   - `cpu`: The unit is the number of CPU cores, int and float types are supported.
     - Supports setting `request` and `limit` as a dictionary, e.g. `resources={"cpu": {"request": 1, "limit": 2}}`.
     - If only a single number is set, the SDK will automatically set `request` and `limit` to the same value, e.g. `resources={"cpu": 1.5}` is equivalent to `resources={"cpu": {"request": 1.5, "limit": 1.5}}`.
@@ -159,7 +159,7 @@ def predict_batch_images(batch_data)
 @evaluation.predict(
     resources={"nvidia.com/gpu": 1,
                "cpu": {"request": 1, "limit": 2},
-               "mem": 200 * 1024},  # 200MB
+               "memory": 200 * 1024},  # 200MB
     log_mode="plain",
 )
 def predict_with_resources(data):

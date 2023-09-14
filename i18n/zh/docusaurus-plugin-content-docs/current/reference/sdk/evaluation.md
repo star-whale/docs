@@ -15,10 +15,10 @@ title: Starwhale 模型评测 SDK
 ### 控制参数 {#predict-params}
 
 - `resources`: (dict, optional)
-  - 定义 `predict` 每个任务在 Server 实例上运行时所需要的资源，包括 `mem`，`cpu` 和 `nvidia.com/gpu` 三种类型。
-    - `mem`: 单位为 Bytes，支持 int 和 float 类型。
-      - 支持以字典的方式设置 `request` 和 `limit`，比如 `resources={"mem": {"request": 100 * 1024, "limit": 200: 1024}}`。
-      - 若仅设置单个数字，则 SDK 会自动将 `request` 和 `limit` 设置为相同的数值，比如 `resources={"mem": 100 * 1024}` 等价于 `resources={"mem": {"request": 100 * 1024, "limit": 100 * 1024}}`。
+  - 定义 `predict` 每个任务在 Server 实例上运行时所需要的资源，包括 `memory`，`cpu` 和 `nvidia.com/gpu` 三种类型。
+    - `memory`: 单位为 Bytes，支持 int 和 float 类型。
+      - 支持以字典的方式设置 `request` 和 `limit`，比如 `resources={"memory": {"request": 100 * 1024, "limit": 200: 1024}}`。
+      - 若仅设置单个数字，则 SDK 会自动将 `request` 和 `limit` 设置为相同的数值，比如 `resources={"memory": 100 * 1024}` 等价于 `resources={"memory": {"request": 100 * 1024, "limit": 100 * 1024}}`。
     - `cpu`: 单位为 CPU 核心数，支持 int 和 float 类型。
       - 支持以字典的方式设置 `request` 和 `limit`，比如 `resources={"cpu": {"request": 1, "limit": 2}}`。
       - 若仅设置单个数字，则 SDK 会自动将 `request` 和 `limit` 设置为相同的数值，比如 `resources={"cpu": 1.5}` 等价于 `resources={"cpu": {"request": 1.5, "limit": 1.5}}`。
@@ -159,7 +159,7 @@ def predict_batch_images(batch_data)
 @evaluation.predict(
     resources={"nvidia.com/gpu": 1,
                "cpu": {"request": 1, "limit": 2},
-               "mem": 200 * 1024},  # 200MB
+               "memory": 200 * 1024},  # 200MB
     log_mode="plain",
 )
 def predict_with_resources(data):
