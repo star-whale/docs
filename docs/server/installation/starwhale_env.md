@@ -111,4 +111,8 @@ SW_METADATA_STORAGE_USER=
 # The password of the MySQL server.
 SW_METADATA_STORAGE_PASSWORD=
 ################################################################################
+
+# The cache directory for the WAL files. Point it to a mounted volume or host path with enough space.
+# If not set, the WAL files will be saved in the docker runtime layer, and will be lost when the container is restarted.
+SW_DATASTORE_WAL_LOCAL_CACHE_DIR=
 ```

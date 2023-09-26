@@ -1,7 +1,6 @@
 dev-all:
 	yarn
-	yarn build
-	yarn run serve
+	yarn start
 
 install-req:
 	yarn
