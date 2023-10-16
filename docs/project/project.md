@@ -55,3 +55,10 @@ On the project list page, all projects are supported to be sorted by "Recently v
 
 1. Click **Manage Members** to go to the project member list page.
 2. Find the username you want to adjust through searching, click the **Project Role** drop-down menu, and select a new project role. For more information on roles, please take a look at [Roles and permissions in Starwhale](roles-permissions).
+
+## Deleting a Project
+
+Once a project is deleted, all related resources (such as datasets, models, runtimes, evaluations, etc.) will be deleted and cannot be restored.
+
+1. Enter the project list page and search for the project name to find the project that needs to be deleted. Click the **Delete** button.
+2. Follow the prompts, enter the relevant information, click **Confirm** to delete the project, or click **Cancel** to cancel the deletion.
