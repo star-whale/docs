@@ -1,5 +1,5 @@
 ---
-title: Starwhale Task SDK
+title: Starwhale Job SDK
 ---
 
 ## job
@@ -169,7 +169,7 @@ def get_table_rows(
   - When `end` is set, whether the iteration includes the `end` record.
   - Default is False.
 
-### Usage Example
+### Usage Example {#rows-example}
 
 ```python
 from starwhale import job
@@ -185,4 +185,115 @@ rows = list(j.get_table_rows(table_name, start=0, end=100))
 
 # return the first record from the results table
 result = list(j.get_table_rows('results', start=0, end=1))[0]
+```
+
+## status
+
+`status` is a property that returns the current real-time state of the Job as a string. The possible states are `CREATED`, `READY`, `PAUSED`, `RUNNING`, `CANCELLING`, `CANCELED`, `SUCCESS`, `FAIL`, and `UNKNOWN`.
+
+```python
+@property
+def status(self) -> str:
+```
+
+## create
+
+`create` is a classmethod that can create tasks on a Standalone instance or Server/Cloud instance, including tasks for Model Evaluation, Fine-tuning, Online Serving, and Developing. The function returns a Job object. 
+
+- `create` determines which instance the generated task runs on through the `project` parameter, including Standalone and Server/Cloud instances.
+- On a Standalone instance, `create` creates a synchronously executed task. 
+- On a Server/Cloud instance, `create` creates an asynchronously executed task.
+
+```python
+@classmethod
+def create(
+    cls,
+    project: Project | str,
+    model: Resource | str,
+    run_handler: str,
+    datasets: t.List[str | Resource] | None = None,
+    runtime: Resource | str | None = None,
+    resource_pool: str = DEFAULT_RESOURCE_POOL,
+    ttl: int = 0,
+    dev_mode: bool = False,
+    dev_mode_password: str = "",
+    dataset_head: int = 0,
+    overwrite_specs: t.Dict[str, t.Any] | None = None,
+) -> Job:
+```
+
+### Parameters {#create-params}
+
+Parameters apply to all instances:
+
+- `project`: (Project|str, required) 
+    - A `Project` object or Project URI string.
+- `model`: (Resource|str, required)
+    - Model URI string or `Resource` object of Model type, representing the Starwhale model package to run.
+- `run_handler`: (str, required)
+    - The name of the runnable handler in the Starwhale model package, e.g. the `evaluate` handler of [mnist](https://github.com/star-whale/starwhale/tree/main/example/mnist): `mnist.evaluator:MNISTInference.evaluate`.
+- `datasets`: (List[str | Resource], optional)
+    - Datasets required for the Starwhale model package to run, not required.
+
+Parameters only effective for Standalone instances:
+
+- `dataset_head`: (int, optional)
+    - Generally used for debugging scenarios, only uses the first N data in the dataset for the Starwhale model to consume.
+
+Parameters only effective for Server/Cloud instances:
+
+- `runtime`: (Resource | str, optional)
+    - Runtime URI string or `Resource` object of Runtime type, representing the Starwhale runtime required to run the task.
+    - When not specified, it will try to use the built-in runtime of the Starwhale model package.
+    - When creating tasks under a Standalone instance, the Python interpreter environment used by the Python script is used as its own runtime. Specifying a runtime via the `runtime` parameter is not supported. If you need to specify a runtime, you can use the `swcli model run` command.
+- `resource_pool`: (str, optional)
+    - Specify which resource pool the task runs in, default to the `default` resource pool.
+- `ttl`: (int, optional) 
+    - Maximum lifetime of the task, will be killed after timeout.
+    - The unit is seconds.
+    - By default, ttl is 0, meaning no timeout limit, and the task will run as expected.
+    - When ttl is less than 0, it also means no timeout limit.
+- `dev_mode`: (bool, optional)
+    - Whether to set debug mode. After turning on this mode, you can enter the related environment through VSCode Web.
+    - Debug mode is off by default.
+- `dev_mode_password`: (str, optional) 
+    - Login password for VSCode Web in debug mode.
+    - Default is empty, in which case the task's UUID will be used as the password, which can be obtained via `job.info().job.uuid`.
+- `overwrite_specs`: (Dict[str, Any], optional)
+    - Support setting the `replicas` and `resources` fields of the handler.
+    - If empty, use the values set in the corresponding handler of the model package.
+    - The key of `overwrite_specs` is the name of the handler, e.g. the `evaluate` handler of [mnist](https://github.com/star-whale/starwhale/tree/main/example/mnist): `mnist.evaluator:MNISTInference.evaluate`.
+    - The value of `overwrite_specs` is the set value, in dictionary format, supporting settings for `replicas` and `resources`, e.g. `{"replicas": 1, "resources": {"memory": "1GiB"}}`.
+    
+
+### Examples {#create-example}
+
+- create a Cloud Instance job
+
+```python
+from starwhale import Job
+project = "https://cloud.starwhale.cn/project/starwhale:public"
+job = Job.create(
+    project=project,
+    model=f"{project}/model/mnist/version/v0",
+    run_handler="mnist.evaluator:MNISTInference.evaluate",
+    datasets=[f"{project}/dataset/mnist/version/v0"],
+    runtime=f"{project}/runtime/pytorch",
+    overwrite_specs={"mnist.evaluator:MNISTInference.evaluate": {"resources": "4GiB"},
+                     "mnist.evaluator:MNISTInference.predict": {"resources": "8GiB", "replicas": 10}}
+)
+print(job.status)
+```
+
+- create a Standalone Instance job
+
+```python
+from starwhale import Job
+job = Job.create(
+    project="self",
+    model="mnist",
+    run_handler="mnist.evaluator:MNISTInference.evaluate",
+    datasets=["mnist"],
+)
+print(job.status)
 ```
