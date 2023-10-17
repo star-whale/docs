@@ -31,11 +31,11 @@ The name, privacy and description  of a project can be edited.
 
 ## View a project
 
-**My projects**
+### My projects
 
 On the project list page, only my projects are displayed by default. My projects refer to the projects participated in by the current users as project members or project owners.
 
-**Project sorting**
+### Project sorting
 
 On the project list page, all projects are supported to be sorted by "Recently visited", "Project creation time from new to old", and "Project creation time from old to new", which can be selected according to your needs.
 
@@ -66,7 +66,7 @@ Only users with the admin role can assign people to the project. The project own
 3. Click **Yes** to delete the user from this project, click **No** to cancel the deletion.
 4. If you're removing multiple members, repeat steps 1 through 3.
 
-### Edit a member's role 
+### Edit a member's role
 
 1. Hover your mouse over the project you want to edit, then click **Manage Members** to go to the project member list page.
 2. Find the username you want to adjust through searching, click the **Project Role** drop-down menu, and select a new project role. For more information on roles, please take a look at [Roles and permissions in Starwhale](roles-permissions).
