@@ -10,7 +10,8 @@ Starwhale provides a series of Python SDKs to help manage datasets, models, eval
 - `Context`: Passes context information during model evaluation, including Project, Task ID etc.
 - `class Dataset`: Starwhale Dataset class.
 - `class starwhale.api.service.Service`: The base class of online evaluation.
-- `class Job`: Provides operations for Job.
+- `class Job`: Starwhale Job class.
+- `class Evaluation`: Starwhale Evaluation class.
 
 ## Functions
 
@@ -18,9 +19,6 @@ Starwhale provides a series of Python SDKs to help manage datasets, models, eval
 - `@handler`: Decorator to define a running entity with resource attributes (mem/cpu/gpu). You can control replica count. Handlers can form DAGs through dependencies to control execution flow.
 - `@evaluation.predict`: Decorator to define inference process in model evaluation, similar to map phase in MapReduce.
 - `@evaluation.evaluate`: Decorator to define evaluation process in model evaluation, similar to reduce phase in MapReduce.
-- `evaluation.log`: Log evaluation metrics to the specific tables.
-- `evaluation.log_summary`: Log certain metrics to the summary table.
-- `evaluation.iter`: Iterate and read data from the certain tables.
 - `model.build`: Build Starwhale model.
 - `@fine_tune`: Decorator to define model fine-tuning process.
 - `init_logger`: Set log level, implement 5-level logging.
@@ -46,9 +44,7 @@ Starwhale provides a series of Python SDKs to help manage datasets, models, eval
 - `Point`: Point type.
 - `Polygon`: Polygon type.
 - `Link`: Link type, for creating `remote-link` data.
-- `S3LinkAuth`: When data is stored in S3-based object storage, this type describes auth and key info.
 - `MIMEType`: Describes multimedia types supported by Starwhale, used in `mime_type` attribute of `Image`, `Video` etc for better Dataset Viewer.
-- `LinkType`: Describes remote link types supported by Starwhale, currently `LocalFS` and `S3`.
 
 ## Other
 

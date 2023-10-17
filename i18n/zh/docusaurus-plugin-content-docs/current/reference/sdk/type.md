@@ -481,69 +481,6 @@ Link(
 astype() -> Dict[str, t.Any]
 ```
 
-## S3LinkAuth
-
-当数据存储在基于S3协议的对象存储上时，该类型负责描述授权、密钥信息。
-
-```python
-S3LinkAuth(
-    name: str = "",
-    access_key: str = "",
-    secret: str = "",
-    endpoint: str = "",
-    region: str = "local",
-)
-```
-
-|参数|说明|
-|---|---|
-|`name`|Auth的名称|
-|`access_key`|S3连接中的access_key|
-|`secret`|S3连接中的secret|
-|`endpoint`|S3连接中的endpoint地址|
-|`region`|bucket所在的S3 region，默认为local|
-
-### 使用示例 {#s3-example}
-
-```python
-import struct
-import typing as t
-from pathlib import Path
-
-from starwhale import (
-    Link,
-    S3LinkAuth,
-    GrayscaleImage,
-    UserRawBuildExecutor,
-)
-class LinkRawDatasetProcessExecutor(UserRawBuildExecutor):
-    _auth = S3LinkAuth(name="mnist", access_key="minioadmin", secret="minioadmin")
-    _endpoint = "10.131.0.1:9000"
-    _bucket = "users"
-
-    def iter_item(self) -> t.Generator[t.Tuple[t.Any, t.Any], None, None]:
-        root_dir = Path(__file__).parent.parent / "data"
-
-        with (root_dir / "t10k-labels-idx1-ubyte").open("rb") as label_file:
-            _, label_number = struct.unpack(">II", label_file.read(8))
-
-            offset = 16
-            image_size = 28 * 28
-
-            uri = f"s3://{self._endpoint}/{self._bucket}/dataset/mnist/t10k-images-idx3-ubyte"
-            for i in range(label_number):
-                _data = Link(
-                    f"{uri}",
-                    self._auth,
-                    offset=offset,
-                    size=image_size,
-                    data_type=GrayscaleImage(display_name=f"{i}", shape=(28, 28, 1)),
-                )
-                _label = struct.unpack(">B", label_file.read(1))[0]
-                yield _data, {"label": _label}
-                offset += image_size
-```
-
 ## MIMEType
 
 描述Starwhale支持的多媒体类型，用Python Enum类型实现，用在 `Image`、`Video` 等类型的mime_type 属性上，能更好的进行Dataset Viewer。
@@ -568,17 +505,6 @@ class MIMEType(Enum):
     HTML = "text/html"
     GRAYSCALE = "x/grayscale"
     UNDEFINED = "x/undefined"
-```
-
-## LinkType
-
-描述Starwhale支持的remote-link类型，用Python Enum类型实现，目前支持 `LocalFS` 和 `S3` 两种类型。
-
-```python
-class LinkType(Enum):
-    LocalFS = "local_fs"
-    S3 = "s3"
-    UNDEFINED = "undefined"
 ```
 
 ## Line

@@ -490,69 +490,6 @@ Link(
 astype() -> Dict[str, t.Any]
 ```
 
-## S3LinkAuth
-
-`S3LinkAuth` provides authentication and key information when data is stored on S3 protocol based object storage.
-
-```python
-S3LinkAuth(
-    name: str = "",
-    access_key: str = "",
-    secret: str = "",
-    endpoint: str = "",
-    region: str = "local",
-)
-```
-
-| Parameter | Description |
-|-|-|
-| `name` | Name of the auth |
-| `access_key` | Access key for S3 connection |
-| `secret` | Secret for S3 connection |
-| `endpoint` | Endpoint URL for S3 connection |
-| `region` | S3 region where bucket is located, default is local. |
-
-### Examples {#s3-example}
-
-```python
-import struct
-import typing as t
-from pathlib import Path
-
-from starwhale import (
-    Link,
-    S3LinkAuth,
-    GrayscaleImage,
-    UserRawBuildExecutor,
-)
-class LinkRawDatasetProcessExecutor(UserRawBuildExecutor):
-    _auth = S3LinkAuth(name="mnist", access_key="minioadmin", secret="minioadmin")
-    _endpoint = "10.131.0.1:9000"
-    _bucket = "users"
-
-    def iter_item(self) -> t.Generator[t.Tuple[t.Any, t.Any], None, None]:
-        root_dir = Path(__file__).parent.parent / "data"
-
-        with (root_dir / "t10k-labels-idx1-ubyte").open("rb") as label_file:
-            _, label_number = struct.unpack(">II", label_file.read(8))
-
-            offset = 16
-            image_size = 28 * 28
-
-            uri = f"s3://{self._endpoint}/{self._bucket}/dataset/mnist/t10k-images-idx3-ubyte"
-            for i in range(label_number):
-                _data = Link(
-                    f"{uri}",
-                    self._auth,
-                    offset=offset,
-                    size=image_size,
-                    data_type=GrayscaleImage(display_name=f"{i}", shape=(28, 28, 1)),
-                )
-                _label = struct.unpack(">B", label_file.read(1))[0]
-                yield _data, {"label": _label}
-                offset += image_size
-```
-
 ## MIMEType
 
 `MIMEType` describes the multimedia types supported by Starwhale, implemented using Python Enum. It is used in the mime_type attribute of `Image`, `Video` etc to enable better Dataset Viewer support.
@@ -577,17 +514,6 @@ class MIMEType(Enum):
     HTML = "text/html"
     GRAYSCALE = "x/grayscale"
     UNDEFINED = "x/undefined"
-```
-
-## LinkType
-
-`LinkType` describes the remote link types supported by Starwhale, also implemented using Python Enum. Currently supports `LocalFS` and `S3` types.
-
-```python
-class LinkType(Enum):
-    LocalFS = "local_fs"
-    S3 = "s3"
-    UNDEFINED = "undefined"
 ```
 
 ## Line

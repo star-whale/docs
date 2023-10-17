@@ -264,6 +264,7 @@ model URI模式需要一个预先构建好的模型包，本地开发模式仅�
 | `--model-yaml` 或 `-f` | N | String | ${MODEL_DIR}/model.yaml | model.yaml 的路径。model.yaml 对于 `model run` 是非必须的。|
 | `--run-project` 或 `-p` | N | String | 默认的 Project | Project URI，表示 `model run` 的结果存储到对应的项目中。|
 | `--dataset` 或 `-d` | N | String | | Dataset URI，模型运行所需要的 Starwhale 数据集。该参数可以被设置多次。|
+| `--dataset-head` 或 `-dh` | N | Integer | 0 | 在 Standalone Instance 下，用于调试目的，一般只需要运行数据集的一部分数据即可，可以通过 `--dataset-head` 参数来设定。默认值为0，表示会使用数据集所有数据。|
 | `--in-container` | N | Boolean | False | 使用docker镜像来运行模型。此选项仅适用于 Standalone 实例。Server 和 Cloud 实例始终使用 docker 镜像。如果指定的 runtime 是基于 docker 镜像构建的，此选项总是为真。|
 | `--forbid-snapshot` 或 `-fs` | N | Boolean | False | 当在model URI模式下，每次模型运行，都会使用一个全新的快照目录，设置该参数后直接使用模型的 workdir 目录作为运行目录。本地开发模式下，此参数不生效，每次运行都是在 `--workdir` 指定的目录中。|
 | `-- --user-arbitrary-args` | N | String | | 给[你在handlers中预设的参数](https://github.com/star-whale/starwhale/pull/2614) 赋值. |
@@ -296,6 +297,9 @@ swcli model run --workdir . --module mnist.evaluator --handler mnist.evaluator:M
 #     ctx=ContextInput(),
 # )
 swcli model run -w . -m th --handler th:f -- -x 2 -x=1 --mi=blab-la --ds mnist
+
+# --> run with dataset of head 10
+swcli model run --uri mnist --dataset-head 10 --dataset mnist
 ```
 
 ## swcli model serve {#serve}
