@@ -209,24 +209,27 @@ def create(
 ### 参数 {#create-params}
 
 对所有实例都生效的参数：
+
 - `project`: (Project|str, required)
   - `Project` 对象或 Project URI 字符串。
 - `model`: (Resource|str, required)
-  - Model URI 字符串或 Model 类型的 `Resource` 对象，表示要运行的 Starwhale 模型包。 
+  - Model URI 字符串或 Model 类型的 `Resource` 对象，表示要运行的 Starwhale 模型包。
 - `run_handler`: (str, required)
   - Starwhale 模型包中对应的可运行的 handler 名称，比如 [mnist](https://github.com/star-whale/starwhale/tree/main/example/mnist) 的 evaluate handler: `mnist.evaluator:MNISTInference.evaluate` 。
 - `datasets`: (List[str | Resource], optional)
   - Starwhale 模型包运行所需要的数据集，非必需。
 
 仅对 Standalone 实例生效的参数：
+
 - `dataset_head`: (int, optional)
   - 一般用于调试场景，只使用数据集前 N 条数据来供 Starwhale 模型来消费。
 
 仅对 Server/Cloud 实例生效的参数：
+
 - `runtime`: (Resource | str, optional)
   - Runtime URI 字符串或 Runtime 类型的 `Resource` 对象，表示要运行任务所需要的 Starwhale 运行时。
-  - 当不指定该参数时，会尝试使用 Starwhale 模型包的内建运行时。 
-  - 创建 Standalone 实例下的任务，使用 Python 脚本所用的 Python 解释器环境作为自己的运行时，不支持通过 `runtime` 参数指定运行时。若有指定运行时的需要，可以使用 `swcli model run` 命令。 
+  - 当不指定该参数时，会尝试使用 Starwhale 模型包的内建运行时。
+  - 创建 Standalone 实例下的任务，使用 Python 脚本所用的 Python 解释器环境作为自己的运行时，不支持通过 `runtime` 参数指定运行时。若有指定运行时的需要，可以使用 `swcli model run` 命令。
 - `resource_pool`: (str, optional)
   - 指定任务运行在哪个资源池中，默认为 `default` 资源池。
 - `ttl`: (int, optional)
@@ -242,7 +245,7 @@ def create(
   - 默认为空，此时会用任务的UUID作为密码，可以通过 `job.info().job.uuid` 获得。
 - `overwrite_specs`: (Dict[str, Any], optional)
   - 支持设置 handler 的 `replicas` 和 `resources` 字段。
-  - 若为空，则使用模型包中对应 handler 设置的值。 
+  - 若为空，则使用模型包中对应 handler 设置的值。
   - `overwrite_specs` 的 key 为 handler 的名字，比如 [mnist](https://github.com/star-whale/starwhale/tree/main/example/mnist) 的 evaluate handler: `mnist.evaluator:MNISTInference.evaluate`。
   - `overwrite_specs` 的 value 为设置的值，字典格式，支持设置 `replicas` 和 `resources` , 比如 `{"replicas": 1, "resources": {"memory": "1GiB"}}`。
 

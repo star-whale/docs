@@ -10,7 +10,8 @@ Starwhale 提供一系列的 Python SDK，帮助用户管理数据集、模型�
 - `class Context`: 执行模型评测过程中传入的上下文信息，包括 Project、Task ID 等。
 - `class Dataset`: Starwhale 数据集类。
 - `class starwhale.api.service.Service`: 在线评测的基础类。
-- `class Job`: 提供Job相关的操作。
+- `class Job`: 提供 Job 相关的操作。
+- `class Evaluation`: 提供 Evaluation 的 log 和 scan 相关的操作。
 
 ## 函数
 
@@ -18,9 +19,6 @@ Starwhale 提供一系列的 Python SDK，帮助用户管理数据集、模型�
 - `@handler`: 修饰器，定义一个带有资源属性（mem/cpu/gpu）的运行实体，可以控制副本数。多个Handlers可以通过依赖关系，生成DAG，便于控制执行流程。
 - `@evaluation.predict`: 修饰器，定义模型评测中的推理过程，类似 MapReduce 中的 map 阶段。
 - `@evaluation.evaluate`: 修饰器，定义模型评测中的评测过程，类似 MapReduce 中的 reduce 阶段。
-- `evaluation.log`: 记录某些评测指标到特定表中。
-- `evaluation.log_summary`: 记录某些指标到 summary 表中。
-- `evaluation.iter`: 迭代读取某些表中的数据。
 - `model.build`: 进行 Starwhale 模型构建。
 - `@fine_tune`: 修饰器，定义模型训练的微调(fine-tune)过程。
 - `init_logger`: 设置日志输出级别，实现五种级别日志输出。
@@ -46,9 +44,7 @@ Starwhale 提供一系列的 Python SDK，帮助用户管理数据集、模型�
 - `Point`: 点类型。
 - `Polygon`: 多边形类型。
 - `Link`: Link类型，用来制作 `remote-link` 类型的数据。
-- `S3LinkAuth`: 当数据存储在基于S3协议的对象存储上时，该类型负责描述授权、密钥信息。
 - `MIMEType`: 描述 Starwhale 支持的多媒体类型，用在 `Image`、`Video` 等类型的 mime_type 属性上，能更好的进行 Dataset Viewer。
-- `LinkType`: 描述 Starwhale 支持的remote-link类型，目前支持 `LocalFS` 和 `S3` 两种类型。
 
 ## 其他
 

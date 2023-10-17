@@ -217,18 +217,65 @@ def evaluate_results():
     ...
 ```
 
-## evaluation.log
+## class Evaluation
 
-`evaluation.log` 是一个函数，记录某些评测指标到特定表中，之后可以通过 Server/Cloud 实例的 Web 页面中查看相关的表。
+`starwhale.Evaluation` 实现 Starwhale Model Evaluation 的抽象，能对Standalone/Server/Cloud实例上的Model Evaluation进行log和scan等操作，用来记录和检索指标。
+
+### \_\_init\_\_
+
+`__init__` 函数用来初始化一个 `Evaluation` 对象。
+
+```python
+class Evaluation
+  def __init__(self, id: str, project: Project | str) -> None:
+```
+
+#### 参数 {#init-params}
+
+- `id`: (str, required)
+  - Evaluation 的 UUID，此ID由 Starwhale 系统自动生成。
+- `project`: (Project|str, required)
+  - `Project` 对象或 Project URI 字符串。
+
+#### 使用示例 {#init-example}
+
+```python
+from starwhale import Evaluation
+
+standalone_e = Evaluation("fcd1206bf1694fce8053724861c7874c", project="self")
+server_e = Evaluation("fcd1206bf1694fce8053724861c7874c", project="cloud://server/project/starwhale:starwhale")
+cloud_e = Evaluation("2ddab20df9e9430dbd73853d773a9ff6", project="https://cloud.starwhale.cn/project/starwhale:llm-leaderboard")
+```
+
+### from_context
+
+`from_context` 是一个 classmethod 方法，获得当前 Context 下的 Evaluation 对象。`from_context` 在任务运行环境下才能生效，非任务运行环境调用该方法，会抛出 `RuntimeError` 异常，提示 Starwhale Context 没有被合理设置。
 
 ```python
 @classmethod
+def from_context(cls) -> Evaluation:
+```
+
+### 使用示例 {#from-context-example}
+
+```python
+from starwhale import Evaluation
+
+with Evaluation.from_context() as e:
+    e.log("label/1", 1, {"loss": 0.99, "accuracy": 0.98})
+```
+
+### log
+
+`log` 是一个 method 方法，记录某些评测指标到特定表中，之后可以通过 Server/Cloud 实例的 Web 页面或 `scan` 方法中查看相关的表。
+
+```python
 def log(
-    cls, category: str, id: t.Union[str, int], metrics: t.Dict[str, t.Any]
+    self, category: str, id: t.Union[str, int], metrics: t.Dict[str, t.Any]
 ) -> None:
 ```
 
-### 参数 {#log-params}
+#### 参数 {#log-params}
 
 - `category`: (str, required)
   - 记录的类别，该值会被作为 Starwhale Datastore 的表名的后缀。
@@ -238,58 +285,244 @@ def log(
   - 同一张表，只能采用 str 或 int 的一种类型作为 ID 类型。
 - `metrics`: (dict, required)
   - 字典类型，key-value 方式记录指标。
+  - key 为 str 类型。
+  - value 既支持 `int`, `float`, `str`, `bytes`, `bool` 等常量类型，也支持 `tuple`, `list`, `dict` 等复合类型。同时也支持Artifacts类型 `Starwhale.Image`, `Starwhale.Video`, `Starwhale.Audio`, `Starwhale.Text`, `Starwhale.Binary` 的记录。
+  - 当 value 中包含 `dict` 类型时，Starwhale SDK会自动展平字典，便于更好的进行可视化展示和指标对比。
+    - 比如 metrics 为 `{"test": {"loss": 0.99, "prob": [0.98,0.99]}, "image": [Image, Image]}` , 存入后会变成 `{"test/loss": 0.99, "test/prob": [0.98, 0.99], "image/0": Image, "image/1": Image}` 结构。
 
-### 使用示例 {#log-example}
-
-```python
-from starwhale import evaluation
-
-evaluation.log("label/1", 1, {"loss": 0.99, "accuracy": 0.98})
-evaluation.log("ppl", "1", {"a": "test", "b": 1})
-```
-
-## evaluation.log_summary
-
-`evaluation.log_summary` 是一个函数，记录某些指标到 summary 表中，Server/Cloud 实例评测页面显示的就是 summary 表的数据。
-每次调用，Starwhale 都会自动以此次评测的唯一ID作为表的行ID进行更新，可以再一次评测过程中多次调用该函数，用来更新不同的列。
-
-每个项目中有一张 summary 表，所有该项目下的评测任务都会将 summary 信息写入该表中。
+#### 使用示例 {#log-example}
 
 ```python
-@classmethod
-def log_summary(cls, *args: t.Any, **kw: t.Any) -> None:
+from starwhale import Evaluation
+
+evaluation_store = Evaluation.from_context()
+
+evaluation_store.log("label/1", 1, {"loss": 0.99, "accuracy": 0.98})
+evaluation_store.log("ppl", "1", {"a": "test", "b": 1})
 ```
 
-### 使用示例 {#log-s-example}
+### scan
+
+`scan` 是一个 method 方法，返回一个迭代器，用来读取某些模型评测表中的数据。
 
 ```python
-from starwhale import evaluation
-
-evaluation.log_summary(loss=0.99)
-evaluation.log_summary(loss=0.99, accuracy=0.99)
-evaluation.log_summary({"loss": 0.99, "accuracy": 0.99})
+def scan(
+    self,
+    category: str,
+    start: t.Any = None,
+    end: t.Any = None,
+    keep_none: bool = False,
+    end_inclusive: bool = False,
+) -> t.Iterator:
 ```
 
-## evaluation.iter
-
-`evaluation.iter` 是一个函数，返回一个迭代器，用来迭代式的读取某些模型评测表中的数据。
-
-```python
-@classmethod
-def iter(cls, category: str) -> t.Iterator:
-```
-
-### 参数 {#iter-params}
+#### 参数 {#scan-params}
 
 - `category`: (str, required)
-  - 与 `evaluation.log` 函数中的 `category` 参数含义一致。
+  - 与 `log` 函数中的 `category` 参数含义一致。
+- `start`: (Any, optional)
+  - 起始 Key，若不指定，则从表的第一条数据开始。
+- `end`: (Any, optional)
+  - 结束 Key，若不指定，则一直遍历到表的结尾。
+- `keep_none`: (bool, optional)
+  - 若某列的值为 None，是否返回该列，默认不返回。
+- `end_inclusive`: (bool, optional)
+  - 是否包含 `end` 对应的行，默认不包含。
 
-### 使用示例 {#iter-example}
+#### 使用示例 {#scan-example}
 
 ```python
-from starwhale import evaluation
+from starwhale import Evaluation
 
-results = [data for data in evaluation.iter("label/0")]
+evaluation_store = Evaluation(id="2ddab20df9e9430dbd73853d773a9ff6", project="https://cloud.starwhale.cn/projects/349")
+results = [data for data in evaluation_store.scan("label/0")]
+```
+
+### flush
+
+`flush` 是一个 method 方法，能够将 `log` 方法记录的指标立即刷新到 datastore 和 oss 存储中。若不调用 `flush` 方法，Evaluation 最后关闭的时候，也会自动刷新数据到存储中。
+
+```python
+def flush(self, category: str, artifacts_flush: bool = True) -> None
+```
+
+#### 参数 {#flush-params}
+
+- `category`: (str, required)
+  - 与 `log` 函数中的 `category` 参数含义一致。
+- `artifacts_flush`: (bool, optional)
+  - 是否转储制品数据到blob文件，并上传到相关存储中。默认为 `True`。
+
+### log_result
+
+`log_result` 是一个 method 方法，记录评测指标到 `results` 表中，等价于 `log` 方法指定 `category` 参数为 `results`。 `results` 表一般用来存储推理结果，`@starwhale.predict` 默认情况下会将修饰函数的返回值存储在 `results` 表中，也可以用 `log_results` 手动存储。
+
+```python
+def log_result(self, id: t.Union[str, int], metrics: t.Dict[str, t.Any]) -> None:
+```
+
+#### 参数 {#log-result-params}
+
+- `id`: (str|int, required)
+  - 记录的ID，results 表内唯一。
+  - 同一张表，只能采用 str 或 int 的一种类型作为 ID 类型。
+- `metrics`: (dict, required)
+  - 与 `log` 函数中 `metrics` 参数定义一致。
+
+#### 使用示例 {#log-result-example}
+
+```python
+from starwhale import Evaluation
+
+evaluation_store = Evaluation(id="2ddab20df9e9430dbd73853d773a9ff6", project="self")
+evaluation_store.log_result(1, {"loss": 0.99, "accuracy": 0.98})
+evaluation_store.log_result(2, {"loss": 0.98, "accuracy": 0.99})
+```
+
+### scan_results
+
+`scan_results` 是一个 method 方法，返回一个迭代器，用来读取 `results` 表中的数据。
+
+```python
+def scan_results(
+    self,
+    start: t.Any = None,
+    end: t.Any = None,
+    keep_none: bool = False,
+    end_inclusive: bool = False,
+) -> t.Iterator:
+```
+
+#### 参数 {#scan-results-params}
+
+- `start`: (Any, optional)
+  - 起始 Key，若不指定，则从表的第一条数据开始。
+  - 与 `scan` 函数中 `start` 参数定义一致。
+- `end`: (Any, optional)
+  - 结束 Key，若不指定，则一直遍历到表的结尾。
+  - 与 `scan` 函数中 `end` 参数定义一致。
+- `keep_none`: (bool, optional)
+  - 若某列的值为 None，是否返回该列，默认不返回。
+  - 与 `scan` 函数中 `keep_none` 参数定义一致。
+- `end_inclusive`: (bool, optional)
+  - 是否包含 `end` 对应的行，默认不包含。
+  - 与 `scan` 函数中 `end_inclusive` 参数定义一致。
+
+#### 使用示例 {#scan-results-example}
+
+```python
+from starwhale import Evaluation
+
+evaluation_store = Evaluation(id="2ddab20df9e9430dbd73853d773a9ff6", project="self")
+
+evaluation_store.log_result(1, {"loss": 0.99, "accuracy": 0.98})
+evaluation_store.log_result(2, {"loss": 0.98, "accuracy": 0.99})
+results = [data for data in evaluation_store.scan_results()]
+```
+
+### flush_results
+
+`flush_results` 是一个 method 方法，能够将 `log_results` 方法记录的指标立即刷新到 datastore 和 oss 存储中。若不调用 `flush_results` 方法，Evaluation 最后关闭的时候，也会自动刷新数据到存储中。
+
+```python
+def flush_results(self, artifacts_flush: bool = True) -> None:
+```
+
+#### 参数 {#flush-results-params}
+
+- `artifacts_flush`: (bool, optional)
+  - 是否转储制品数据到blob文件，并上传到相关存储中。默认为 `True`。
+  - 与 `flush` 方法中 `artifacts_flush` 参数定义一致。
+
+### log_summary
+
+`log_summary` 是一个 method 方法，记录某些指标到 summary 表中，Server/Cloud 实例评测页面显示的就是 summary 表的数据。
+每次调用，Starwhale 都会自动以此次评测的唯一ID作为表的行ID进行更新，可以再一次评测过程中多次调用该函数，用来更新不同的列。
+
+每个项目中有一张 summary 表，所有该项目下的评测任务都会将 summary 信息写入该表中，便于进行不同模型评测的结果对比。
+
+```python
+def log_summary(self, *args: t.Any, **kw: t.Any) -> None:
+```
+
+与 `log` 函数一致，也会对字典类型自动展平。
+
+#### 使用示例 {#log-summary-example}
+
+```python
+from starwhale import Evaluation
+
+evaluation_store = Evaluation(id="2ddab20df9e9430dbd73853d773a9ff6", project="https://cloud.starwhale.cn/projects/349")
+
+evaluation_store.log_summary(loss=0.99)
+evaluation_store.log_summary(loss=0.99, accuracy=0.99)
+evaluation_store.log_summary({"loss": 0.99, "accuracy": 0.99})
+```
+
+### get_summary
+
+`get_summary` 是一个 method 方法，用来返回 `log_summary` 记录的信息。
+
+```python
+def get_summary(self) -> t.Dict:
+```
+
+### flush_summary
+
+`flush_summary` 是一个 method 方法，能够将 `log_summary` 方法记录的指标立即刷新到 datastore 和 oss 存储中。若不调用 `flush_results` 方法，Evaluation 最后关闭的时候，也会自动刷新数据到存储中。
+
+```python
+def flush_summary(self, artifacts_flush: bool = True) -> None:
+```
+
+#### 参数 {#flush-summary-params}
+
+- `artifacts_flush`: (bool, optional)
+  - 是否转储制品数据到blob文件，并上传到相关存储中。默认为 `True`。
+  - 与 `flush` 方法中 `artifacts_flush` 参数定义一致。
+
+### flush_all
+
+`flush_all` 是一个 method 方法，能够将 `log`, `log_results`, `log_summary` 方法记录的指标立即刷新到 datastore 和 oss 存储中。若不调用 `flush_all` 方法，Evaluation 最后关闭的时候，也会自动刷新数据到存储中。
+
+```python
+def flush_all(self, artifacts_flush: bool = True) -> None:
+```
+
+#### 参数 {#flush-all-params}
+
+- `artifacts_flush`: (bool, optional)
+  - 是否转储制品数据到blob文件，并上传到相关存储中。默认为 `True`。
+  - 与 `flush` 方法中 `artifacts_flush` 参数定义一致。
+
+### get_tables
+
+`get_tables` 是一个 method 方法，返回模型评测中产生的所有表的名称，需要注意的是，该函数并不返回 `summary` 表名称。
+
+```python
+def get_tables(self) -> t.List[str]:
+```
+
+### close
+
+`close` 是一个 method 方法，用来关闭 Evaluation 对象。`close` 调用时会将，会自动刷新数据到存储中。同时 `Evaluation` 也实现了 `__enter__` 和 `__exit__` 方法，可以用 `with` 语法简化 `close` 的手工调用。
+
+```python
+def close(self) -> None:
+```
+
+#### 使用示例 {#close-example}
+
+```python
+from starwhale import Evaluation
+
+evaluation_store = Evaluation(id="2ddab20df9e9430dbd73853d773a9ff6", project="https://cloud.starwhale.cn/projects/349")
+evaluation_store.log_summary(loss=0.99)
+evaluation_store.close()
+
+# auto close when the with-context exits.
+with Evaluation.from_context() as e:
+  e.log_summary(loss=0.99)
 ```
 
 ## @handler

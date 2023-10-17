@@ -198,10 +198,10 @@ def status(self) -> str:
 
 ## create
 
-`create` is a classmethod that can create tasks on a Standalone instance or Server/Cloud instance, including tasks for Model Evaluation, Fine-tuning, Online Serving, and Developing. The function returns a Job object. 
+`create` is a classmethod that can create tasks on a Standalone instance or Server/Cloud instance, including tasks for Model Evaluation, Fine-tuning, Online Serving, and Developing. The function returns a Job object.
 
 - `create` determines which instance the generated task runs on through the `project` parameter, including Standalone and Server/Cloud instances.
-- On a Standalone instance, `create` creates a synchronously executed task. 
+- On a Standalone instance, `create` creates a synchronously executed task.
 - On a Server/Cloud instance, `create` creates an asynchronously executed task.
 
 ```python
@@ -226,45 +226,44 @@ def create(
 
 Parameters apply to all instances:
 
-- `project`: (Project|str, required) 
-    - A `Project` object or Project URI string.
+- `project`: (Project|str, required)
+  - A `Project` object or Project URI string.
 - `model`: (Resource|str, required)
-    - Model URI string or `Resource` object of Model type, representing the Starwhale model package to run.
+  - Model URI string or `Resource` object of Model type, representing the Starwhale model package to run.
 - `run_handler`: (str, required)
-    - The name of the runnable handler in the Starwhale model package, e.g. the `evaluate` handler of [mnist](https://github.com/star-whale/starwhale/tree/main/example/mnist): `mnist.evaluator:MNISTInference.evaluate`.
+  - The name of the runnable handler in the Starwhale model package, e.g. the `evaluate` handler of [mnist](https://github.com/star-whale/starwhale/tree/main/example/mnist): `mnist.evaluator:MNISTInference.evaluate`.
 - `datasets`: (List[str | Resource], optional)
-    - Datasets required for the Starwhale model package to run, not required.
+  - Datasets required for the Starwhale model package to run, not required.
 
 Parameters only effective for Standalone instances:
 
 - `dataset_head`: (int, optional)
-    - Generally used for debugging scenarios, only uses the first N data in the dataset for the Starwhale model to consume.
+  - Generally used for debugging scenarios, only uses the first N data in the dataset for the Starwhale model to consume.
 
 Parameters only effective for Server/Cloud instances:
 
 - `runtime`: (Resource | str, optional)
-    - Runtime URI string or `Resource` object of Runtime type, representing the Starwhale runtime required to run the task.
-    - When not specified, it will try to use the built-in runtime of the Starwhale model package.
-    - When creating tasks under a Standalone instance, the Python interpreter environment used by the Python script is used as its own runtime. Specifying a runtime via the `runtime` parameter is not supported. If you need to specify a runtime, you can use the `swcli model run` command.
+  - Runtime URI string or `Resource` object of Runtime type, representing the Starwhale runtime required to run the task.
+  - When not specified, it will try to use the built-in runtime of the Starwhale model package.
+  - When creating tasks under a Standalone instance, the Python interpreter environment used by the Python script is used as its own runtime. Specifying a runtime via the `runtime` parameter is not supported. If you need to specify a runtime, you can use the `swcli model run` command.
 - `resource_pool`: (str, optional)
-    - Specify which resource pool the task runs in, default to the `default` resource pool.
-- `ttl`: (int, optional) 
-    - Maximum lifetime of the task, will be killed after timeout.
-    - The unit is seconds.
-    - By default, ttl is 0, meaning no timeout limit, and the task will run as expected.
-    - When ttl is less than 0, it also means no timeout limit.
+  - Specify which resource pool the task runs in, default to the `default` resource pool.
+- `ttl`: (int, optional)
+  - Maximum lifetime of the task, will be killed after timeout.
+  - The unit is seconds.
+  - By default, ttl is 0, meaning no timeout limit, and the task will run as expected.
+  - When ttl is less than 0, it also means no timeout limit.
 - `dev_mode`: (bool, optional)
-    - Whether to set debug mode. After turning on this mode, you can enter the related environment through VSCode Web.
-    - Debug mode is off by default.
-- `dev_mode_password`: (str, optional) 
-    - Login password for VSCode Web in debug mode.
-    - Default is empty, in which case the task's UUID will be used as the password, which can be obtained via `job.info().job.uuid`.
+  - Whether to set debug mode. After turning on this mode, you can enter the related environment through VSCode Web.
+  - Debug mode is off by default.
+- `dev_mode_password`: (str, optional)
+  - Login password for VSCode Web in debug mode.
+  - Default is empty, in which case the task's UUID will be used as the password, which can be obtained via `job.info().job.uuid`.
 - `overwrite_specs`: (Dict[str, Any], optional)
-    - Support setting the `replicas` and `resources` fields of the handler.
-    - If empty, use the values set in the corresponding handler of the model package.
-    - The key of `overwrite_specs` is the name of the handler, e.g. the `evaluate` handler of [mnist](https://github.com/star-whale/starwhale/tree/main/example/mnist): `mnist.evaluator:MNISTInference.evaluate`.
-    - The value of `overwrite_specs` is the set value, in dictionary format, supporting settings for `replicas` and `resources`, e.g. `{"replicas": 1, "resources": {"memory": "1GiB"}}`.
-    
+  - Support setting the `replicas` and `resources` fields of the handler.
+  - If empty, use the values set in the corresponding handler of the model package.
+  - The key of `overwrite_specs` is the name of the handler, e.g. the `evaluate` handler of [mnist](https://github.com/star-whale/starwhale/tree/main/example/mnist): `mnist.evaluator:MNISTInference.evaluate`.
+  - The value of `overwrite_specs` is the set value, in dictionary format, supporting settings for `replicas` and `resources`, e.g. `{"replicas": 1, "resources": {"memory": "1GiB"}}`.
 
 ### Examples {#create-example}
 
