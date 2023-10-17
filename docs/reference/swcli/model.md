@@ -262,9 +262,10 @@ swcli [GLOBAL OPTIONS] model run [OPTIONS]
 | `--handler` or `-h` | N | String | | Runnable handler index or name, default is None, will use the first handler |
 | `--module` or `-m` | N | String | | The name of the Python module to import. This parameter can be set multiple times. |
 | `--runtime` or `-r`| N | String | | the [Starwhale Runtime](../../runtime/index.md) URI to use when running this command. If this option is used, this command will run in an independent python environment specified by the Starwhale Runtime; otherwise, it will run directly in the swcli's current python environment. |
-| `--model-yaml` 或 `-f` | N | String | ${MODEL_DIR}/model.yaml | The path to the model.yaml. `model.yaml` is optional for `model run`. |
+| `--model-yaml` or `-f` | N | String | ${MODEL_DIR}/model.yaml | The path to the model.yaml. `model.yaml` is optional for `model run`. |
 | `--run-project` or `-p` | N | String | Default project | Project URI, indicates the `model run` results will be stored in the corresponding project. |
 | `--dataset` or `-d` | N | String | | Dataset URI, the Starwhale dataset required for model running. This parameter can be set multiple times. |
+| `--dataset-head` or `-dh` | N | Integer | 0 | [ONLY STANDALONE]For debugging purpose, every prediction task will, at most, consume the first n rows from every dataset.When the value is less than or equal to 0, all samples will be used.|
 | `--in-container` | N | Boolean | False | Use docker container to run the model. This option is only available for standalone instances. For server and cloud instances, a docker image is always used. If the runtime is a docker image, this option is always implied. |
 | `--forbid-snapshot` or `-fs` | N | Boolean | False | In model URI mode, each model run uses a new snapshot directory. Setting this parameter will directly use the model's workdir as the run directory. In local dev mode, this parameter does not take effect, each run is in the `--workdir` specified directory. |
 | `-- --user-arbitrary-args` | N | String |  | Specify [the args you defined in your handlers](https://github.com/star-whale/starwhale/pull/2614). |
@@ -297,6 +298,9 @@ swcli model run --workdir . --module mnist.evaluator --handler mnist.evaluator:M
 #     ctx=ContextInput(),
 # )
 swcli model run -w . -m th --handler th:f -- -x 2 -x=1 --mi=blab-la --ds mnist
+
+# --> run with dataset of head 10
+swcli model run --uri mnist --dataset-head 10 --dataset mnist
 ```
 
 ## swcli model serve {#serve}
