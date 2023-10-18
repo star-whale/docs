@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkstarwhale_docs=self.webpackChunkstarwhale_docs||[]).push([[1112],{25264:e=>{e.exports=JSON.parse('{"permalink":"/zh/blog/tags/\u6a21\u578b","page":1,"postsPerPage":2,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Starwhale Blog"}')}}]);

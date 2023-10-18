@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstarwhale_docs=self.webpackChunkstarwhale_docs||[]).push([[7775],{9285:a=>{a.exports=JSON.parse('{"label":"\u6a21\u578b\u8bc4\u6d4b","permalink":"/zh/blog/tags/\u6a21\u578b\u8bc4\u6d4b","allTagsPath":"/zh/blog/tags","count":1}')}}]);
