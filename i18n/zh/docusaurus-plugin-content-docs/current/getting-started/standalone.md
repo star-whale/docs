@@ -2,7 +2,7 @@
 title: Starwhale Standalone入门指南
 ---
 
-当[Starwhale Client（swcli）](../swcli)安装完成后，您就可以使用Starwhale Standalone。
+当[Starwhale Client（swcli）](../swcli/)安装完成后，您就可以使用Starwhale Standalone。
 
 我们也提供对应的Jupyter Notebook例子，可以在 [Google Colab](https://colab.research.google.com/github/star-whale/starwhale/blob/main/example/notebooks/quickstart-standalone.ipynb) 或本地的 [vscode/jupyterlab](https://github.com/star-whale/starwhale/blob/main/example/notebooks/quickstart-standalone.ipynb) 中试用。
 

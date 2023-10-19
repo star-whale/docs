@@ -2,7 +2,7 @@
 title: Getting started with Starwhale Standalone
 ---
 
-When the [Starwhale Client (swcli)](../swcli) is installed, you are ready to use Starwhale Standalone.
+When the [Starwhale Client (swcli)](../swcli/) is installed, you are ready to use Starwhale Standalone.
 
 We also provide a Jupyter Notebook example, you can try it in [Google Colab](https://colab.research.google.com/github/star-whale/starwhale/blob/main/example/notebooks/quickstart-standalone.ipynb) or in your local [vscode/jupyterlab](https://github.com/star-whale/starwhale/blob/main/example/notebooks/quickstart-standalone.ipynb).
 

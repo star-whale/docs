@@ -44,8 +44,7 @@ python3 -m pip install starwhale
 
 swcli --version
 
-sudo rm -rf /usr/local/bin/swcli
-sudo ln -s `which swcli` /usr/local/bin/
+sudo ln -sf "$(which swcli)" /usr/local/bin/
 ```
 
 ### 使用conda安装
@@ -57,8 +56,7 @@ python3 -m pip install starwhale
 
 swcli --version
 
-sudo rm -rf /usr/local/bin/swcli
-sudo ln -s `which swcli` /usr/local/bin/
+sudo ln -sf "$(which swcli)" /usr/local/bin/
 ```
 
 👏 现在，您可以在全局环境中使用 `swcli` 了。

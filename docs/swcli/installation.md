@@ -42,8 +42,7 @@ python3 -m pip install starwhale
 
 swcli --version
 
-sudo rm -rf /usr/local/bin/swcli
-sudo ln -s `which swcli` /usr/local/bin/
+sudo ln -sf "$(which swcli)" /usr/local/bin/
 ```
 
 ### Install with conda
@@ -55,8 +54,7 @@ python3 -m pip install starwhale
 
 swcli --version
 
-sudo rm -rf /usr/local/bin/swcli
-sudo ln -s `which swcli` /usr/local/bin/
+sudo ln -sf "$(which swcli)" /usr/local/bin/
 ```
 
 👏 Now, you can use `swcli` in the global environment.
