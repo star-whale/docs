@@ -4,17 +4,33 @@ title: 使用 Minikube 安装 Starwhale Server
 
 ## 先决条件
 
-* [Minikube](https://minikube.sigs.k8s.io/docs/start/) 1.25+
+* [Minikube](https://minikube.sigs.k8s.io/docs/start/) 1.32.0+
 * [Helm](https://helm.sh/docs/intro/install/) 3.2.0+
 * 操作系统： Linux 或 macOS
 
 ## 启动 Minikube
 
 ```bash
-minikube start --addons ingress --image-mirror-country=cn --kubernetes-version=1.25.3
+minikube start --kubernetes-version=1.25.3 --image-repository=docker-registry.starwhale.cn/minikube --base-image=docker-registry.starwhale.cn/minikube/k8s-minikube/kicbase:v0.0.42
+
+minikube addons enable ingress --images="KubeWebhookCertgenPatch=ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0,KubeWebhookCertgenCreate=ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0,IngressController=ingress-nginx/controller:v1.9.4"
 ```
 
-对于非中国大陆网络用户，可以省略 `--image-mirror-country=cn` 参数。另外，如果在您的机器上没有安装 [kubectl](https://kubernetes.io/zh-cn/docs/reference/kubectl/)，可以使用 Minikube 自带的 kubectl： `minikube kubectl` 或 bashrc中增加 `alias kubectl="minikube kubectl --"`。
+目前 `docker-registry.starwhale.cn/minikube` 目前只缓存了 Kubernetes 1.25.3 的镜像，也可以使用阿里云提供的 Minikube 镜像：
+
+```bash
+minikube start --image-mirror-country=cn
+
+minikube addons enable ingress --images="KubeWebhookCertgenPatch=kube-webhook-certgen:v20231011-8b53cabe0,KubeWebhookCertgenCreate=kube-webhook-certgen:v20231011-8b53cabe0,IngressController=nginx-ingress-controller:v1.9.4" --registries="KubeWebhookCertgenPatch=registry.cn-hangzhou.aliyuncs.com/google_containers,KubeWebhookCertgenCreate=registry.cn-hangzhou.aliyuncs.com/google_containers,IngressController=registry.cn-hangzhou.aliyuncs.com/google_containers"
+```
+
+对于非中国大陆网络用户，可以使用如下命令：
+
+```bash
+minikube start --addons ingress
+```
+
+如果在您的机器上没有安装 [kubectl](https://kubernetes.io/zh-cn/docs/reference/kubectl/)，可以使用 Minikube 自带的 kubectl： `minikube kubectl` 或 bashrc中增加 `alias kubectl="minikube kubectl --"`。
 
 ## 安装 Starwhale Server
 
