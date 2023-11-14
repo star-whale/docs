@@ -4,17 +4,33 @@ title: Install Starwhale Server with Minikube
 
 ## Prerequisites
 
-* [Minikube](https://minikube.sigs.k8s.io/docs/start/) 1.25+
+* [Minikube](https://minikube.sigs.k8s.io/docs/start/) 1.32.0+
 * [Helm](https://helm.sh/docs/intro/install/) 3.2.0+
 * OS: Linux or macOS
 
 ## Starting Minikube
 
 ```bash
-minikube start --addons ingress --kubernetes-version=1.25.3
+minikube start --addons ingress
 ```
 
-For users in the mainland of China, please add `--image-mirror-country=cn` parameter. If there is no kubectl bin in your machine, you may use `minikube kubectl` or `alias kubectl="minikube kubectl --"` alias command.
+For users in the mainland of China, please run the following commands:
+
+```bash
+minikube start --kubernetes-version=1.25.3 --image-repository=docker-registry.starwhale.cn/minikube --base-image=docker-registry.starwhale.cn/minikube/k8s-minikube/kicbase:v0.0.42
+
+minikube addons enable ingress --images="KubeWebhookCertgenPatch=ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0,KubeWebhookCertgenCreate=ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0,IngressController=ingress-nginx/controller:v1.9.4"
+```
+
+The docker registry `docker-registry.starwhale.cn/minikube` currently only caches the images for Kubernetes 1.25.3. Another choice, you can also use Aliyun mirror:
+
+```bash
+minikube start --image-mirror-country=cn
+
+minikube addons enable ingress --images="KubeWebhookCertgenPatch=kube-webhook-certgen:v20231011-8b53cabe0,KubeWebhookCertgenCreate=kube-webhook-certgen:v20231011-8b53cabe0,IngressController=nginx-ingress-controller:v1.9.4" --registries="KubeWebhookCertgenPatch=registry.cn-hangzhou.aliyuncs.com/google_containers,KubeWebhookCertgenCreate=registry.cn-hangzhou.aliyuncs.com/google_containers,IngressController=registry.cn-hangzhou.aliyuncs.com/google_containers"
+```
+
+If there is no kubectl bin in your machine, you may use `minikube kubectl` or `alias kubectl="minikube kubectl --"` alias command.
 
 ## Installing Starwhale Server
 
