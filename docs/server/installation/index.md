@@ -2,7 +2,8 @@
 title: Starwhale Server Installation Guide
 ---
 
-Starwhale Server is delivered as a Docker image, which can be run with Docker directly or deployed to a Kubernetes cluster.
+Starwhale Server is delivered as a Docker image, which can be run with Docker directly or deployed to a Kubernetes cluster or Minikube.
 
-* To install Starwhale Server with Docker, see [Install Starwhale Server with Docker](docker)
-* To deploy Starwhale Server to a Kubernetes cluster, see [Install Starwhale Server with Helm](helm-charts)
+* To deploy Starwhale Server with [Minikube](minikube)
+* To deploy Starwhale Server to a [Kubernetes cluster](k8s-cluster)
+* To install Starwhale Server with [Docker](docker)

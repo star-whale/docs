@@ -66,7 +66,7 @@ module.exports = {
                             collapsed: true,
                             items: [
                                 "server/installation/minikube",
-                                "server/installation/helm-charts",
+                                "server/installation/k8s-cluster",
                                 {
                                     type: 'category',
                                     label: 'Install Starwhale Server with Docker',
@@ -211,7 +211,7 @@ module.exports = {
                 }
             ],
         },
-        //"faq/index",
+        "faq/index",
         {
             "Community": [
                 "community/contribute",

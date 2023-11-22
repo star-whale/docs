@@ -1,5 +1,5 @@
 ---
-title: 使用 Minikube 安装 Starwhale Server
+title: 在 Minikube 中安装 Starwhale
 ---
 
 ## 先决条件
