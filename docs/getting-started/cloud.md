@@ -16,9 +16,9 @@ Then you can create a new project. In this tutorial, we will use the name `demo`
 
 Follow step 1 to step 4 in [Getting started with Starwhale Standalone](standalone) to create:
 
-- a Starwhale model named mnist
-- a Starwhale dataset named mnist
-- a Starwhale runtime named pytorch
+- a Starwhale model named helloworld
+- a Starwhale dataset named mnist64
+- a Starwhale runtime named helloworld
 
 ## Login to the cloud instance
 
@@ -29,9 +29,9 @@ swcli instance login --username <your account name> --password <your password> -
 ## Copy the dataset, model, and runtime to the cloud instance
 
 ```bash
-swcli model copy mnist swcloud/project/<your account name>:demo
-swcli dataset copy mnist swcloud/project/<your account name>:demo
-swcli runtime copy pytorch swcloud/project/<your account name>:demo
+swcli model copy helloworld swcloud/project/<your account name>:demo
+swcli dataset copy mnist64 swcloud/project/<your account name>:demo
+swcli runtime copy helloworld swcloud/project/<your account name>:demo
 ```
 
 ## Run an evaluation with the web UI

@@ -19,14 +19,14 @@ To save time in the example downloading, we skip git-lfs and other commits info.
 
 ![Core Workflow](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/standalone-core-workflow.gif)
 
-## Building a Pytorch Runtime
+## Building Starwhale Runtime
 
-Runtime example codes are in the `example/runtime/pytorch` directory.
+Runtime example codes are in the `example/helloworld` directory.
 
 - Build the Starwhale runtime bundle:
 
   ```bash
-  swcli runtime build --yaml example/runtime/pytorch/runtime.yaml
+  swcli -vvv runtime build --yaml example/helloworld/runtime.yaml
   ```
 
   :::tip
@@ -47,62 +47,44 @@ Runtime example codes are in the `example/runtime/pytorch` directory.
 
   ```bash
   swcli runtime list
-  swcli runtime info pytorch
+  swcli runtime info helloworld
   ```
 
 ## Building a Model
 
-Model example codes are in the `example/mnist` directory.
-
-- Download the pre-trained model file:
-
-  ```bash
-  cd example/mnist
-  make download-model
-  # For users in the mainland of China, please add `CN=1` environment for make command:
-  # CN=1 make download-model
-  cd -
-  ```
+Model example codes are in the `example/helloworld` directory.
 
 - Build a Starwhale model:
 
   ```bash
-  swcli model build example/mnist --runtime pytorch
+  swcli -vvv model build example/helloworld --name helloworld -m evaluation --runtime helloworld
   ```
 
 - Check your local Starwhale models:
 
   ```bash
   swcli model list
-  swcli model info mnist
+  swcli model info helloworld
   ```
 
 ## Building a Dataset
 
-Dataset example codes are in the `example/mnist` directory.
-
-- Download the MNIST raw data:
-
-  ```bash
-  cd example/mnist
-  make download-data
-  # For users in the mainland of China, please add `CN=1` environment for make command:
-  # CN=1 make download-data
-  cd -
-  ```
+Dataset example codes are in the `example/helloworld` directory.
 
 - Build a Starwhale dataset:
 
   ```bash
-  swcli dataset build --yaml example/mnist/dataset.yaml
+  swcli runtime activate helloworld
+  python3 example/helloworld/dataset.py
+  deactivate
   ```
 
 - Check your local Starwhale dataset:
 
   ```bash
   swcli dataset list
-  swcli dataset info mnist
-  swcli dataset head mnist
+  swcli dataset info mnist64
+  swcli dataset head mnist64
   ```
 
 ## Running an Evaluation Job
@@ -110,7 +92,7 @@ Dataset example codes are in the `example/mnist` directory.
 - Create an evaluation job:
 
  ```bash
- swcli -vvv model run --uri mnist --dataset mnist --runtime pytorch
+ swcli -vvv model run --uri helloworld --dataset mnist64 --runtime helloworld
  ```
 
 - Check the evaluation result

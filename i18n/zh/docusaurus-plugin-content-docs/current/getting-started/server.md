@@ -20,18 +20,18 @@ title: Starwhale Server入门指南
 
 按照[Starwhale Standalone入门指南](standalone)中的步骤1到步骤4在本地机器上创建：
 
-- 一个名为mnist的Starwhale模型
-- 一个名为mnist的Starwhale数据集
-- 一个名为pytorch的Starwhale运行时
+- 一个名为helloworld的Starwhale模型
+- 一个名为mnist64的Starwhale数据集
+- 一个名为helloworld的Starwhale运行时
 
 ## 将数据集、模型和运行时复制到Starwhale Server
 
 ```bash
 swcli instance login --username <your username> --password <your password> --alias server <Your Server URL>
 
-swcli model copy mnist server/project/demo
-swcli dataset copy mnistserver/project/demo
-swcli runtime copy pytorch server/project/demo
+swcli model copy helloworld server/project/demo
+swcli dataset copy mnist64 server/project/demo
+swcli runtime copy helloworld server/project/demo
 ```
 
 ## 使用Web UI运行模型评估

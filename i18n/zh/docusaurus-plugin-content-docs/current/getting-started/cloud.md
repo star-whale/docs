@@ -16,9 +16,9 @@ Starwhale Cloud运行在阿里云上，域名是 <https://cloud.starwhale.cn> �
 
 按照[Starwhale Standalone入门指南](standalone)中的步骤1到步骤4在本地机器上创建：
 
-- 一个名为mnist的Starwhale模型
-- 一个名为mnist的Starwhale数据集
-- 一个名为pytorch的Starwhale运行时
+- 一个名为helloworld的Starwhale模型
+- 一个名为mnist64的Starwhale数据集
+- 一个名为helloworld的Starwhale运行时
 
 ## 登录云实例
 
@@ -29,9 +29,9 @@ swcli instance login --username <您的用户名> --password <您的密码> --al
 ## 将数据集、模型和运行时复制到Starwhale Cloud
 
 ```bash
-swcli model copy mnist swcloud/project/demo
-swcli dataset copy mnist swcloud/project/demo
-swcli runtime copy pytorch swcloud/project/demo
+swcli model copy helloworld swcloud/project/demo
+swcli dataset copy mnist64 swcloud/project/demo
+swcli runtime copy helloworld swcloud/project/demo
 ```
 
 ## 使用 Web UI 运行评估
