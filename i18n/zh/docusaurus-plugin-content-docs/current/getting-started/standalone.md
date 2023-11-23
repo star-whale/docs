@@ -19,14 +19,14 @@ cd starwhale
 
 ![核心工作流程](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/standalone-core-workflow.gif)
 
-## 构建 Pytorch 运行时
+## 构建 Starwhale 运行时
 
-运行时示例代码位于`example/runtime/pytorch`目录中。
+运行时示例代码位于`example/helloworld`目录中。
 
 - 构建Starwhale运行时包：
 
   ```bash
-  swcli runtime build --yaml example/runtime/pytorch/runtime.yaml
+  swcli -vvv runtime build --yaml example/helloworld/runtime.yaml
   ```
 
   :::tip
@@ -48,60 +48,44 @@ cd starwhale
 
   ```bash
   swcli runtime list
-  swcli runtime info pytorch
+  swcli runtime info helloworld
   ```
 
 ## 构建模型
 
-模型示例代码位于 `example/mnist` 目录中。
-
-- 下载预训练模型文件：
-
-  ```bash
-  cd example/mnist
-  CN=1 make download-model
-  # 非中国大陆网络用户，可以省略 CN=1 环境变量
-  cd -
-  ```
+模型示例代码位于 `example/helloworld` 目录中。
 
 - 构建一个Starwhale模型：
 
   ```bash
-  swcli model build example/mnist --runtime pytorch
+  swcli -vvv model build example/helloworld --name helloworld -m evaluation --runtime helloworld
   ```
 
 - 检查您本地的Starwhale模型：
 
   ```bash
   swcli model list
-  swcli model info mnist
+  swcli model info helloworld
   ```
 
 ## 构建数据集
 
-数据集示例代码位于 `example/mnist` 目录中。
-
-- 下载MNIST原始数据：
-
-  ```bash
-  cd example/mnist
-  CN=1 make download-data
-  # 非中国大陆网络用户，可以省略 CN=1 环境变量
-  cd -
-  ```
+数据集示例代码位于 `example/helloworld` 目录中。
 
 - 构建Starwhale数据集：
 
   ```bash
-  swcli dataset build --yaml example/mnist/dataset.yaml
+  swcli runtime activate helloworld
+  python3 example/helloworld/dataset.py
+  deactivate
   ```
 
 - 检查您本地的Starwhale数据集：
 
   ```bash
   swcli dataset list
-  swcli dataset info mnist
-  swcli dataset head mnist
+  swcli dataset info mnist64
+  swcli dataset head mnist64
   ```
 
 ## 运行评估作业
@@ -109,7 +93,7 @@ cd starwhale
 - 创建评估工作
 
  ```bash
- swcli -vvv model run --uri mnist --dataset mnist --runtime pytorch
+ swcli -vvv model run --uri helloworld --dataset mnist64 --runtime helloworld
  ```
 
 - 检查评估结果

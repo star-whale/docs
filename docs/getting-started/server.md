@@ -20,18 +20,18 @@ Open your browser and enter your server's URL in the address bar. Login with you
 
 Follow step 1 to step 4 in [Getting started with Starwhale Standalone](standalone) to create:
 
-- a Starwhale model named mnist
-- a Starwhale dataset named mnist
-- a Starwhale runtime named pytorch
+- a Starwhale model named helloworld
+- a Starwhale dataset named mnist64
+- a Starwhale runtime named helloworld
 
 ## Copy the dataset, the model, and the runtime to the server
 
 ```bash
 swcli instance login --username <your username> --password <your password> --alias server <Your Server URL>
 
-swcli model copy mnist server/project/demo
-swcli dataset copy mnist server/project/demo
-swcli runtime copy pytorch server/project/demo
+swcli model copy helloworld server/project/demo
+swcli dataset copy mnist64 server/project/demo
+swcli runtime copy helloworld server/project/demo
 ```
 
 ## Use the Web UI to run an evaluation
