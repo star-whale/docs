@@ -99,11 +99,11 @@ swcli dataset build --audio-folder /path/to/audio/folder  # build dataset from /
 swcli dataset build --video-folder /path/to/video/folder  # build dataset from /path/to/video/folder, search all video type files.
 
 #- from json/jsonl file
-swcli dataset build --json /path/to/example.json 
-swcli dataset build --json http://example.com/example.json 
-swcli dataset build --json /path/to/example.json --field-selector a.b.c # extract the json_content["a"]["b"]["c"] field from the json file.  
-swcli dataset build --name qald9 --json https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-test-multilingual.json --field-selector questions 
-swcli dataset build --json /path/to/test01.jsonl --json /path/to/test02.jsonl 
+swcli dataset build --json /path/to/example.json
+swcli dataset build --json http://example.com/example.json
+swcli dataset build --json /path/to/example.json --field-selector a.b.c # extract the json_content["a"]["b"]["c"] field from the json file.
+swcli dataset build --name qald9 --json https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-test-multilingual.json --field-selector questions
+swcli dataset build --json /path/to/test01.jsonl --json /path/to/test02.jsonl
 swcli dataset build --json https://modelscope.cn/api/v1/datasets/damo/100PoisonMpts/repo\?Revision\=master\&FilePath\=train.jsonl
 
 #- from huggingface dataset
@@ -112,10 +112,10 @@ swcli dataset build -hf mnist --no-cache
 swcli dataset build -hf cais/mmlu --subset anatomy --split auxiliary_train --revision 7456cfb
 
 #- from csv files
-swcli dataset build --csv /path/to/example.csv 
-swcli dataset build --csv /path/to/example.csv --csv-file /path/to/example2.csv 
-swcli dataset build --csv /path/to/csv-dir  
-swcli dataset build --csv http://example.com/example.csv 
+swcli dataset build --csv /path/to/example.csv
+swcli dataset build --csv /path/to/example.csv --csv-file /path/to/example2.csv
+swcli dataset build --csv /path/to/csv-dir
+swcli dataset build --csv http://example.com/example.csv
 swcli dataset build --name product-desc-modelscope --csv https://modelscope.cn/api/v1/datasets/lcl193798/product_description_generation/repo\?Revision\=master\&FilePath\=test.csv --encoding=utf-8-sig
 ```
 

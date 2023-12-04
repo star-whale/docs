@@ -190,6 +190,7 @@ module.exports = {
                         "reference/swcli/dataset",
                         "reference/swcli/runtime",
                         "reference/swcli/job",
+                        "reference/swcli/server",
                         "reference/swcli/utilities",
                     ]
                 },
@@ -206,6 +207,7 @@ module.exports = {
                         "reference/sdk/evaluation",
                         "reference/sdk/model",
                         "reference/sdk/job",
+                        "reference/swcli/server",
                         "reference/sdk/other",
                     ]
                 }
