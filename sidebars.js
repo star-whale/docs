@@ -65,6 +65,7 @@ module.exports = {
                             },
                             collapsed: true,
                             items: [
+                                "server/installation/server-start",
                                 "server/installation/minikube",
                                 "server/installation/k8s-cluster",
                                 {
