@@ -8,6 +8,12 @@ We can use `swcli` to complete all tasks for Starwhale Instances. `swcli` is wri
 DO NOT install Starwhale in your system's global Python environment. It will cause a python dependency conflict problem.
 :::
 
+## Quick install
+
+```bash
+python3 -m pip install starwhale
+```
+
 ## Prerequisites
 
 * Python 3.7 ~ 3.11

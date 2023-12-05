@@ -8,6 +8,12 @@ title: 安装指南
 非常不建议将 Starwhale 安装在系统的全局 Python 环境中，可能会导致 Python 的依赖冲突问题。使用 venv 或 conda 创建一个隔离的 Python 环境，并在其中安装 Starwhale，是 Python 推荐的做法。
 :::
 
+## 快速安装
+
+```bash
+python3 -m pip install starwhale
+```
+
 ## 先决条件
 
 * Python3.7 ~ 3.11

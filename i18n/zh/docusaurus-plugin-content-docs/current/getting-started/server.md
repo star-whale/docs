@@ -2,9 +2,13 @@
 title: Starwhale Server入门指南
 ---
 
-## 安装Starwhale Server
+## 启动 Starwhale Server
 
-安装 Starwhale Server，参见[安装指南](../server/installation/index.md)。
+```bash
+swcli server start
+```
+
+更多的Starwhale Server 安装和启动信息，请参见[安装指南](../server/installation/index.md)。
 
 ## 创建您的第一个项目
 
