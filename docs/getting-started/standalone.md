@@ -6,6 +6,14 @@ When the [Starwhale Client (swcli)](../swcli/) is installed, you are ready to us
 
 We also provide a Jupyter Notebook example, you can try it in [Google Colab](https://colab.research.google.com/github/star-whale/starwhale/blob/main/example/notebooks/quickstart-standalone.ipynb) or in your local [vscode/jupyterlab](https://github.com/star-whale/starwhale/blob/main/example/notebooks/quickstart-standalone.ipynb).
 
+## Installing Starwhale Client
+
+```bash
+python3 -m pip install starwhale
+```
+
+For detailed information, see [Starwhale Client Installation Guide](swcli/installation).
+
 ## Downloading Examples
 
 Download Starwhale examples by cloning the Starwhale project via:

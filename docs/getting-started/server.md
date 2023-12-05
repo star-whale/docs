@@ -2,9 +2,13 @@
 title: Getting started with Starwhale Server
 ---
 
-## Install Starwhale Server
+## Start Starwhale Server
 
-To install Starwhale Server, see the [installation guide](../server/installation/index.md).
+```bash
+swcli server start
+```
+
+For detailed informatiuon, see the [installation guide](../server/installation/index.md).
 
 ## Create your first project
 
