@@ -9,6 +9,8 @@ Starwhale是一个 MLOps/LLMOps平台，面向机器学习项目提供研发运�
 
 Starwhale 同时也是一个[开源的平台](https://github.com/star-whale/starwhale)，使用 [Apache-2.0 协议](https://github.com/star-whale/starwhale/blob/main/LICENSE)。
 
+## Starwhale 功能
+
 ![products](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/products.png)
 
 * 平台基础：
@@ -26,6 +28,25 @@ Starwhale 同时也是一个[开源的平台](https://github.com/star-whale/star
   * Starwhale Server：部署在私有数据中心里，依赖 Kubernetes 集群，提供集中化的、Web交互式的、安全的服务。
   * Starwhale Cloud：托管在公共云上的服务，访问地址为<https://cloud.starwhale.cn>，由 Starwhale 团队负责运维，无需安装，注册账户后即可使用。
 
+## Starwhale 框架
+
+<img src="https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/framework.png" alt="framework" width="75%"/>
+
+* 面向独立开发者
+  * 使用 Starwhale Standalone 实例。
+  * `swcli`：Python 编写的一组命令行工具，可以用来完成模型构建、评测、拷贝等工作。
+  * Starwhale Python SDK：一系列工具函数或类，让模型评测与微调、数据集构建与加载等任务变得简单。
+* 面向团队用户
+  * 使用 Starwhale Server 或 Starwhale Cloud 实例，提供Web UI。
+  * 核心组件：
+    * **api server**：依赖MySQL数据库和对象存储，完成Starwhale平台的API实现。
+    * **scheduler**：依赖Docker或Kubernetes，实现评测任务的调度。
+    * **datastore**：依赖对象存储，提供类似Big Table的存储与访问方式，满足数据集和评测数据的存储、检索等需求。
+  * 外部依赖：
+    * 存储：MySQL和对象存储。
+    * 容器：Docker（单机）或Kubernetes（集群）。
+    * 计算资源：裸金属或公有云。
+
 ## 典型使用场景
 
 * **数据集管理**：基于 Starwhale Dataset Python SDK 可以非常容易的导入、创建、分发和加载数据集，同时可以实现数据集细粒度的版本控制和可视化等功能。
@@ -40,6 +61,6 @@ Starwhale 是一个开放的平台，工作中可以只用某些功能，也可�
 ## 开始 Starwhale 之旅
 
 * 5-10分钟内完成 [Starwhale Client 的安装](swcli/installation)和 [Starwhale Server 的启动](server/installation/server-start)。
-* 参考 [Starwhale Standalone 入门指南](server/installation/server-start)，在本地对 helloworld 例子的模型、数据集和运行时构建，完成对 MNIST 数据集的模型效果的评估。
+* 参考 [Starwhale Standalone 入门指南](server/installation/server-start)，在本地对 helloworld 例子的模型、数据集和运行时进行构建，完成对 MNIST 数据集的模型效果的评估。
 * 参考 [Starwhale Server 入门指南](getting-started/server)，在 Starwhale Server 中运行 helloworld 例子的模型评测。
 * 阅读 [用户指南](swcli) 和 [参考指南](reference/swcli)，并参照[例子](https://github.com/star-whale/starwhale/tree/main/example)，制作自己的数据集、运行时和模型包，进行模型评测等任务。
