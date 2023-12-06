@@ -9,6 +9,8 @@ Starwhale is an MLOps/LLMOps platform that provides R&D operation management cap
 
 Starwhale is also an [open source platform](https://github.com/star-whale/starwhale), using the [Apache-2.0 license](https://github.com/star-whale/starwhale/blob/main/LICENSE).
 
+## Starwhale Products
+
 ![products](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/products.png)
 
 * Fundamentals:
@@ -26,7 +28,26 @@ Starwhale is also an [open source platform](https://github.com/star-whale/starwh
   * Starwhale Server: Deployed in a private data center, relying on a Kubernetes cluster, providing centralized, web-based, and secure services.
   * Starwhale Cloud: Hosted on a public cloud, with the access address <https://cloud.starwhale.ai>. The Starwhale team is responsible for maintenance, and no installation is required. You can start using it after registering an account.
 
-## Typical Use Cases
+## Starwhale Framework
+
+<img src="https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/framework.png" alt="framework" width="75%"/>
+
+* For Individual Developers
+  * Use Starwhale Standalone instances.
+  * `swcli`: A set of command-line tools written in Python that can be used to complete tasks such as model building, evaluation, and copying.
+  * Starwhale Python SDK: A series of utility functions or classes that simplify tasks such as model evaluation and fine-tuning, dataset construction, and loading.
+* For Team Users
+  * Use Starwhale Server or Starwhale Cloud instances, which provide a Web UI.
+  * Core Components:
+    * **api server**: Depends on MySQL database and object storage, and implements the API for the Starwhale platform.
+    * **scheduler**: Depends on Docker or Kubernetes, and schedules evaluation tasks.
+    * **datastore**: Depends on object storage, providing a Big Table-like storage and access method to meet the storage and retrieval requirements of datasets and evaluation data.
+  * External Dependencies:
+    * Storage: MySQL and object storage.
+    * Containers: Docker (single-node) or Kubernetes (cluster).
+    * Compute Resources: Bare metal or public cloud.
+
+## Starwhale Use Cases
 
 * **Dataset Management**: With the Starwhale Dataset Python SDK, you can easily import, create, distribute, and load datasets while achieving fine-grained version control and visualization.
 * **Model Management**: By using a simple packaging mechanism, you can generate Starwhale Model packages that include models, configuration files, and code, providing efficient distribution, version management, Model Registry, and visualization, making the daily management of model packages more straightforward.
