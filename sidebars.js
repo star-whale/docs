@@ -12,7 +12,17 @@ module.exports = {
                 "getting-started/standalone",
                 "getting-started/server",
                 "getting-started/cloud",
-                "getting-started/runtime"
+            ]
+        },
+        {
+            type: "category",
+            label: "Examples",
+            link: {
+                type: "doc",
+                id: "examples/index"
+            },
+            items: [
+                "examples/helloworld",
             ]
         },
         {
