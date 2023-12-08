@@ -13,3 +13,4 @@ lint-docs:
 
 versioning-docs:
 	yarn docusaurus docs:version ${RELEASE_VERSION}
+	cp i18n/zh/docusaurus-plugin-content-docs/current.json i18n/zh/docusaurus-plugin-content-docs/version-${RELEASE_VERSION}.json
