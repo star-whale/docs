@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkstarwhale_docs=self.webpackChunkstarwhale_docs||[]).push([[4805],{63091:a=>{a.exports=JSON.parse('{"label":"llama2","permalink":"/blog/tags/llama-2","allTagsPath":"/blog/tags","count":1}')}}]);

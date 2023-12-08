@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstarwhale_docs=self.webpackChunkstarwhale_docs||[]).push([[63057],{63291:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/intro","page":1,"postsPerPage":1,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Starwhale Blog"}')}}]);
