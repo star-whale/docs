@@ -46,10 +46,6 @@
     "sidebar.mainSidebar.category.FAQ": {
         "message": "常见问题"
     },
-    "version.label": {
-        "message": "WIP",
-        "description": "The label for version current"
-    },
     "sidebar.mainSidebar.category.Starwhale Client(swcli) User Guide": {
         "message": "Starwhale Client(swcli) 用户指南",
         "description": "The label for category Starwhale Client(swcli) User Guide in sidebar mainSidebar"
