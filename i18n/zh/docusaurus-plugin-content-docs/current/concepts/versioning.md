@@ -1,5 +1,5 @@
 ---
-title: Starwhale中的资源版本控制
+title: Starwhale的资源版本控制
 ---
 
 - Starwhale管理所有模型、数据集和运行时的历史记录。对特定资源的每次更新都会附加一个新版本的历史记录。
