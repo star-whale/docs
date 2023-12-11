@@ -33,6 +33,7 @@ module.exports = {
                 id: "concepts/index"
             },
             items: [
+                "concepts/glossary",
                 "concepts/names",
                 "concepts/project",
                 "concepts/roles-permissions",
