@@ -10,7 +10,7 @@ title: Starwhale的名词解释
 * **Starwhale Instance**：Starwhale的每个部署称为一个实例。所有实例都可以通过`swcli`进行管理。Starwhale 实例有Starwhale Standalone, Starwhale Server 和 Starwhale Cloud 三种类型。Starwhale 会在不同实例上保持概念上的一致性，用户可以轻松的在不同实例上复制模型、数据集和运行时。
 * **Starwhale Standalone**：Starwhale 三种实例类型之一。面向独立开发者，部署在本地开发环境中，通过`swcli`命令行工具进行管理，满足开发、调试等需求。
 * **Starwhale Server**：Starwhale 三种实例类型之一。面向团队用户，部署在私有数据中心里，依赖Kubernetes集群，提供集中化、Web交互式的、安全的服务。
-* Starwhale Cloud：Starwhale 三种实例类型之一。托管在公有云上的服务，访问地址为 <https://cloud.starwhale.cn>，由Starwhale团队负责运维，无需安装，开箱即用。
+* **Starwhale Cloud**：Starwhale 三种实例类型之一。托管在公有云上的服务，访问地址为 <https://cloud.starwhale.cn>，由Starwhale团队负责运维，无需安装，开箱即用。
 * **`swcli`**：是Python编写的Starwhale命令行工具，可以对不同实例上的模型包、数据集和运行时进行管理。
 * **datastore**：Starwhale 中的一个基础设施，提供类似Big Table的存储和访问方式，满足数据集和评测数据的存储、检索等需求。
 * **Starwhale Project**：是组织不同资源（如模型、数据集等）的基本单位。
