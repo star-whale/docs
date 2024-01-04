@@ -219,7 +219,6 @@ module.exports = {
                         "reference/sdk/evaluation",
                         "reference/sdk/model",
                         "reference/sdk/job",
-                        "reference/swcli/server",
                         "reference/sdk/other",
                     ]
                 }
