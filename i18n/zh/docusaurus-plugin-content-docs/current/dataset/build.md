@@ -203,4 +203,99 @@ print(repr(ds.fetch_one()))
 
 ## 使用 Starwhale SDK 编写 Python Script 方式构建
 
+Starwhale Dataset SDK 提供类似Python `dict` 的方式添加或更新数据，实现本地或远端数据集的创建和更新。
+
+Starwhale 对每行数据定义了两种属性：`key` 和 `features` 。
+    - `key` 类型为 int 或 str，同一个数据集中只有有一种类型的`key`。`key` 表示能够唯一索引到该行数据。
+    - `features` 类型为 dict。Starwhale Dataset 采用无Schema设计，所以每一行的 `features` 结构都可以不同。
+      - `features` 中的数据支持int, float, str等Python 常量类型，也支持Image, Video, Audio, Text, Binary 等Starwhale 类型，还支持 list, tuple, dict等Python 复合类型。
+
+### 数据集初始化
+
+要创建、更新或加载数据集，需要先获得一个 Starwhale.Dataset 对象，一般可以采用如下方式获取：
+
+```python
+from starwhale import dataset
+
+# 创建一个本地的数据集，名称为 new-test，若已经存在这个数据集，则抛出异常
+local_ds = dataset("new-test", create="empty")
+print(local_ds)
+print(len(local_ds))
+
+# 若mnist64数据集不存在就创建一个，若存在就加载这个数据集
+remote_ds = dataset("https://cloud.starwhale.cn/project/starwhale:helloworld/dataset/mnist64", create="auto")
+print(remote_ds)
+print(len(remote_ds))
+
+# 加载一个已经存在的数据集，名称为mnist64，如该数据集不存在则报错
+existed_ds = dataset("mnist64", create="forbid")
+print(existed_ds)
+print(len(existed_ds))
+```
+
+```console
+Dataset: new-test, stash version: y4touw3btifhkd4f2gg4x3qvydgnfmvoztqqm5cf, loading version: y4touw3btifhkd4f2gg4x3qvydgnfmvoztqqm5cf
+0
+
+Dataset: mnist64, stash version: 4z5wpbpozsxlelma3j6soeatekufymnyxdeihoqo, loading version: vs3gnaauakidjcc5effevaoh63vivu7dzodo5cmc
+500
+
+Dataset: mnist64, stash version: 3ahtfbizw63myxcz34ebd72lhgc25dualcmtznts, loading version: lwhvvixpimlsghfs2xqmtgrwti4yn2z5nevz7hth
+500
+```
+
+### 数据集元素添加和更新
+
+Dataset 添加完数据后，如调用 `commit` 方式会产生一个新的版本，之后就可以用这个版本进行数据集的记载。
+
+#### append 方式
+
+Dataset 提供 `append` 函数，调用时自动增加`features`到数据集新的一行。
+
+```python
+from starwhale import dataset
+ds = dataset("new-test", create="empty")
+
+# key 采用自增ID方式，本例子中 key 为 0
+ds.append({"a": 0, "b": 0})
+
+# key 也可以主动声明，但需要保持与其他行的key类型一致
+# 以 list 或 tuple 方式添加的数据，第0个就是该行的`key`, 第1个是`features`
+ds.append((1, {"a":1, "b":1}))
+
+ds.commit()
+```
+
+#### \_\_setitem\_\_ 方式
+
+Dataset 提供 `__setitem__` 函数，提供类似 dict的索引更新值的方式添加数据。
+
+```python
+ds[2] = {"a":2, "b":2}
+ds.commit()
+```
+
 ## 使用 swcli dataset build + Python Handler 方式构建
+
+支持 `swcli` 命令行读取某个Python文件中的某个函数作为输入，构建数据集。该函数的返回值需要可迭代。
+
+dataset.py 脚本内容如下：
+
+```python
+def iter_item():
+    for i in range(100):
+        # 只返回 features。key为int类型的自增数字。
+        yield {"a": i, "b": i}
+
+def iter_item_with_key():
+    for i in range(100):
+        # 返回 key + features结构。
+        yield i, {"a": i, "b": i}
+```
+
+构建数据集时，需要通过`swcli`命令行触发：
+
+```console
+swcli dataset build --handler dataset:iter_item --name test1
+swcli dataset build --handler dataset:iter_item_with_key --name test2
+```
