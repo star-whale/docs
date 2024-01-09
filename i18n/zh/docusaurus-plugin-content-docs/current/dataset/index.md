@@ -89,7 +89,7 @@ title: Starwhale 数据集
 
 ```python
 {
-    "img": GrayscaleImage(
+    "img": Image(
         link=Link(
             "123",
             offset=32,
