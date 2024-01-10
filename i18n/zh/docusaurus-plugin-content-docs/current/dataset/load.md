@@ -8,35 +8,35 @@ Starwhale 数据集构建完成后，可以在任意位置访问数据集，加�
 
 - 加载本地 Standalone 实例或远端 Cloud/Server 实例的数据集，数据集唯一索引方式是数据集URI。
 
-	```python
-	from starwhale import dataset
-	
-	local_latest_ds = dataset("mnist")
-	remote_cloud_ds = dataset("https://cloud-cn.starwhale.cn/project/starwhale:helloworld/dataset/mnist64/v2")
-	remote_server_ds = dataset("cloud://server/project/1/dataset/helloworld")
-	```
+    ```python
+    from starwhale import dataset
+
+    local_latest_ds = dataset("mnist")
+    remote_cloud_ds = dataset("https://cloud-cn.starwhale.cn/project/starwhale:helloworld/dataset/mnist64/v2")
+    remote_server_ds = dataset("cloud://server/project/1/dataset/helloworld")
+    ```
 
 - 远端数据集按需预加载，数据不落盘。
   - Starwhale 数据集加载时，并不会将远端数据集完全下载到本地后再加载。只会加载目标索引关联的数据。
   - 根据目标索引特征，提前加载一些数据，提升Batch性能，用空间换时间。
-  
+
   ![dataset-load](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/dataset-load.png)
 
 - 数据索引方式灵活。Starwhale Dataset 类实现了 `__getitem__` 方法，提供key索引和分片索引方式读取相关数据。
 
-	```python
-	from starwhale import dataset
-	ds = dataset("mnist64")
-	print(ds[0].features.img)
-	print(ds[0].features.label)
-	print(len(ds[:10]))
-	```
-	
-	```console
-	ArtifactType.Image, display:0, mime_type:MIMEType.PNG, shape:[8, 8, 1], encoding: 
-	0
-	10
-	```
+    ```python
+    from starwhale import dataset
+    ds = dataset("mnist64")
+    print(ds[0].features.img)
+    print(ds[0].features.label)
+    print(len(ds[:10]))
+    ```
+
+    ```console
+    ArtifactType.Image, display:0, mime_type:MIMEType.PNG, shape:[8, 8, 1], encoding:
+    0
+    10
+    ```
 
 ## 数据集元素访问方式
 
@@ -48,9 +48,9 @@ Starwhale 数据集构建完成后，可以在任意位置访问数据集，加�
 from starwhale import dataset
 
 with dataset("empty-new") as ds:
-	for i in range(0, 100):
-		ds.append({"a": i})
-	ds.commit()
+    for i in range(0, 100):
+        ds.append({"a": i})
+    ds.commit()
 
 ds = dataset("empty-new", readonly=True)
 print(ds[0].features.a)
@@ -76,9 +76,9 @@ Starwhale Dataset 类实现了 `__iter__` 方法，可以对实例化的Dataset�
 from starwhale import dataset
 ds = dataset("mnist64")
 for idx, row in enumerate(ds):
-	if idx > 10:
-		break
-	print(row.index, row.features)
+    if idx > 10:
+        break
+    print(row.index, row.features)
 ```
 
 ```console
@@ -102,14 +102,14 @@ for idx, row in enumerate(ds):
 ```python
 from starwhale import dataset
 ds = dataset("mnist64")
-item = ds.fetch_one() 
+item = ds.fetch_one()
 print(item.index)
 print(list(item.features.keys()))
 ```
 
 ```console
-0                                                                                                                                        │
-['img', 'label'] 
+0
+['img', 'label']
 ```
 
 ### head 方法
@@ -127,6 +127,6 @@ print(len(items))
 
 ```console
 0
-{'img': ArtifactType.Image, display:0, mime_type:MIMEType.PNG, shape:[8, 8, 1], encoding: , 'label': 0} 
+{'img': ArtifactType.Image, display:0, mime_type:MIMEType.PNG, shape:[8, 8, 1], encoding: , 'label': 0}
 5
 ```

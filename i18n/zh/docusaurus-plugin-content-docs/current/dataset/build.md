@@ -10,12 +10,12 @@ Starwhale 数据集构建方式非常灵活，可以从一些图片/音频/视�
 
 支持递归遍历目录中的图片文件，构建Starwhale 数据集，不需要写任何代码：
 
-- 支持的图片文件格式： `png/jpg/jpeg/webp/svg/apng`
-- 图片会转成 Starwhale.Image 类型，并可以在 Starwhale Server Web页面中查看。
+- 支持的图片文件格式： `png/jpg/jpeg/webp/svg/apng`。
+- 图片会转成 `Starwhale.Image` 类型，并可以在 Starwhale Server Web页面中查看。
 - 支持命令行 `swcli dataset build --image` 和 Python SDK `starwhale.Dataset.from_folder` 两种方式。
-- label机制：当 SDK 设置 `auto_label=True` 或 命令行设置 `--auto-label` 时，会将父目录的名字作为 `label`。
-- metadata机制：可以通过在根目录设置 `metadata.csv` 或 `metadata.jsonl` 文件来扩展数据集的列。
-- caption机制：当在同目录下发现 `{image-name}.txt` 文件时，文件中的内容会被自动导入，填充到 `caption` 列中。
+- **label机制**：当 SDK 设置 `auto_label=True` 或 命令行设置 `--auto-label` 时，会将父目录的名字作为 `label`。
+- **metadata机制**：可以通过在根目录设置 `metadata.csv` 或 `metadata.jsonl` 文件来扩展数据集的列。
+- **caption机制**：当在同目录下发现 `{image-name}.txt` 文件时，文件中的内容会被自动导入，填充到 `caption` 列中。
 
 假设在 folder 目录中有下面四个文件：
 
@@ -40,19 +40,18 @@ folder/cat/4.png
 ```console
 ❯ swcli dataset head image-folder -n 2
 row  ───────────────────────────────────────
-🌳 id: cat/2.png 
+🌳 id: cat/2.png
 🌀 features:
-         🔅 file_name : cat/2.png 
-         🔅 label : cat 
-         🔅 file : ArtifactType.Image, display:2.png, mime_type:MIMEType.PNG, shape:[None, None, 3], encoding:  
+         🔅 file_name : cat/2.png
+         🔅 label : cat
+         🔅 file : ArtifactType.Image, display:2.png, mime_type:MIMEType.PNG, shape:[None, None, 3], encoding:
 row  ───────────────────────────────────────
-🌳 id: cat/4.png 
+🌳 id: cat/4.png
 🌀 features:
-         🔅 file_name : cat/4.png 
-         🔅 label : cat 
-         🔅 file : ArtifactType.Image, display:4.png, mime_type:MIMEType.PNG, shape:[None, None, 3], encoding:  
+         🔅 file_name : cat/4.png
+         🔅 label : cat
+         🔅 file : ArtifactType.Image, display:4.png, mime_type:MIMEType.PNG, shape:[None, None, 3], encoding:
 ```
-
 
 Python SDK方式构建：
 
@@ -70,12 +69,11 @@ Dataset: folder, stash version: d22hdiwyakdfh5xitcpn2s32gblfbhrerzczkb63, loadin
 {'file_name': 'cat/2.png', 'label': 'cat', 'file': ArtifactType.Image, display:2.png, mime_type:MIMEType.PNG, shape:[None, None, 3], encoding: }
 ```
 
-
 ### 视频
 
 支持递归遍历目录中的视频文件，构建Starwhale 数据集，不需要写任何代码：
 
-- 支持的视频文件格式：`mp4/webm/avi`
+- 支持的视频文件格式：`mp4/webm/avi`。
 - 视频会被转成 Starwhale.Video 类型，并可以在 Starwhale Server Web页面中查看。
 - 支持命令行 `swcli dataset build --video` 和 Python SDK `starwhale.Dataset.from_folder` 两种方式。
 - label, caption 和 metadata 机制与图片方式相同。
@@ -212,7 +210,7 @@ Starwhale 对每行数据定义了两种属性：`key` 和 `features` 。
 
 ### 数据集初始化
 
-要创建、更新或加载数据集，需要先获得一个 Starwhale.Dataset 对象，一般可以采用如下方式获取：
+要创建、更新或加载数据集，需要先获得一个 `Starwhale.Dataset` 对象，一般可以采用如下方式获取：
 
 ```python
 from starwhale import dataset

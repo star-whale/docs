@@ -13,7 +13,7 @@ Starwhale 数据集可以 Pillow, Numpy, Huggingface Datasets, Pytorch 和 Tenso
 ```python
 from starwhale import dataset
 
-# login cloud instance in advance: `swcli instance login` command or `starwhale.login` sdk 
+# login cloud instance in advance: `swcli instance login` command or `starwhale.login` sdk
 # raw dataset url: https://cloud.starwhale.cn/projects/397/datasets/172/versions/236/files
 ds = dataset("https://cloud.starwhale.cn/project/starwhale:object-detection/dataset/coco128/v2")
 img = ds.head(n=1)[0].features.image
@@ -44,25 +44,25 @@ print(img)
 ```
 
 ```console
-ArtifactType.Image, display:, mime_type:MIMEType.UNDEFINED, shape:[None, None, 3], encoding: 
+ArtifactType.Image, display:, mime_type:MIMEType.UNDEFINED, shape:[None, None, 3], encoding:
 ```
 
 ## Numpy
 
 ### 转化为 numpy.ndarray
 
-Starwhale 的以下数据类型可以转化为 numpy.ndarray 对象:
+Starwhale 的以下数据类型可以转化为 `numpy.ndarray` 对象:
 
-* Image：先转化为Pillow Image类型，然后再转化为 numpy.ndarray 对象。
-* Video：将 video bytes 直接转化 numpy.ndarray 对象。
-* Audio：调用 soundfile 库将 audio bytes 转化为 numpy.ndarray 对象。
-* BoundingBox：转化为 xywh 格式的 numpy.ndarray 对象。
-* Binary：将 bytes 直接转化 numpy.ndarray 对象。
+* `Image`：先转化为Pillow Image类型，然后再转化为 `numpy.ndarray` 对象。
+* `Video`：将 video bytes 直接转化 `numpy.ndarray` 对象。
+* `Audio`：调用 soundfile 库将 audio bytes 转化为 `numpy.ndarray` 对象。
+* `BoundingBox`：转化为 xywh 格式的 `numpy.ndarray` 对象。
+* `Binary`：将 bytes 直接转化 `numpy.ndarray` 对象。
 
 ```python
 from starwhale import dataset
 
-# login cloud instance in advance: `swcli instance login` command or `starwhale.login` sdk 
+# login cloud instance in advance: `swcli instance login` command or `starwhale.login` sdk
 # raw dataset url: https://cloud.starwhale.cn/projects/397/datasets/172/versions/236/files
 ds = dataset("https://cloud.starwhale.cn/project/starwhale:object-detection/dataset/coco128/v2")
 
@@ -100,7 +100,7 @@ print(img)
 ```
 
 ```console
-ArtifactType.Image, display:, mime_type:MIMEType.UNDEFINED, shape:[None, None, 3], encoding: 
+ArtifactType.Image, display:, mime_type:MIMEType.UNDEFINED, shape:[None, None, 3], encoding:
 ```
 
 ## Huggingface Datasets
@@ -139,8 +139,8 @@ from starwhale import dataset
 import torch.utils.data as tdata
 
 def custom_transform(data):
-	data["label"] = data["label"] + 100
-	return data
+    data["label"] = data["label"] + 100
+    return data
 
 with dataset("simple", create="empty") as ds:
     for i in range(0, 10):
@@ -166,7 +166,7 @@ Starwhale Dataset 可以转化为 Tensorflow 的 [tensorflow.data.Dataset](https
 ```python
 from starwhale import dataset
 
-# login cloud instance in advance: `swcli instance login` command or `starwhale.login` sdk 
+# login cloud instance in advance: `swcli instance login` command or `starwhale.login` sdk
 # raw dataset url: https://cloud.starwhale.cn/projects/397/datasets/172/versions/236/files
 ds = dataset("https://cloud.starwhale.cn/project/starwhale:helloworld/dataset/mnist64")
 tf_ds = ds.to_tensorflow()
