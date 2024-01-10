@@ -157,7 +157,12 @@ module.exports = {
                     },
                     collapsed: true,
                     items: [
-                        "dataset/yaml"
+                        "dataset/yaml",
+                        "dataset/build",
+                        "dataset/load",
+                        "dataset/view",
+                        "dataset/version",
+                        "dataset/integration"
                     ]
                 },
                 {

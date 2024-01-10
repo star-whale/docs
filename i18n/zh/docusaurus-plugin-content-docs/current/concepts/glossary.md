@@ -18,3 +18,4 @@ title: Starwhale的名词解释
 * **`model.yaml` 文件**：是一种定义Starwhale Model如何构建的描述性文件，非必需。
 * **`dataset.yaml` 文件**：是一种定义Starwhale Dataset如何构建的描述性文件，需要与一些Python脚本配合使用。`swcli dataset build` 命令会使用。非必需。
 * **`runtime.yaml` 文件**：是一种定义Starwhale Runtime的描述性文件，`swcli runtime build` 命令会使用。非必需。
+* **Starwhale Console**： Starwhale Server/Cloud 实例中的Web前端页面。

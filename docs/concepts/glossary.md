@@ -18,3 +18,4 @@ On this page you find a list of important terminology used throughout the Starwh
 * **`model.yaml` file**: A descriptive file defining how to build a Starwhale Model, optional.
 * **`dataset.yaml` file**: A descriptive file defining how to build a Starwhale Dataset, needs to work with some Python scripts. Used by `swcli dataset build` command, optional.
 * **`runtime.yaml` file**: A descriptive file defining a Starwhale Runtime, used by `swcli runtime build` command, optional.
+* **Starwhale Console**: Web frontend page for Starwhale Server/Cloud instance.

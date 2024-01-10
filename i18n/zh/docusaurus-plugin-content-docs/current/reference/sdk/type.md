@@ -158,7 +158,7 @@ ClassLabel(
 )
 ```
 
-## Image
+## Image {#image}
 
 图片类型。
 
@@ -175,7 +175,7 @@ Image(
 
 |参数|说明|
 |---|---|
-|`fp`|图片的路径、IO对象或文件内容的bytes|
+|`fp`|图片的路径、IO对象、numpy对象、pillow image对象或文件内容的bytes|
 |`display_name`|Dataset Viewer上展示的名字|
 |`shape`|图片的Width、Height和channel|
 |`mime_type`|MIMEType支持的类型|
