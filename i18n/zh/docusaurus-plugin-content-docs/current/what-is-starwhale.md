@@ -14,11 +14,11 @@ Starwhale 同时也是一个[开源的平台](https://github.com/star-whale/star
 ![products](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/products.png)
 
 * 平台基础：
-  * [Starwhale Model](model/index)：Starwhale 模型是一种机器学习模型的标准包格式，可用于多种用途，例如模型微调、模型评估和在线服务。 Starwhale 模型包含模型文件、推理代码、配置文件等。
-  * [Starwhale Dataset](dataset/index)：Starwhale 数据集能够高效的数据存储、数据加载和数据可视化，是一款面向ML/DL领域的数据管理工具。
-  * [Starwhale Runtime](runtime/index)：Starwhale 运行时能够针对运行Python程序，提供一种可复现、可分享的运行环境。使用 Starwhale 运行时，可以非常容易的与他人分享，并且能在 Starwhale Server 和 Starwhale Cloud 实例上使用 Starwhale 运行时。
+  * [Starwhale Model](model)：Starwhale 模型是一种机器学习模型的标准包格式，可用于多种用途，例如模型微调、模型评估和在线服务。 Starwhale 模型包含模型文件、推理代码、配置文件等。
+  * [Starwhale Dataset](dataset)：Starwhale 数据集能够高效的数据存储、数据加载和数据可视化，是一款面向ML/DL领域的数据管理工具。
+  * [Starwhale Runtime](runtime)：Starwhale 运行时能够针对运行Python程序，提供一种可复现、可分享的运行环境。使用 Starwhale 运行时，可以非常容易的与他人分享，并且能在 Starwhale Server 和 Starwhale Cloud 实例上使用 Starwhale 运行时。
 * 模型评测：
-  * [Model Evaluation](evaluation/index)：Starwhale 模型评测能让用户通过SDK写少量的Python 代码就能实现复杂的、生产级别的、分布式的模型评测任务。
+  * [Model Evaluation](evaluation)：Starwhale 模型评测能让用户通过SDK写少量的Python 代码就能实现复杂的、生产级别的、分布式的模型评测任务。
   * Live Demo：能够通过Web UI方式对模型进行在线评测。
   * Reports：编写可分享，可自动集成评测数据的报告。
   * Tables：提供多维度的模型评测结果对比和展示，表格中支持包括图片、音频和视频等多媒体数据展示。能够将评测过程中通过Starwhale Python SDK 自由记录的数据都呈现出来。

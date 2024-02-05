@@ -14,11 +14,11 @@ Starwhale is also an [open source platform](https://github.com/star-whale/starwh
 ![products](https://starwhale-examples.oss-cn-beijing.aliyuncs.com/docs/products.png)
 
 * Fundamentals:
-  * [Starwhale Model](model/index): Starwhale Model is a standard package format for machine learning models, which can be used for various purposes, such as model fine-tuning, model evaluation, and online services. Starwhale Model includes model files, inference code, configuration files, etc.
-  * [Starwhale Dataset](dataset/index): Starwhale Dataset enables efficient data storage, data loading, and data visualization, making it a data management tool for the ML/DL field.
-  * [Starwhale Runtime](runtime/index): Starwhale Runtime provides a reproducible and shareable runtime environment for running Python programs. With Starwhale Runtime, you can easily share with others and use it on Starwhale Server and Starwhale Cloud instances.
+  * [Starwhale Model](model): Starwhale Model is a standard package format for machine learning models, which can be used for various purposes, such as model fine-tuning, model evaluation, and online services. Starwhale Model includes model files, inference code, configuration files, etc.
+  * [Starwhale Dataset](dataset): Starwhale Dataset enables efficient data storage, data loading, and data visualization, making it a data management tool for the ML/DL field.
+  * [Starwhale Runtime](runtime): Starwhale Runtime provides a reproducible and shareable runtime environment for running Python programs. With Starwhale Runtime, you can easily share with others and use it on Starwhale Server and Starwhale Cloud instances.
 * Model Evaluation:
-  * [Model Evaluation](evaluation/index): Starwhale Model Evaluation allows users to implement complex, production-level, distributed model evaluation tasks with minimal Python code using the SDK.
+  * [Model Evaluation](evaluation): Starwhale Model Evaluation allows users to implement complex, production-level, distributed model evaluation tasks with minimal Python code using the SDK.
   * Live Demo: Evaluate models online through a Web UI.
   * Reports: Create shareable, automatically integrated evaluation reports.
   * Tables: Provide multi-dimensional model evaluation result comparisons and displays, with support for multimedia data such as images, audio, and video. The tables can present all the data and artifacts recorded during the evaluation process using the Starwhale Python SDK.
