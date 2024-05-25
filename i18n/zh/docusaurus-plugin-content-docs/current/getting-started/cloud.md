@@ -29,9 +29,9 @@ swcli instance login --username <您的用户名> --password <您的密码> --al
 ## 将数据集、模型和运行时复制到Starwhale Cloud
 
 ```bash
-swcli model copy helloworld swcloud/project/demo
-swcli dataset copy mnist64 swcloud/project/demo
-swcli runtime copy helloworld swcloud/project/demo
+swcli model copy helloworld swcloud/project/<your account name>:demo
+swcli dataset copy mnist64 swcloud/project/<your account name>:demo
+swcli runtime copy helloworld swcloud/project/<your account name>:demo
 ```
 
 ## 使用 Web UI 运行评估
