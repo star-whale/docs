@@ -8,7 +8,13 @@ title: Getting started with Starwhale Server
 swcli server start
 ```
 
-For detailed informatiuon, see the [installation guide](../server/installation/index.md).
+If you encounter an error when pulling the image, you can specify the image address on ghcr.io using the `-i` parameter, similar to the following command:
+
+```bash
+swcli server start -i ghcr.io/star-whale/server:0.6.13
+```
+
+For detailed information, see the [installation guide](../server/installation/index.md).
 
 ## Create your first project
 
