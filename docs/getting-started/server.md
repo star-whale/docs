@@ -8,7 +8,13 @@ title: Getting started with Starwhale Server
 swcli server start
 ```
 
-For detailed informatiuon, see the [installation guide](../server/installation/index.md).
+If you encounter an error when pulling the image, you can specify the image address on ghcr.io using the `-i` parameter, similar to the following command:
+
+```bash
+swcli server start -i ghcr.io/star-whale/server:0.6.13
+```
+
+For detailed information, see the [installation guide](../server/installation/index.md).
 
 ## Create your first project
 
@@ -31,7 +37,8 @@ Follow step 1 to step 4 in [Getting started with Starwhale Standalone](standalon
 ## Copy the dataset, the model, and the runtime to the server
 
 ```bash
-swcli instance login --username <your username> --password <your password> --alias server <Your Server URL>
+swcli instance login --username starwhale --password abcd1234 --alias server http://127.0.0.1:8082
+# swcli instance login --username <your username> --password <your password> --alias server <Your Server URL>
 
 swcli model copy helloworld server/project/demo
 swcli dataset copy mnist64 server/project/demo

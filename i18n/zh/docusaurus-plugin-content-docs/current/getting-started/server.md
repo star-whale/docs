@@ -8,6 +8,12 @@ title: Starwhale Server入门指南
 swcli server start
 ```
 
+如果提示无法拉取镜像，可以使用通过 `-i` 参数指定ghcr.io 上的Server 镜像地址，类似如下命令：
+
+```bash
+swcli server start -i ghcr.io/star-whale/server:0.6.13
+```
+
 更多的Starwhale Server 安装和启动信息，请参见[安装指南](../server/installation/index.md)。
 
 ## 创建您的第一个项目
@@ -31,7 +37,8 @@ swcli server start
 ## 将数据集、模型和运行时复制到Starwhale Server
 
 ```bash
-swcli instance login --username <your username> --password <your password> --alias server <Your Server URL>
+swcli instance login --username starwhale --password abcd1234 --alias server http://127.0.0.1:8082
+#swcli instance login --username <your username> --password <your password> --alias server <Your Server URL>
 
 swcli model copy helloworld server/project/demo
 swcli dataset copy mnist64 server/project/demo
