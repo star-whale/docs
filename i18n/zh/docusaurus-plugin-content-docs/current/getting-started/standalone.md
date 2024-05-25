@@ -81,9 +81,7 @@ cd starwhale
 - 构建Starwhale数据集：
 
   ```bash
-  swcli runtime activate helloworld
-  python3 example/helloworld/dataset.py
-  deactivate
+  swcli runtime run helloworld --cwd example/helloworld  python3 dataset.py
   ```
 
 - 检查您本地的Starwhale数据集：

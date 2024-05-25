@@ -82,9 +82,7 @@ Dataset example codes are in the `example/helloworld` directory.
 - Build a Starwhale dataset:
 
   ```bash
-  swcli runtime activate helloworld
-  python3 example/helloworld/dataset.py
-  deactivate
+  swcli runtime run helloworld --cwd example/helloworld  python3 dataset.py
   ```
 
 - Check your local Starwhale dataset:
