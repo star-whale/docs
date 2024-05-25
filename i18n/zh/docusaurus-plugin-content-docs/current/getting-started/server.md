@@ -37,7 +37,8 @@ swcli server start -i ghcr.io/star-whale/server:0.6.13
 ## 将数据集、模型和运行时复制到Starwhale Server
 
 ```bash
-swcli instance login --username <your username> --password <your password> --alias server <Your Server URL>
+swcli instance login --username starwhale --password abcd1234 --alias server http://127.0.0.1:8082
+#swcli instance login --username <your username> --password <your password> --alias server <Your Server URL>
 
 swcli model copy helloworld server/project/demo
 swcli dataset copy mnist64 server/project/demo
